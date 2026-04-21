@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const navItems = [
   { label: "About", href: "#sobre" },
   { label: "Process", href: "#processo" },
   { label: "Projects", href: "#projetos" },
   { label: "Philosophy", href: "#filosofia" },
-]
+];
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50">
@@ -21,9 +21,11 @@ export function Header() {
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="font-serif text-xl tracking-[0.3em] text-foreground uppercase">
-              Bott Monument
-            </span>
+            <img
+              src="/logoBOTT-monument12.png"
+              alt="Bott Monument"
+              className="h-12 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -41,9 +43,7 @@ export function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button 
-              className="bg-transparent text-primary border border-primary hover:bg-primary hover:text-background rounded-none px-6 py-5 text-sm tracking-wide transition-all duration-300"
-            >
+            <Button className="bg-transparent text-primary border border-primary hover:bg-primary hover:text-background rounded-none px-6 py-5 text-sm tracking-wide transition-all duration-300">
               Start a Project
             </Button>
           </div>
@@ -77,14 +77,12 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <Button 
-              className="bg-transparent text-primary border border-primary hover:bg-primary hover:text-background rounded-none px-6 py-5 text-sm tracking-wide mt-4 w-full transition-all duration-300"
-            >
+            <Button className="bg-transparent text-primary border border-primary hover:bg-primary hover:text-background rounded-none px-6 py-5 text-sm tracking-wide mt-4 w-full transition-all duration-300">
               Start a Project
             </Button>
           </nav>
         </div>
       )}
     </header>
-  )
+  );
 }
