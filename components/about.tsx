@@ -2,83 +2,85 @@ import Image from "next/image";
 
 export function About() {
   return (
-    <section className="py-8 md:py-12 bg-card">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
-          {/* Image */}
-          <div className="relative h-[400px] md:h-[500px]">
-            {/* Main image */}
-            <div className="absolute left-0 top-0 w-[100%] h-[100%] overflow-hidden">
+    // ADICIONADO: id="about" para o Header encontrar esta seção
+    <section id="about" className="py-12 md:py-1 bg-[#1a1d23] overflow-hidden">
+      <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          {/* Visual Side */}
+          <div className="relative h-[450px] md:h-[600px] w-full">
+            {/* Main image - Craftsman */}
+            <div className="absolute left-0 top-0 w-[90%] h-[90%] overflow-hidden shadow-2xl">
               <Image
                 src="/images/craftsman.jpg"
-                alt="Drew Bott trabalhando em um memorial"
+                alt="Drew Bott crafting a memorial"
                 fill
-                className="object-cover"
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
               />
-              <div className="absolute inset-0 border border-primary/20" />
+              <div className="absolute inset-0 bg-black/10" />
             </div>
 
-            {/* Second image — offset bottom right */}
-            <div className="absolute right-0 bottom-0 w-[40%] h-[55%] overflow-hidden border-4 border-card">
+            {/* Second image — Family (The Heart of the Brand) */}
+            <div className="absolute right-0 bottom-0 w-[45%] h-[50%] overflow-hidden border-[8px] border-[#1a1d23] shadow-2xl z-10">
               <Image
                 src="/images/bott-family.jpg"
-                alt="Família Bott"
+                alt="The Bott Family"
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 border border-primary/20" />
             </div>
+            
+            {/* Decorative Gold Element */}
+            <div className="absolute -left-4 -bottom-4 w-24 h-24 border-l-2 border-b-2 border-[#f9b000]/30 -z-10" />
           </div>
 
-          {/* Content */}
-          <div>
-            <p className="text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] text-primary uppercase mb-2 md:mb-3">
-              WHO WE ARE
+          {/* Content Side */}
+          <div className="flex flex-col justify-center">
+            <p className="text-[10px] tracking-[0.4em] text-[#f9b000] font-bold uppercase mb-4">
+              Our Legacy
             </p>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground mb-4 md:mb-6 text-balance">
-              A MONUMENT FAMILY
+            <h2 className="font-serif text-3xl md:text-5xl text-white mb-8 leading-tight">
+              A Family Dedicated to <br/>
+              <span className="italic text-white/90">the Art of Remembrance</span>
             </h2>
 
-            <div className="space-y-3 md:space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed">
+            <div className="space-y-6 text-base md:text-lg text-white/60 font-light leading-relaxed max-w-xl">
               <p>
-                Drew and Kara Bott are the driving force behind Bott Monument.
+                Drew and Kara Bott are the visionaries behind <span className="text-white font-medium">Bott Monument</span>. 
+                With a passion for excellence, every memorial is a testament to their 
+                commitment to honoring life.
               </p>
               <p>
-                Drew designs, crafts and installs every memorial. Kara is the
-                CFO and is also Drew’s right-hand woman on every job. If you
-                come watch the delivery, chances are she’s right there with him.
+                As a true family-owned business, Drew personally designs, crafts, 
+                and installs every monument. Kara, our CFO, is the cornerstone of 
+                every operation—often found on-site ensuring every delivery is handled 
+                with the utmost care.
               </p>
               <p>
-                The girls come along as often as possible and make every trip
-                enjoyable. They also handle all the photography and time lapse
-                videos.
+                Their daughters represent the future of this craft, capturing 
+                the process through photography and time-lapse, documenting 
+                each tribute from stone to sanctuary.
               </p>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 md:gap-6 mt-6 md:mt-8 pt-6 md:pt-8 border-t border-border/50">
-              <div>
-                <span className="font-serif text-2xl sm:text-3xl md:text-4xl text-primary">
-                  6
-                </span>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Harold J. Schaller Award wins
+            {/* Stats Block - US Social Proof */}
+            <div className="grid grid-cols-3 gap-8 mt-12 pt-10 border-t border-white/10">
+              <div className="text-center lg:text-left">
+                <span className="block font-serif text-3xl md:text-4xl text-[#f9b000]">6</span>
+                <p className="text-[9px] uppercase tracking-widest text-white/40 mt-2">
+                  Harold Schaller <br/> Awards
                 </p>
               </div>
-              <div>
-                <span className="font-serif text-2xl sm:text-3xl md:text-4xl text-primary">
-                  27
-                </span>
-                <p className="text-xs text-muted-foreground mt-1">
-                  National first place awards
+              <div className="text-center lg:text-left">
+                <span className="block font-serif text-3xl md:text-4xl text-[#f9b000]">27</span>
+                <p className="text-[9px] uppercase tracking-widest text-white/40 mt-2">
+                  National <br/> First Places
                 </p>
               </div>
-              <div>
-                <span className="font-serif text-2xl sm:text-3xl md:text-4xl text-primary">
-                  18
-                </span>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Magazine covers featured
+              <div className="text-center lg:text-left">
+                <span className="block font-serif text-3xl md:text-4xl text-[#f9b000]">18</span>
+                <p className="text-[9px] uppercase tracking-widest text-white/40 mt-2">
+                  Magazine <br/> Features
                 </p>
               </div>
             </div>

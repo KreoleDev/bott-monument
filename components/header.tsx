@@ -1,86 +1,101 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { label: "About", href: "#sobre" },
-  { label: "Process", href: "#processo" },
-  { label: "Projects", href: "#projetos" },
-  { label: "Philosophy", href: "#filosofia" },
+  { label: "Our Story", href: "#about" },
+  { label: "The Craft", href: "#process" },
+  { label: "Gallery", href: "#projects" },
+  { label: "Heritage", href: "#philosophy" },
 ];
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Monitor scroll to change background opacity
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
+    <header 
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ${
+        isScrolled 
+          ? "bg-[#1a1d23]/90 backdrop-blur-xl border-b border-white/5 py-3" 
+          : "bg-transparent py-6"
+      }`}
+    >
+      <div className="mx-auto max-w-7xl px-8 lg:px-12">
+        <div className="flex h-16 items-center justify-between">
+          
+          {/* Logo Section */}
+          <Link href="/" className="flex items-center transition-opacity hover:opacity-80">
             <img
               src="/logoBOTT-monument12.png"
               alt="Bott Monument"
-              className="h-12 w-auto"
+              className="h-10 w-auto brightness-0 invert" // Ensures logo is white for high-end look
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-10">
+          {/* Desktop Navigation - US Luxury Spacing */}
+          <nav className="hidden md:flex items-center gap-12">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-300"
+                className="text-[10px] uppercase tracking-[0.35em] text-white/60 hover:text-[#f9b000] transition-all duration-300 font-semibold"
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
                 {item.label}
               </Link>
             ))}
           </nav>
 
-          {/* CTA Button */}
+          {/* US Style CTA Button */}
           <div className="hidden md:block">
-            <Button className="bg-transparent text-primary border border-primary hover:bg-primary hover:text-background rounded-none px-6 py-5 text-sm tracking-wide transition-all duration-300">
-              Start a Project
+            <Button 
+              className="bg-transparent text-[#f9b000] border border-[#f9b000]/40 hover:bg-[#f9b000] hover:text-[#1a1d23] rounded-full px-10 py-2 text-[9px] font-bold uppercase tracking-[0.25em] transition-all duration-500"
+            >
+              Get a Quote
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Toggle */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 text-white/80"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
           >
-            {isMenuOpen ? (
-              <X className="h-6 w-6 text-foreground" />
-            ) : (
-              <Menu className="h-6 w-6 text-foreground" />
-            )}
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-20 left-0 right-0 bg-background border-b border-border">
-          <nav className="flex flex-col px-6 py-6 gap-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-base text-muted-foreground hover:text-foreground transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Button className="bg-transparent text-primary border border-primary hover:bg-primary hover:text-background rounded-none px-6 py-5 text-sm tracking-wide mt-4 w-full transition-all duration-300">
-              Start a Project
-            </Button>
-          </nav>
+        <div className="md:hidden absolute top-0 left-0 w-full h-screen bg-[#1a1d23] z-[-1] flex flex-col items-center justify-center gap-8 animate-in fade-in duration-500">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-lg uppercase tracking-[0.4em] text-white/90 hover:text-[#f9b000]"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Button 
+            className="bg-[#f9b000] text-[#1a1d23] rounded-full px-12 py-6 font-bold uppercase tracking-widest mt-8"
+          >
+            Get a Quote
+          </Button>
         </div>
       )}
     </header>

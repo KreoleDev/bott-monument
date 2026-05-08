@@ -5,70 +5,90 @@ const pillars = [
   {
     icon: Users,
     title: "Uniquely Yours",
+    subtitle: "No Clipart. No Catalogs.",
     description:
-      "No catalogs, no clipart. Every design is one-of-a-kind — crafted in granite, bronze, or stainless steel to honor your loved one in a way only Drew can.",
+      "Every design is a bespoke masterpiece. We work in granite, bronze, and stainless steel to craft a tribute as unique as the life it honors.",
     image: "/images/creative.jpg",
   },
   {
     icon: User,
-    title: "Personal & One on One",
+    title: "Direct Connection",
+    subtitle: "Personal & One-on-One",
     description:
-      "We build a relationship before we ever talk monuments. You work with Drew and only Drew — from first conversation to final installation.",
+      "You work exclusively with Drew—from the first conceptual sketch to the final hand-installation. No middlemen, just pure craftsmanship.",
     image: "/images/personal.jpg",
   },
   {
     icon: Flag,
-    title: "American Made & Award-Winning",
+    title: "The American Standard",
+    subtitle: "Award-Winning Heritage",
     description:
-      "Only American quarries, only American craftsmen. Every memorial is built to magazine-worthy standards — backed by national awards to prove it.",
-    image: "/images/american-made.jpg.jpg",
+      "Sourcing only from American quarries. Every memorial is built to national award-winning standards, ensuring a legacy that lasts generations.",
+    image: "/images/work-1.jpg",
   },
 ]
 
 export function Features() {
   return (
-    <section id="sobre" className="py-8 md:py-12 bg-background">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-6 md:mb-8">
-          <p className="text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] text-primary uppercase mb-2">
-            WHY CHOOSE US
+    <section id="projects" className="py-24 md:py-16 bg-[#1a1d23]">
+      <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        
+        {/* Header */}
+        <div className="text-center mb-16 md:mb-24">
+          <p className="text-[10px] tracking-[0.5em] text-[#f9b000] font-bold uppercase mb-4">
+            Why Choose Us
           </p>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground text-balance">
-            OUR PILLARS
+          <h2 className="font-serif text-3xl md:text-5xl text-white">
+            The Pillars of <span className="italic text-white/80">Excellence</span>
           </h2>
+          <div className="mt-6 w-12 h-1px bg-[#f9b000]/40 mx-auto" />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+        {/* Pillars Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {pillars.map((pillar, index) => (
             <div
               key={index}
-              className="group relative p-5 md:p-6 border border-border/50 hover:border-primary/30 transition-all duration-500 text-center overflow-hidden min-h-[260px] flex flex-col items-center justify-center"
+              className="group relative min-h-[450px] flex flex-col items-center justify-end p-8 md:p-10 overflow-hidden border border-white/5 transition-all duration-700"
             >
-              {/* Background image on hover */}
-              <div className="absolute inset-0 ">
+              {/* Background Image with Ken Burns Effect */}
+              <div className="absolute inset-0 z-0">
                 <Image
                   src={pillar.image}
                   alt={pillar.title}
                   fill
-                  className="object-cover"
+                  className="object-cover opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-[2000ms] ease-out"
                 />
-                <div className="absolute inset-0 bg-black/60" />
+                {/* Gradient Overlay for Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1d23] via-[#1a1d23]/80 to-transparent" />
               </div>
 
               {/* Content */}
-              <div className="relative z-10">
-                <div className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 border border-primary/30 mb-4 md:mb-5 group-hover:border-primary transition-colors duration-500">
+              <div className="relative z-10 w-full text-center">
+                {/* Icon Circle */}
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-[#f9b000]/30 mb-6 group-hover:border-[#f9b000] group-hover:bg-[#f9b000]/10 transition-all duration-500">
                   <pillar.icon
-                    className="h-5 w-5 md:h-6 md:w-6 text-primary"
-                    strokeWidth={1.5}
+                    className="h-6 w-6 text-[#f9b000]"
+                    strokeWidth={1}
                   />
                 </div>
-                <h3 className="font-serif text-lg md:text-xl text-foreground mb-2 md:mb-3">
+                
+                <p className="text-[9px] tracking-[0.2em] text-[#f9b000] uppercase font-bold mb-2 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0">
+                  {pillar.subtitle}
+                </p>
+                
+                <h3 className="font-serif text-2xl text-white mb-4">
                   {pillar.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed ">
-                  {pillar.description}
-                </p>
+                
+                <div className="h-0 group-hover:h-24 transition-all duration-700 overflow-hidden opacity-0 group-hover:opacity-100">
+                  <p className="text-sm md:text-base text-white/60 leading-relaxed font-light">
+                    {pillar.description}
+                  </p>
+                </div>
+
+                {/* Bottom Line Decor */}
+                <div className="mt-6 w-0 group-hover:w-full h-px bg-gradient-to-r from-transparent via-[#f9b000]/50 to-transparent transition-all duration-1000" />
               </div>
             </div>
           ))}
