@@ -40,7 +40,7 @@ export function About() {
   const text2 = "As a family-owned and operated studio, Drew personally designs, crafts, and installs every monument. Kara, our CFO, ensures every piece of history is handled with the precision and care it deserves.";
 
   return (
-    <section id="about" className="py-16 md:py-2 bg-[#1a1d23] overflow-hidden">
+    <section id="about" className="py-16 md:py-2 bg-[#13151a] overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           

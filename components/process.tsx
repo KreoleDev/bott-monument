@@ -36,7 +36,7 @@ export function Process() {
   });
 
   return (
-    <section id="process" ref={containerRef} className="py-24 md:py-15 bg-[#1a1d23] overflow-hidden">
+    <section id="process" ref={containerRef} className="py-24 md:py-15 bg-[#1c1f27] overflow-hidden">
       <div className="mx-auto max-w-6xl px-6">
         
         {/* Header com animação de entrada */}

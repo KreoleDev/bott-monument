@@ -19,7 +19,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contato" className="py-8 md:py-12 bg-card">
+    <section id="contato" className="py-8 md:py-12  bg-[#0b0d11]">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-5 md:mb-6">
           <p className="text-xs tracking-[0.2em] sm:tracking-[0.3em] text-primary uppercase mb-1">
@@ -30,7 +30,7 @@ export function Contact() {
           </h2>
         </div>
 
-        <div className="border border-border/30 bg-background/50 p-4 sm:p-5 md:p-6">
+       <div className="border border-white/5 bg-white/[0.03] p-4 sm:p-5 md:p-6">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-5 md:gap-8">
             <form onSubmit={handleSubmit} className="md:col-span-3 space-y-3">
               <div className="grid grid-cols-2 gap-3">
