@@ -50,12 +50,7 @@ export function Process() {
             The Journey
           </motion.span>
           <h2 className="font-serif text-4xl md:text-6xl text-white tracking-tight">Our Process</h2>
-          <motion.div 
-            initial={{ width: 0 }}
-            whileInView={{ width: "80px" }}
-            viewport={{ once: false }}
-            className="h-[1px] bg-primary mt-8" 
-          />
+          
         </div>
 
         {/* Timeline Area */}
