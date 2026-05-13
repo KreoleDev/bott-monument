@@ -96,11 +96,11 @@ export function Hero() {
   }, [])
 
   const scene = scenes[current]
-  const arrowColor = scene.arrows === "gold" ? "#f9b000" : "rgba(255,255,255,0.7)"
+  const brass = "#c8a66a"
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-[#1a1d23]"
+      className="relative w-full overflow-hidden bg-background"
       style={{ minHeight: "calc(100vh - 80px)", height: "calc(100vh - 80px)", marginTop: "80px" }}
     >
       <style jsx global>{`
@@ -118,12 +118,11 @@ export function Hero() {
         >
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
-    {/* ESTE É O CÓDIGO NOVO QUE SUBSTITUI A DIV ANTIGA: */}
-      <div className="absolute inset-0 bg-black/30" /> {/* Escurecimento base */}
+      <div className="absolute inset-0 bg-black/15" />
       <div 
         className="absolute inset-0" 
         style={{ 
-          background: "radial-gradient(circle at center, transparent 0%, rgba(26,29,35,0.8) 100%)" 
+          background: "radial-gradient(circle at center, transparent 12%, rgba(15,14,12,0.5) 100%)" 
         }} 
       />
       </div>
@@ -131,16 +130,16 @@ export function Hero() {
       <div
         className="absolute top-0 left-0 right-0 z-[2] pointer-events-none"
         style={{
-          height: "120px",
-          background: "linear-gradient(to bottom, #1a1d23 0%, #1a1d23 40%, transparent 100%)",
+          height: "96px",
+          background: `linear-gradient(to bottom, rgba(15,14,12,0.88) 0%, rgba(15,14,12,0.52) 48%, transparent 100%)`,
         }}
       />
 
       <div
         className="absolute bottom-0 left-0 right-0 z-[2] pointer-events-none"
         style={{
-          height: "clamp(80px, 15vh, 208px)",
-          background: "linear-gradient(to top, #1a1d23 0%, transparent 100%)",
+          height: "clamp(70px, 12vh, 170px)",
+          background: `linear-gradient(to top, rgba(15,14,12,0.82) 0%, transparent 100%)`,
         }}
       />
 
@@ -159,25 +158,6 @@ export function Hero() {
         {scene.watermark}
       </div>
 
-      {scene.arrows !== "none" && (
-        <>
-          <svg
-            className="absolute z-[5] pointer-events-none hidden sm:block"
-            style={{ bottom: "clamp(100px, 18vh, 150px)", left: "clamp(8px, 2vw, 24px)" }}
-            width="40" height="40" viewBox="0 0 40 40"
-          >
-            <polyline points="35,5 5,20 35,35" fill="none" stroke={arrowColor} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          <svg
-            className="absolute z-[5] pointer-events-none hidden sm:block"
-            style={{ bottom: "clamp(100px, 18vh, 150px)", right: "clamp(8px, 2vw, 24px)" }}
-            width="40" height="40" viewBox="0 0 40 40"
-          >
-            <polyline points="5,5 35,20 5,35" fill="none" stroke={arrowColor} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </>
-      )}
-
       {scene.badge && (
         <div
           className="absolute z-10 whitespace-nowrap text-center"
@@ -192,7 +172,7 @@ export function Hero() {
             color: "rgba(255,255,255,0.5)",
           }}
         >
-          — Stone arte since <span style={{ color: "#f9b000" }}>1985</span> —
+          — Stone arte since <span style={{ color: brass }}>1985</span> —
         </div>
       )}
 
@@ -218,7 +198,7 @@ export function Hero() {
                   overflow: "hidden" // Esconde o texto enquanto ele está "embaixo"
                 }}>
                   <div style={{
-                    color: "#f9b000",
+                    color: brass,
                     transform: revealed ? "translateY(0)" : "translateY(105%)", // Move de baixo para cima
                     transition: "transform 1s cubic-bezier(0.16, 1, 0.3, 1)", // Transição suave "Power4"
                   }}>
@@ -269,7 +249,7 @@ export function Hero() {
                 fontFamily: "'Bebas Neue', sans-serif",
                 fontSize: "clamp(28px, 6.5vw, 86px)",
                 lineHeight: 0.95,
-                color: "#f9b000",
+                color: brass,
                 opacity: revealed ? 1 : 0,
                 transform: revealed ? "translateY(0)" : "translateY(20px)",
                 transition: "opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s",
@@ -288,7 +268,7 @@ export function Hero() {
                 {scene.titleWhite}
               </div>
               <div style={{
-                border: "1px solid rgba(249,176,0,0.5)",
+                border: "1px solid rgba(200,166,106,0.5)",
                 borderRadius: 999,
                 padding: "6px 24px",
                 fontFamily: "'Montserrat', sans-serif",
@@ -311,15 +291,15 @@ export function Hero() {
                 transform: revealed ? "scale(1)" : "scale(0.5)",
                 transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)"
               }}>
-                <div className="absolute inset-0 bg-[#f9b000] blur-2xl opacity-20 rounded-full" />
-                <Hammer size={56} strokeWidth={1.5} className="text-[#f9b000] relative z-10" />
+                <div className="absolute inset-0 bg-primary blur-2xl opacity-20 rounded-full" />
+                <Hammer size={56} strokeWidth={1.5} className="text-primary relative z-10" />
               </div>
 
               <div style={{
                 fontFamily: "'Bebas Neue', sans-serif",
                 fontSize: "clamp(32px, 7.5vw, 90px)",
                 lineHeight: 0.95,
-                color: "#f9b000",
+                color: brass,
                 opacity: revealed ? 1 : 0,
                 transform: revealed ? "translateY(0)" : "translateY(20px)",
                 transition: "opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s",
@@ -357,7 +337,7 @@ export function Hero() {
               width: i === current ? 22 : 6,
               height: 6,
               borderRadius: i === current ? 3 : "50%",
-              background: i === current ? "#f9b000" : "rgba(255,255,255,0.2)",
+              background: i === current ? brass : "rgba(255,255,255,0.2)",
               border: "none",
               cursor: "pointer",
               transition: "all 0.3s",
@@ -377,7 +357,7 @@ export function Hero() {
       >
         <Button
           size="lg"
-          className="rounded-full px-6 md:px-10 py-5 md:py-6 text-xs md:text-sm font-bold text-[#1a1d23] bg-[#f9b000] relative overflow-hidden transition-transform hover:scale-105 active:scale-95 shadow-[0_0_24px_rgba(249,176,0,0.45)] w-full max-w-xs md:max-w-sm"
+          className="rounded-full px-6 md:px-10 py-5 md:py-6 text-xs md:text-sm font-bold text-primary-foreground bg-primary relative overflow-hidden transition-transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(200,166,106,0.32)] w-full max-w-xs md:max-w-sm"
           asChild
         >
           <Link href="#contato">
@@ -390,15 +370,15 @@ export function Hero() {
         </Button>
 
         <Link href="#sobre" className="flex items-center gap-3 group">
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-full border border-white/10 transition-all group-hover:border-[#f9b000]/50 flex-shrink-0">
-            <span className="text-white/30 group-hover:text-[#f9b000] text-sm">⬦</span>
-            <div className="absolute inset-0 border-t border-[#f9b000] opacity-0 group-hover:opacity-100 rounded-full animate-spin" />
+          <div className="relative flex items-center justify-center w-10 h-10 rounded-full border border-white/10 transition-all group-hover:border-primary/50 flex-shrink-0">
+            <span className="text-white/30 group-hover:text-primary text-sm">⬦</span>
+            <div className="absolute inset-0 border-t border-primary opacity-0 group-hover:opacity-100 rounded-full animate-spin" />
           </div>
           <div className="flex flex-col items-start">
             <span className="text-[10px] tracking-[0.3em] text-white/30 uppercase font-bold group-hover:text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>
               Explorar Galeria
             </span>
-            <span className="text-[11px] text-[#f9b000]/60 font-serif italic">
+            <span className="text-[11px] text-primary/70 font-serif italic">
               Obras que transcendem o tempo
             </span>
           </div>
@@ -416,9 +396,9 @@ export function Hero() {
           100% { transform: translateX(150%)  skewX(-20deg); }
         }
         @keyframes pulseAura {
-          0%   { box-shadow: 0 0 0 0    rgba(249,176,0,0.7); }
-          70%  { box-shadow: 0 0 0 12px rgba(249,176,0,0);   }
-          100% { box-shadow: 0 0 0 0    rgba(249,176,0,0);   }
+          0%   { box-shadow: 0 0 0 0    rgba(200,166,106,0.55); }
+          70%  { box-shadow: 0 0 0 12px rgba(200,166,106,0);   }
+          100% { box-shadow: 0 0 0 0    rgba(200,166,106,0);   }
         }
       `}</style>
     </section>

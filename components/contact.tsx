@@ -19,7 +19,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contato" className="py-8 md:py-12  bg-[#0b0d11]">
+    <section id="contato" className="py-8 md:py-12 bg-background">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-5 md:mb-6">
           <p className="text-xs tracking-[0.2em] sm:tracking-[0.3em] text-primary uppercase mb-1">

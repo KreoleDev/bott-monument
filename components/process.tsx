@@ -36,7 +36,7 @@ export function Process() {
   });
 
   return (
-    <section id="process" ref={containerRef} className="py-24 md:py-15 bg-[#1c1f27] overflow-hidden">
+    <section id="process" ref={containerRef} className="py-24 md:py-15 bg-secondary overflow-hidden">
       <div className="mx-auto max-w-6xl px-6">
         
         {/* Header com animação de entrada */}
@@ -45,7 +45,7 @@ export function Process() {
             initial={{ opacity: 0, letterSpacing: "0.2em" }}
             whileInView={{ opacity: 1, letterSpacing: "0.5em" }}
             viewport={{ once: false }}
-            className="text-[#f9b000] text-[10px] font-bold uppercase mb-4 transition-all duration-1000"
+            className="text-primary text-[10px] font-bold uppercase mb-4 transition-all duration-1000"
           >
             The Journey
           </motion.span>
@@ -54,7 +54,7 @@ export function Process() {
             initial={{ width: 0 }}
             whileInView={{ width: "80px" }}
             viewport={{ once: false }}
-            className="h-[1px] bg-[#f9b000] mt-8" 
+            className="h-[1px] bg-primary mt-8" 
           />
         </div>
 
@@ -65,7 +65,7 @@ export function Process() {
           <div className="hidden md:block absolute top-[45px] left-0 right-0 h-[1px] bg-white/5 z-0">
             <motion.div 
               style={{ scaleX, originX: 0 }}
-              className="h-full bg-gradient-to-r from-[#f9b000]/0 via-[#f9b000] to-[#f9b000]/0"
+              className="h-full bg-gradient-to-r from-primary/0 via-primary to-primary/0"
             />
           </div>
 
@@ -82,14 +82,14 @@ export function Process() {
                 {/* Círculo com Efeito "Float" e Glassmorphism */}
                 <motion.div 
                   whileHover={{ y: -10 }}
-                  className="relative z-10 flex items-center justify-center w-24 h-24 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-10 transition-all duration-500 group-hover:border-[#f9b000]/50 group-hover:shadow-[0_0_30px_rgba(249,176,0,0.1)]"
+                  className="relative z-10 flex items-center justify-center w-24 h-24 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-10 transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(200,166,106,0.1)]"
                 >
-                  <span className="font-serif text-3xl text-white/20 group-hover:text-[#f9b000] transition-colors duration-500">
+                  <span className="font-serif text-3xl text-white/20 group-hover:text-primary transition-colors duration-500">
                     {step.number}
                   </span>
                   
                   {/* Brilho interno animado */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#f9b000]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </motion.div>
 
                 {/* Texto com entrada stagger */}
@@ -101,7 +101,7 @@ export function Process() {
                   {/* Linha pequena que expande no hover */}
                   <div className="flex justify-center">
                     <motion.div 
-                      className="h-[1px] bg-[#f9b000]/40" 
+                      className="h-[1px] bg-primary/40" 
                       initial={{ width: "20px" }}
                       whileHover={{ width: "40px" }}
                     />
@@ -123,7 +123,7 @@ export function Process() {
           viewport={{ once: false }}
           className="mt-32 flex flex-col items-center"
         >
-          <div className="h-12 w-[1px] bg-gradient-to-b from-[#f9b000] to-transparent mb-8" />
+          <div className="h-12 w-[1px] bg-gradient-to-b from-primary to-transparent mb-8" />
           <p className="text-white/20 text-[9px] tracking-[0.4em] uppercase font-bold">
             Personalized Service Since 1970
           </p>

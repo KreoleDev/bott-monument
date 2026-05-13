@@ -30,18 +30,18 @@ const pillars = [
 
 export function Features() {
   return (
-    <section id="projects" className="py-24 md:py-16 bg-[#1e2128]">
+    <section id="projects" className="py-24 md:py-16 bg-secondary">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         
         {/* Header */}
         <div className="text-center mb-16 md:mb-24">
-          <p className="text-[10px] tracking-[0.5em] text-[#f9b000] font-bold uppercase mb-4">
+          <p className="text-[10px] tracking-[0.5em] text-primary font-bold uppercase mb-4">
             Why Choose Us
           </p>
           <h2 className="font-serif text-3xl md:text-5xl text-white">
             The Pillars of <span className="italic text-white/80">Excellence</span>
           </h2>
-          <div className="mt-6 w-12 h-1px bg-[#f9b000]/40 mx-auto" />
+          <div className="mt-6 w-12 h-1px bg-primary/40 mx-auto" />
         </div>
 
         {/* Pillars Grid */}
@@ -57,23 +57,23 @@ export function Features() {
                   src={pillar.image}
                   alt={pillar.title}
                   fill
-                  className="object-cover opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-[2000ms] ease-out"
+                  className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-110 transition-all duration-[2000ms] ease-out"
                 />
                 {/* Gradient Overlay for Text Readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1d23] via-[#1a1d23]/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/35 to-transparent" />
               </div>
 
               {/* Content */}
               <div className="relative z-10 w-full text-center">
                 {/* Icon Circle */}
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-[#f9b000]/30 mb-6 group-hover:border-[#f9b000] group-hover:bg-[#f9b000]/10 transition-all duration-500">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-primary/30 mb-6 group-hover:border-primary group-hover:bg-primary/10 transition-all duration-500">
                   <pillar.icon
-                    className="h-6 w-6 text-[#f9b000]"
+                    className="h-6 w-6 text-primary"
                     strokeWidth={1}
                   />
                 </div>
                 
-                <p className="text-[9px] tracking-[0.2em] text-[#f9b000] uppercase font-bold mb-2 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0">
+                <p className="text-[9px] tracking-[0.2em] text-primary uppercase font-bold mb-2 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0">
                   {pillar.subtitle}
                 </p>
                 
@@ -88,7 +88,7 @@ export function Features() {
                 </div>
 
                 {/* Bottom Line Decor */}
-                <div className="mt-6 w-0 group-hover:w-full h-px bg-gradient-to-r from-transparent via-[#f9b000]/50 to-transparent transition-all duration-1000" />
+                <div className="mt-6 w-0 group-hover:w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent transition-all duration-1000" />
               </div>
             </div>
           ))}

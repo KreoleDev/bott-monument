@@ -40,7 +40,7 @@ export function About() {
   const text2 = "As a family-owned and operated studio, Drew personally designs, crafts, and installs every monument. Kara, our CFO, ensures every piece of history is handled with the precision and care it deserves.";
 
   return (
-    <section id="about" className="py-16 md:py-2 bg-[#13151a] overflow-hidden">
+    <section id="about" className="py-16 md:py-2 bg-card overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
@@ -52,17 +52,17 @@ export function About() {
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1.5s] opacity-70 hover:opacity-100"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1.5s] opacity-[0.85] hover:opacity-100"
               >
                 <source src="/videos/familia.mp4" type="video/mp4" />
                 <img src="/images/craftsman.jpg" alt="Drew Bott" className="object-cover w-full h-full" />
               </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1d23]/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent" />
             </div>
             
             {/* Elementos Decorativos Dourados */}
-            <div className="absolute -left-3 -bottom-3 w-32 h-32 border-l border-b border-[#f9b000]/40 -z-0 animate-pulse" />
-            <div className="absolute -right-3 -top-3 w-32 h-32 border-r border-t border-[#f9b000]/20 -z-0 transition-all duration-1000 group-hover:-translate-y-2 group-hover:translate-x-2" />
+            <div className="absolute -left-3 -bottom-3 w-32 h-32 border-l border-b border-primary/40 -z-0 animate-pulse" />
+            <div className="absolute -right-3 -top-3 w-32 h-32 border-r border-t border-primary/20 -z-0 transition-all duration-1000 group-hover:-translate-y-2 group-hover:translate-x-2" />
           </div>
 
           {/* Lado do Conteúdo - Texto e Stats */}
@@ -70,7 +70,7 @@ export function About() {
             <motion.p 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 0.8 }}
-              className="text-[10px] tracking-[0.4em] text-[#f9b000] font-bold uppercase mb-4"
+              className="text-[10px] tracking-[0.4em] text-primary font-bold uppercase mb-4"
             >
               Our Legacy
             </motion.p>
@@ -124,7 +124,7 @@ export function About() {
                 >
                   <motion.span 
                     whileHover={{ scale: 1.05 }}
-                    className="block font-serif text-3xl md:text-5xl text-[#f9b000] transition-all duration-500 drop-shadow-[0_0_15px_rgba(249,176,0,0.2)]"
+                    className="block font-serif text-3xl md:text-5xl text-primary transition-all duration-500 drop-shadow-[0_0_15px_rgba(200,166,106,0.18)]"
                   >
                     <Counter value={stat.n} />
                   </motion.span>
