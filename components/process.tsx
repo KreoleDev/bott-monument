@@ -1,128 +1,183 @@
 "use client";
-import { motion, useScroll, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useSpring, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 
 const steps = [
-  {
-    number: "01",
-    title: "FIRST ENCOUNTER",
-    description: "By phone, email, or in person, Drew will listen and get to know you and your loved one. This first visit can be as brief or as long as you need.",
+  { 
+    number: "01", 
+    title: "FIRST ENCOUNTER", 
+    description: "By phone, email, or in person, Drew will listen and get to know you and your loved one to understand your vision.",
+    image: "/images/work-1.jpg" 
   },
-  {
-    number: "02",
-    title: "DESIGN PROCESS",
-    description: "Drew will craft a unique memorial based on your input, then send you the designs for review. Revisions are always welcome — no question asked.",
+  { 
+    number: "02", 
+    title: "DESIGN PROCESS", 
+    description: "Drew will craft a unique memorial based on your input, providing detailed 3D designs for your personal review.",
+    image: "/images/work-2.jpg" 
   },
-  {
-    number: "03",
-    title: "FINISHED PRODUCT",
-    description: "Once you choose a design, Drew will provide the quote and adjust as needed to fit your budget. After approval, your memorial will be created.",
+  { 
+    number: "03", 
+    title: "FINISHED PRODUCT", 
+    description: "After your final approval, the memorial is meticulously created and prepared for its lasting place of honor.",
+    image: "/images/work-3.jpg" 
   },
 ];
 
 export function Process() {
+  const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef(null);
   
-  // Script para a linha que cresce conforme o scroll
+  // Detecta se a seção está visível para iniciar e resetar o loop
+  const isSectionInView = useInView(containerRef, { amount: 0.3 });
+  
+  const duration = 2000; // Tempo equilibrado para leitura e animação
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (isSectionInView) {
+      // Reinicia sempre do primeiro passo ao entrar na seção
+      setActiveIndex(0);
+      
+      interval = setInterval(() => {
+        setActiveIndex((prev) => (prev === steps.length - 1 ? 0 : prev + 1));
+      }, duration);
+    }
+
+    return () => clearInterval(interval);
+  }, [isSectionInView]);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "center center"]
   });
 
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   return (
-    <section id="process" ref={containerRef} className="py-24 md:py-15 bg-secondary overflow-hidden">
+    <section ref={containerRef} className="py-24 bg-[#121212] overflow-hidden">
       <div className="mx-auto max-w-6xl px-6">
         
-        {/* Header com animação de entrada */}
+        {/* Cabeçalho da Seção */}
         <div className="flex flex-col items-center mb-24 text-center">
           <motion.span 
-            initial={{ opacity: 0, letterSpacing: "0.2em" }}
-            whileInView={{ opacity: 1, letterSpacing: "0.5em" }}
-            viewport={{ once: false }}
-            className="text-primary text-[10px] font-bold uppercase mb-4 transition-all duration-1000"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 0.5, y: 0 }}
+            className="text-primary text-[10px] font-bold uppercase tracking-[0.6em] mb-4"
           >
             The Journey
           </motion.span>
-          <h2 className="font-serif text-4xl md:text-6xl text-white tracking-tight">Our Process</h2>
-          
+          <h2 className="font-serif text-5xl md:text-6xl text-white tracking-tight">
+            Our Process
+          </h2>
         </div>
 
-        {/* Timeline Area */}
         <div className="relative">
-          
-          {/* Linha de Conexão Animada (Desktop) */}
-          <div className="hidden md:block absolute top-[45px] left-0 right-0 h-[1px] bg-white/5 z-0">
-            <motion.div 
-              style={{ scaleX, originX: 0 }}
-              className="h-full bg-gradient-to-r from-primary/0 via-primary to-primary/0"
-            />
+          {/* Linha de progresso sutil ligando os círculos */}
+          <div className="hidden md:block absolute top-[88px] left-0 right-0 h-[1px] bg-white/[0.05] z-0">
+            <motion.div style={{ scaleX, originX: 0 }} className="h-full bg-primary/30" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
-            {steps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: index * 0.1 }}
-                className="relative flex flex-col items-center group"
-              >
-                {/* Círculo com Efeito "Float" e Glassmorphism */}
-                <motion.div 
-                  whileHover={{ y: -10 }}
-                  className="relative z-10 flex items-center justify-center w-24 h-24 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-10 transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(200,166,106,0.1)]"
-                >
-                  <span className="font-serif text-3xl text-white/20 group-hover:text-primary transition-colors duration-500">
-                    {step.number}
-                  </span>
-                  
-                  {/* Brilho interno animado */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 mb-20">
+            {steps.map((step, index) => {
+              // Lógica de ACUMULAÇÃO: passos anteriores continuam acesos
+              const isCompletedOrActive = activeIndex >= index;
+              const isJustActive = activeIndex === index;
 
-                {/* Texto com entrada stagger */}
-                <div className="text-center space-y-5">
-                  <h3 className="font-serif text-xl text-white tracking-[0.15em] group-hover:translate-y-[-2px] transition-transform duration-500">
-                    {step.title}
-                  </h3>
-                  
-                  {/* Linha pequena que expande no hover */}
-                  <div className="flex justify-center">
+              return (
+                <div 
+                  key={index} 
+                  className="relative flex flex-col items-center cursor-pointer group"
+                  onClick={() => setActiveIndex(index)}
+                >
+                  {/* Container do Círculo */}
+                  <div className="relative z-30 mb-8">
+                    {/* Loader Circular SVG - Aparece apenas no passo atual */}
+                    <svg className="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] -rotate-90">
+                      <circle
+                        cx="50%" cy="50%" r="46%"
+                        stroke="currentColor" strokeWidth="1" fill="transparent"
+                        className="text-white/[0.03]"
+                      />
+                      {isJustActive && isSectionInView && (
+                        <motion.circle
+                          cx="50%" cy="50%" r="46%"
+                          stroke="#C8A66A" strokeWidth="2" fill="transparent"
+                          strokeDasharray="100 100"
+                          initial={{ strokeDashoffset: 100 }}
+                          animate={{ strokeDashoffset: 0 }}
+                          transition={{ duration: duration / 1000, ease: "linear" }}
+                        />
+                      )}
+                    </svg>
+
+                    {/* Moldura da Imagem */}
                     <motion.div 
-                      className="h-[1px] bg-primary/40" 
-                      initial={{ width: "20px" }}
-                      whileHover={{ width: "40px" }}
-                    />
+                      animate={{ 
+                        scale: isJustActive ? 1.1 : isCompletedOrActive ? 1 : 0.9,
+                        borderColor: isCompletedOrActive ? "#C8A66A" : "rgba(255,255,255,0.1)",
+                        boxShadow: isJustActive ? "0 0 30px rgba(200,166,106,0.2)" : "0 0 0px rgba(0,0,0,0)"
+                      }}
+                      className="w-36 h-36 md:w-44 md:h-44 rounded-full border overflow-hidden bg-neutral-900 relative transition-all duration-700"
+                    >
+                      <motion.img 
+                        src={step.image}
+                        alt={step.title}
+                        animate={{ 
+                          opacity: isCompletedOrActive ? 1 : 0.15,
+                          filter: isCompletedOrActive ? "grayscale(0%) blur(0px)" : "grayscale(100%) blur(4px)",
+                        }}
+                        transition={{ duration: 0.8 }}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      
+                      {/* Número do Passo (apenas se não estiver carregado) */}
+                      {!isCompletedOrActive && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                          <span className="font-serif text-xl text-white/20">{step.number}</span>
+                        </div>
+                      )}
+                    </motion.div>
                   </div>
 
-                  <p className="text-white/40 text-sm md:text-base leading-relaxed font-light max-w-[280px] group-hover:text-white/70 transition-colors duration-500">
-                    {step.description}
-                  </p>
+                  {/* Título do Passo */}
+                  <motion.h3 
+                    animate={{ 
+                      color: isCompletedOrActive ? "#ffffff" : "rgba(255,255,255,0.2)",
+                      y: isJustActive ? 0 : 5
+                    }}
+                    className="font-serif text-lg md:text-xl tracking-[0.2em] uppercase text-center relative z-30"
+                  >
+                    {step.title}
+                  </motion.h3>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* ÁREA DE CONTEÚDO DINÂMICO (Preenche o vazio da imagem image_78be54.png) */}
+          <div className="max-w-3xl mx-auto text-center min-h-[100px] flex flex-col items-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="space-y-6"
+              >
+                <p className="text-white/50 text-base md:text-lg font-light leading-relaxed italic px-4">
+                  "{steps[activeIndex].description}"
+                </p>
+                <div className="flex justify-center items-center gap-4">
+                  <div className="h-[1px] w-12 bg-primary/20" />
+                  <span className="text-primary font-serif italic text-sm">Step {steps[activeIndex].number}</span>
+                  <div className="h-[1px] w-12 bg-primary/20" />
                 </div>
               </motion.div>
-            ))}
+            </AnimatePresence>
           </div>
         </div>
-
-        {/* Floating Quote Bottom */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: false }}
-          className="mt-32 flex flex-col items-center"
-        >
-          <div className="h-12 w-[1px] bg-gradient-to-b from-primary to-transparent mb-8" />
-          <p className="text-white/20 text-[9px] tracking-[0.4em] uppercase font-bold">
-            Personalized Service Since 1970
-          </p>
-        </motion.div>
       </div>
     </section>
   );
