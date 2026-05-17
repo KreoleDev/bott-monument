@@ -30,7 +30,7 @@ const pillars = [
 
 export function Features() {
   return (
-    <section id="projects" className="py-24 md:py-16 bg-secondary">
+    <section id="projects" className="py-24 md:py-20 bg-secondary">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         
         {/* Header */}

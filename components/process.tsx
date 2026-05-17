@@ -1,5 +1,5 @@
 "use client";
-import { motion, useScroll, useSpring, useInView, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useSpring, useInView, AnimatePresence, Variants } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 const steps = [
@@ -25,20 +25,16 @@ const steps = [
 
 export function Process() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLElement>(null);
   
-  // Detecta se a seção está visível para iniciar e resetar o loop
-  const isSectionInView = useInView(containerRef, { amount: 0.3 });
-  
-  const duration = 2000; // Tempo equilibrado para leitura e animação
+  const isSectionInView = useInView(containerRef, { once: false, amount: 0.2 });
+  const duration = 2400; // Tempo levemente estendido para acompanhar a barra sutil
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
     if (isSectionInView) {
-      // Reinicia sempre do primeiro passo ao entrar na seção
       setActiveIndex(0);
-      
       interval = setInterval(() => {
         setActiveIndex((prev) => (prev === steps.length - 1 ? 0 : prev + 1));
       }, duration);
@@ -55,54 +51,65 @@ export function Process() {
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   return (
-    <section ref={containerRef} className="py-24 bg-[#121212] overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6">
+    <section ref={containerRef} className="py-24 md:py-25 bg-card overflow-hidden relative">
+      
+      {/* Marca d'água tipográfica sutil integrada */}
+      <div className="absolute left-6 bottom-[10%] z-0 pointer-events-none select-none hidden xl:block opacity-[0.01]">
+        <h3 className="font-serif text-[15vw] text-white leading-none tracking-tighter">STEPS</h3>
+      </div>
+
+      <div className="mx-auto max-w-6xl px-6 relative z-10">
         
-        {/* Cabeçalho da Seção */}
-        <div className="flex flex-col items-center mb-24 text-center">
-          <motion.span 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 0.5, y: 0 }}
-            className="text-primary text-[10px] font-bold uppercase tracking-[0.6em] mb-4"
-          >
-            The Journey
-          </motion.span>
+        {/* Cabeçalho da Seção Refinado */}
+        <div className="flex flex-col items-center mb-28 text-center space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="h-[1px] w-6 bg-primary/40" />
+            <motion.span 
+              initial={{ opacity: 0, letterSpacing: "0.3em" }}
+              animate={isSectionInView ? { opacity: 0.5, letterSpacing: "0.6em" } : { opacity: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-primary text-[10px] font-bold uppercase tracking-[0.6em]"
+            >
+              The Journey
+            </motion.span>
+            <div className="h-[1px] w-6 bg-primary/40" />
+          </div>
           <h2 className="font-serif text-5xl md:text-6xl text-white tracking-tight">
-            Our Process
+            Our <span className="italic font-light text-white/80">Process</span>
           </h2>
         </div>
 
         <div className="relative">
-          {/* Linha de progresso sutil ligando os círculos */}
-          <div className="hidden md:block absolute top-[88px] left-0 right-0 h-[1px] bg-white/[0.05] z-0">
-            <motion.div style={{ scaleX, originX: 0 }} className="h-full bg-primary/30" />
+          {/* Linha de progresso no fundo mais sutil */}
+          <div className="hidden md:block absolute top-[88px] left-[10%] right-[10%] h-[1px] bg-white/[0.03] z-0">
+            <motion.div style={{ scaleX, originX: 0 }} className="h-full bg-gradient-to-r from-primary/10 via-primary/40 to-primary/10" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-12 mb-24">
             {steps.map((step, index) => {
-              // Lógica de ACUMULAÇÃO: passos anteriores continuam acesos
               const isCompletedOrActive = activeIndex >= index;
               const isJustActive = activeIndex === index;
 
               return (
                 <div 
                   key={index} 
-                  className="relative flex flex-col items-center cursor-pointer group"
+                  className="relative flex flex-col items-center cursor-pointer group select-none"
                   onClick={() => setActiveIndex(index)}
                 >
                   {/* Container do Círculo */}
                   <div className="relative z-30 mb-8">
-                    {/* Loader Circular SVG - Aparece apenas no passo atual */}
-                    <svg className="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] -rotate-90">
+                    
+                    {/* Loader Circular SVG Avançado */}
+                    <svg className="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] -rotate-90 pointer-events-none">
                       <circle
                         cx="50%" cy="50%" r="46%"
                         stroke="currentColor" strokeWidth="1" fill="transparent"
-                        className="text-white/[0.03]"
+                        className="text-white/[0.02]"
                       />
                       {isJustActive && isSectionInView && (
                         <motion.circle
                           cx="50%" cy="50%" r="46%"
-                          stroke="#C8A66A" strokeWidth="2" fill="transparent"
+                          stroke="#C8A66A" strokeWidth="1.5" fill="transparent"
                           strokeDasharray="100 100"
                           initial={{ strokeDashoffset: 100 }}
                           animate={{ strokeDashoffset: 0 }}
@@ -111,42 +118,51 @@ export function Process() {
                       )}
                     </svg>
 
-                    {/* Moldura da Imagem */}
+                    {/* Moldura da Imagem Circular de Luxo */}
                     <motion.div 
                       animate={{ 
-                        scale: isJustActive ? 1.1 : isCompletedOrActive ? 1 : 0.9,
-                        borderColor: isCompletedOrActive ? "#C8A66A" : "rgba(255,255,255,0.1)",
-                        boxShadow: isJustActive ? "0 0 30px rgba(200,166,106,0.2)" : "0 0 0px rgba(0,0,0,0)"
+                        scale: isJustActive ? 1.08 : isCompletedOrActive ? 1 : 0.9,
+                        borderColor: isJustActive ? "#C8A66A" : isCompletedOrActive ? "rgba(200,166,106,0.3)" : "rgba(255,255,255,0.05)",
+                        boxShadow: isJustActive ? "0 0 40px rgba(200,166,106,0.15)" : "0 0 0px rgba(0,0,0,0)"
                       }}
-                      className="w-36 h-36 md:w-44 md:h-44 rounded-full border overflow-hidden bg-neutral-900 relative transition-all duration-700"
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                      className="w-36 h-36 md:w-44 md:h-44 rounded-full border overflow-hidden bg-[#111] relative z-20"
                     >
                       <motion.img 
                         src={step.image}
                         alt={step.title}
                         animate={{ 
-                          opacity: isCompletedOrActive ? 1 : 0.15,
-                          filter: isCompletedOrActive ? "grayscale(0%) blur(0px)" : "grayscale(100%) blur(4px)",
+                          opacity: isCompletedOrActive ? 1 : 0.12,
+                          filter: isCompletedOrActive ? "grayscale(0%) blur(0px)" : "grayscale(100%) blur(2px)",
                         }}
-                        transition={{ duration: 0.8 }}
-                        className="absolute inset-0 w-full h-full object-cover"
+                        transition={{ duration: 0.7 }}
+                        className="absolute inset-0 w-full h-full object-cover scale-102 group-hover:scale-105 transition-transform duration-700"
                       />
                       
-                      {/* Número do Passo (apenas se não estiver carregado) */}
+                      {/* Número do Passo integrado de forma elegante */}
                       {!isCompletedOrActive && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                          <span className="font-serif text-xl text-white/20">{step.number}</span>
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                          <span className="font-serif text-lg tracking-widest text-white/10">{step.number}</span>
                         </div>
                       )}
                     </motion.div>
                   </div>
 
-                  {/* Título do Passo */}
+                  {/* Metadado Acima do Título */}
+                  <motion.span 
+                    animate={{ opacity: isJustActive ? 0.4 : 0.1 }}
+                    className="text-[9px] font-sans font-bold tracking-[0.3em] text-white mb-2"
+                  >
+                    PHASE {step.number}
+                  </motion.span>
+
+                  {/* Título do Passo com Contraste */}
                   <motion.h3 
                     animate={{ 
-                      color: isCompletedOrActive ? "#ffffff" : "rgba(255,255,255,0.2)",
-                      y: isJustActive ? 0 : 5
+                      color: isCompletedOrActive ? "#ffffff" : "rgba(255,255,255,0.15)",
+                      letterSpacing: isJustActive ? "0.25em" : "0.15em"
                     }}
-                    className="font-serif text-lg md:text-xl tracking-[0.2em] uppercase text-center relative z-30"
+                    className="font-serif text-base md:text-lg tracking-[0.15em] uppercase text-center relative z-30 transition-all duration-500"
                   >
                     {step.title}
                   </motion.h3>
@@ -155,24 +171,31 @@ export function Process() {
             })}
           </div>
 
-          {/* ÁREA DE CONTEÚDO DINÂMICO (Preenche o vazio da imagem image_78be54.png) */}
-          <div className="max-w-3xl mx-auto text-center min-h-[100px] flex flex-col items-center">
+          {/* ÁREA DE CONTEÚDO DINÂMICO PREMIUM */}
+          <div className="max-w-3xl mx-auto text-center min-h-[120px] flex flex-col items-center justify-center relative">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-                className="space-y-6"
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="space-y-6 flex flex-col items-center"
               >
-                <p className="text-white/50 text-base md:text-lg font-light leading-relaxed italic px-4">
+                <p className="text-zinc-400 text-base md:text-xl font-light leading-relaxed max-w-2xl px-4 font-serif italic">
                   "{steps[activeIndex].description}"
                 </p>
-                <div className="flex justify-center items-center gap-4">
-                  <div className="h-[1px] w-12 bg-primary/20" />
-                  <span className="text-primary font-serif italic text-sm">Step {steps[activeIndex].number}</span>
-                  <div className="h-[1px] w-12 bg-primary/20" />
+                
+                {/* Indicador de progresso em linha abaixo do bloco descritivo */}
+                <div className="flex items-center gap-2 mt-2">
+                  {steps.map((_, dotIndex) => (
+                    <div 
+                      key={dotIndex} 
+                      className={`h-[2px] transition-all duration-500 ${
+                        activeIndex === dotIndex ? "w-8 bg-primary" : "w-2 bg-white/10"
+                      }`} 
+                    />
+                  ))}
                 </div>
               </motion.div>
             </AnimatePresence>

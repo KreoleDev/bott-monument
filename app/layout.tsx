@@ -17,23 +17,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Bott Monument | Memoriais Personalizados',
   description: 'Criamos monumentos únicos e personalizados que honram a memória de seus entes queridos. Cada peça é uma obra de arte.',
-  generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    // Apontando diretamente para o arquivo real que está na raiz da sua pasta public
+    icon: '/logoBOTT-monument1.png',
+    apple: '/logoBOTT-monument1.png',
   },
 }
 
@@ -43,8 +30,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" className={`${cormorant.variable} ${inter.variable} bg-background`}>
-      <body className="font-sans antialiased">
+    <html lang="pt-BR" className={`${cormorant.variable} ${inter.variable} bg-[#0d0d0d] scroll-smooth`}>
+      <body className="font-sans antialiased text-zinc-300">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
