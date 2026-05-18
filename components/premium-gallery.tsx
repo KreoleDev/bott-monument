@@ -12,7 +12,7 @@ interface GalleryProps {
   categories: Category[]
 }
 
-const ITEMS_PER_PAGE = 8
+const ITEMS_PER_PAGE = 4
 
 export function PremiumGallery({ artworks, categories }: GalleryProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
