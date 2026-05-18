@@ -102,7 +102,7 @@ export function Hero() {
     <section
       id="hero"
       className="relative w-full overflow-hidden bg-background"
-      style={{ minHeight: "calc(100vh - 80px)", height: "calc(100vh - 80px)", marginTop: "80px" }}
+      style={{ minHeight: "100vh", height: "100vh", paddingTop: "100px" }}
     >
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;700&display=swap');
@@ -163,7 +163,7 @@ export function Hero() {
         <div
           className="absolute z-10 whitespace-nowrap text-center"
           style={{
-            top: "clamp(16px, 5vh, 40px)",
+            top: "110px",
             left: "50%",
             transform: "translateX(-50%)",
             fontFamily: "'Montserrat', sans-serif",
@@ -178,7 +178,7 @@ export function Hero() {
       )}
 
       <div
-        className="absolute inset-0 z-[4] flex flex-col"
+        className="absolute inset-0 z-[4] flex flex-col pt-8"
         style={{ paddingBottom: "clamp(120px, 22vh, 180px)" }}
       >
         <div
