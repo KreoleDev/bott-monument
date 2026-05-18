@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import useEmblaCarousel from "embla-carousel-react"
-import { X, ChevronLeft, ChevronRight, ZoomIn, Info, ArrowRight } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, ZoomIn, Info, ChevronDown, ChevronUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { Artwork, Category } from "@/lib/types"
 
@@ -246,19 +246,18 @@ export function PremiumGallery({ artworks, categories }: GalleryProps) {
               {hasMore && (
                 <Button
                   onClick={() => setVisibleCount(prev => Math.min(prev + ITEMS_PER_PAGE, filteredArtworks.length))}
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-8 h-12 text-sm tracking-wider group"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 h-12 text-sm uppercase tracking-widest font-medium shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  Mostrar mais
-                  <span className="ml-2 text-xs text-primary-foreground/70">({filteredArtworks.length - visibleCount} restantes)</span>
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  <ChevronDown className="mr-2 h-4 w-4" />
+                  Mostrar mais ({filteredArtworks.length - visibleCount})
                 </Button>
               )}
               {visibleCount > ITEMS_PER_PAGE && (
                 <Button
-                  variant="outline"
                   onClick={() => setVisibleCount(ITEMS_PER_PAGE)}
-                  className="rounded-none px-8 h-12 text-sm tracking-wider border-white/20 text-white/70 hover:border-primary/50 hover:text-primary hover:bg-transparent"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 h-12 text-sm uppercase tracking-widest font-medium shadow-lg hover:shadow-xl transition-all duration-300"
                 >
+                  <ChevronUp className="mr-2 h-4 w-4" />
                   Mostrar menos
                 </Button>
               )}
