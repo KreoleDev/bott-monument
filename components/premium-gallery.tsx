@@ -24,8 +24,9 @@ export function PremiumGallery({ artworks, categories }: GalleryProps) {
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: true,
-    align: "center",
-    skipSnaps: false
+    align: "start",
+    skipSnaps: false,
+    containScroll: "trimSnaps"
   })
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
@@ -113,9 +114,9 @@ export function PremiumGallery({ artworks, categories }: GalleryProps) {
         </motion.div>
 
         {/* Carousel */}
-        <div className="relative">
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-6">
+        <div className="relative -mx-6 lg:-mx-12">
+          <div className="overflow-hidden px-6 lg:px-12" ref={emblaRef}>
+            <div className="flex gap-4 md:gap-6">
               {filteredArtworks.map((artwork, index) => (
                 <motion.div
                   key={artwork.id}
@@ -123,7 +124,7 @@ export function PremiumGallery({ artworks, categories }: GalleryProps) {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="flex-[0_0_85%] md:flex-[0_0_40%] lg:flex-[0_0_30%] min-w-0"
+                  className="flex-[0_0_80%] sm:flex-[0_0_60%] md:flex-[0_0_45%] lg:flex-[0_0_32%] min-w-0"
                 >
                   <div 
                     className="relative aspect-[3/4] overflow-hidden bg-zinc-900 border border-white/10 shadow-2xl cursor-pointer group"
@@ -175,15 +176,15 @@ export function PremiumGallery({ artworks, categories }: GalleryProps) {
           {/* Navigation buttons */}
           <button
             onClick={scrollPrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary/50 transition-all z-10"
+            className="absolute left-0 lg:left-2 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 bg-black/70 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary/50 transition-all z-10"
           >
-            <ChevronLeft className="w-6 h-6 text-white" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
           <button
             onClick={scrollNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary/50 transition-all z-10"
+            className="absolute right-0 lg:right-2 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 bg-black/70 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary/50 transition-all z-10"
           >
-            <ChevronRight className="w-6 h-6 text-white" />
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
           </button>
         </div>
 
