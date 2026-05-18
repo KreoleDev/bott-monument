@@ -151,35 +151,90 @@ export function Philosophy() {
               className="absolute -left-8 top-12 w-[1px] bg-gradient-to-b from-primary/40 to-transparent hidden lg:block"
             />
 
-            <div className="relative group p-2">
-              {/* Moldura Flutuante Refinada */}
-              <div className="absolute inset-0 border border-primary/20 translate-x-3 translate-y-3 transition-transform duration-700 group-hover:translate-x-1 group-hover:translate-y-1" />
+            <div className="relative group">
+              {/* Moldura Premium com Camadas */}
               
-              {/* Caixa da Imagem */}
+              {/* Camada 1: Moldura exterior dourada com cantos decorativos */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={isSectionInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                className="absolute -inset-4 border border-primary/30 transition-all duration-700 group-hover:border-primary/50"
+              >
+                {/* Cantos decorativos */}
+                <div className="absolute -top-1 -left-1 w-6 h-6 border-t-2 border-l-2 border-primary" />
+                <div className="absolute -top-1 -right-1 w-6 h-6 border-t-2 border-r-2 border-primary" />
+                <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-2 border-l-2 border-primary" />
+                <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-2 border-r-2 border-primary" />
+              </motion.div>
+              
+              {/* Camada 2: Glow ambiente atras da imagem */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isSectionInView ? { opacity: 0.4, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 blur-2xl -z-10"
+              />
+              
+              {/* Camada 3: Linha decorativa diagonal */}
+              <motion.div 
+                initial={{ scaleX: 0 }}
+                animate={isSectionInView ? { scaleX: 1 } : { scaleX: 0 }}
+                transition={{ duration: 1, delay: 0.9 }}
+                className="absolute -top-8 -right-8 w-24 h-[1px] bg-gradient-to-r from-primary/60 to-transparent rotate-45 origin-left hidden lg:block"
+              />
+              <motion.div 
+                initial={{ scaleX: 0 }}
+                animate={isSectionInView ? { scaleX: 1 } : { scaleX: 0 }}
+                transition={{ duration: 1, delay: 1.1 }}
+                className="absolute -bottom-8 -left-8 w-24 h-[1px] bg-gradient-to-l from-primary/60 to-transparent rotate-45 origin-right hidden lg:block"
+              />
+              
+              {/* Caixa da Imagem Principal */}
               <motion.div 
                 initial={{ opacity: 0, y: 40 }}
                 animate={isSectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-                // CORREÇÃO AQUI: Adicionado 'as const' ao array de curvas cúbicas e na definição de ease para evitar inferência genérica do TS
                 transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
-                className="relative aspect-[3/4] overflow-hidden bg-zinc-900 shadow-[0_24px_45px_-18px_rgba(0,0,0,0.45)] border border-white/10"
+                className="relative aspect-[3/4] overflow-hidden bg-zinc-900 shadow-[0_24px_45px_-18px_rgba(0,0,0,0.45)]"
               >
+                {/* Borda interna dupla premium */}
+                <div className="absolute inset-0 border border-white/10 z-20 pointer-events-none" />
+                <div className="absolute inset-2 border border-primary/10 z-20 pointer-events-none" />
+                
                 <Image
                   src="/images/monument-detail.jpg"
                   alt="Granite carving detail"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover transition-transform duration-1400 group-hover:scale-105"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
                   priority
                 />
                 
-                <div className="absolute inset-0 bg-transparent" />
+                {/* Vignette overlay premium */}
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)] z-10 pointer-events-none" />
+                
+                {/* Reflexo de luz no topo */}
+                <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white/5 to-transparent z-10 pointer-events-none" />
                 
                 {/* Detalhe da Legenda Interna */}
-                <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end [text-shadow:0_2px_12px_rgba(0,0,0,0.45)]">
+                <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end [text-shadow:0_2px_12px_rgba(0,0,0,0.45)] z-20">
                   <p className="text-[9px] uppercase tracking-[0.25em] text-zinc-300 font-light border-l border-primary/60 pl-3 leading-tight">
                     Hand-crafted<br/>Precision
                   </p>
                   <span className="font-serif text-white/45 text-xs italic">Bott Coll.</span>
+                </div>
+              </motion.div>
+              
+              {/* Badge premium flutuante */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+                animate={isSectionInView ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0, scale: 0.8, rotate: -10 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+                className="absolute -bottom-6 -right-6 w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-lg z-30"
+              >
+                <div className="text-center">
+                  <span className="block font-serif text-lg text-primary-foreground font-bold leading-none">EST.</span>
+                  <span className="block text-xs text-primary-foreground/80 tracking-wider">2010</span>
                 </div>
               </motion.div>
             </div>
