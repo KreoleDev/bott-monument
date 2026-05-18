@@ -4,7 +4,8 @@ import { useState, useCallback, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import useEmblaCarousel from "embla-carousel-react"
-import { X, ChevronLeft, ChevronRight, ZoomIn, Info } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, ZoomIn, Info, ArrowRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import type { Artwork, Category } from "@/lib/types"
 
 interface GalleryProps {
@@ -240,24 +241,26 @@ export function PremiumGallery({ artworks, categories }: GalleryProps) {
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex justify-center gap-4 mt-10"
+              className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10"
             >
               {hasMore && (
-                <button
+                <Button
                   onClick={() => setVisibleCount(prev => Math.min(prev + ITEMS_PER_PAGE, filteredArtworks.length))}
-                  className="px-8 py-3 border border-primary/50 text-primary text-sm uppercase tracking-[0.2em] hover:bg-primary hover:text-background transition-all duration-300 flex items-center gap-3"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-8 h-12 text-sm tracking-wider group"
                 >
-                  <span>Mostrar mais</span>
-                  <span className="text-xs text-primary/60">({filteredArtworks.length - visibleCount} restantes)</span>
-                </button>
+                  Mostrar mais
+                  <span className="ml-2 text-xs text-primary-foreground/70">({filteredArtworks.length - visibleCount} restantes)</span>
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
               )}
               {visibleCount > ITEMS_PER_PAGE && (
-                <button
+                <Button
+                  variant="outline"
                   onClick={() => setVisibleCount(ITEMS_PER_PAGE)}
-                  className="px-8 py-3 border border-white/20 text-white/70 text-sm uppercase tracking-[0.2em] hover:border-white/40 hover:text-white transition-all duration-300"
+                  className="rounded-none px-8 h-12 text-sm tracking-wider border-white/20 text-white/70 hover:border-primary/50 hover:text-primary hover:bg-transparent"
                 >
                   Mostrar menos
-                </button>
+                </Button>
               )}
             </motion.div>
           )}
