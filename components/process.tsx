@@ -1,7 +1,7 @@
 "use client";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { Check } from "lucide-react";
+import { Check, ChevronRight } from "lucide-react";
 
 const steps = [
   { 
@@ -68,68 +68,83 @@ export function Process() {
         </div>
 
         <div className="relative">
-          {/* Premium Progress Connector - Desktop */}
+          {/* Premium Arrow Connectors - Desktop */}
           <div className="hidden md:block absolute top-[88px] left-[16.67%] right-[16.67%] z-10">
-            {/* Background track */}
-            <div className="absolute inset-0 top-1/2 -translate-y-1/2 h-[2px] bg-white/5 rounded-full" />
-            
-            {/* Animated progress line */}
-            <div className="absolute top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-r from-primary via-primary to-primary/50 rounded-full transition-all duration-700 ease-out"
-              style={{ 
-                width: `${(activeIndex / (steps.length - 1)) * 100}%`,
-                boxShadow: '0 0 12px rgba(200,166,106,0.4)'
-              }} 
-            />
-            
-            {/* Connector dots */}
-            {steps.map((_, index) => {
+            {/* Arrow connectors between steps */}
+            {[0, 1].map((index) => {
               const isCompleted = activeIndex > index;
               const isActive = activeIndex === index;
-              const position = (index / (steps.length - 1)) * 100;
+              const leftPosition = index === 0 ? '8%' : '58%';
               
               return (
-                <motion.div
+                <div 
                   key={index}
-                  className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
-                  style={{ left: `${position}%` }}
-                  animate={{
-                    scale: isActive ? 1.2 : 1,
-                  }}
-                  transition={{ duration: 0.3 }}
+                  className="absolute top-1/2 -translate-y-1/2 w-[34%]"
+                  style={{ left: leftPosition }}
                 >
-                  {/* Outer glow ring for active */}
-                  {isActive && (
-                    <motion.div
-                      className="absolute inset-0 -m-2 rounded-full bg-primary/20"
-                      animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+                  {/* Background track */}
+                  <div className="h-[3px] bg-white/10 rounded-full relative overflow-hidden">
+                    {/* Animated progress fill */}
+                    <motion.div 
+                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-primary via-primary to-primary/80 rounded-full"
+                      initial={{ width: '0%' }}
+                      animate={{ 
+                        width: isCompleted ? '100%' : isActive ? '100%' : '0%'
+                      }}
+                      transition={{ 
+                        duration: isActive ? 2.8 : 0.5, 
+                        ease: isActive ? 'linear' : 'easeOut' 
+                      }}
+                      style={{ 
+                        boxShadow: '0 0 20px rgba(200,166,106,0.6), 0 0 40px rgba(200,166,106,0.3)'
+                      }}
                     />
-                  )}
+                    
+                    {/* Moving glow effect on active */}
+                    {isActive && (
+                      <motion.div
+                        className="absolute top-0 bottom-0 w-12 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                        initial={{ left: '-20%' }}
+                        animate={{ left: '100%' }}
+                        transition={{ 
+                          duration: 2.8, 
+                          ease: 'linear',
+                          repeat: 0
+                        }}
+                      />
+                    )}
+                  </div>
                   
-                  {/* Main connector dot */}
+                  {/* Arrow head */}
                   <motion.div
-                    className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
-                      isCompleted 
-                        ? 'bg-primary border-primary' 
-                        : isActive 
-                          ? 'bg-primary/20 border-primary' 
-                          : 'bg-card border-white/20'
-                    }`}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2"
                     animate={{
-                      boxShadow: isActive || isCompleted ? '0 0 16px rgba(200,166,106,0.5)' : 'none'
+                      opacity: isCompleted || isActive ? 1 : 0.3,
+                      scale: isCompleted ? 1.1 : 1,
+                      x: isActive ? [0, 4, 0] : 0
+                    }}
+                    transition={{ 
+                      duration: isActive ? 1 : 0.3,
+                      repeat: isActive ? Infinity : 0,
+                      repeatDelay: 0.5
                     }}
                   >
-                    {isCompleted && (
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                      >
-                        <Check className="w-2.5 h-2.5 text-primary-foreground" strokeWidth={3} />
-                      </motion.div>
-                    )}
+                    <div className={`relative ${isCompleted || isActive ? 'text-primary' : 'text-white/30'}`}>
+                      {/* Glow behind arrow */}
+                      {(isCompleted || isActive) && (
+                        <motion.div 
+                          className="absolute inset-0 blur-md bg-primary/50 rounded-full"
+                          animate={{ opacity: [0.5, 1, 0.5] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        />
+                      )}
+                      <ChevronRight 
+                        className="w-8 h-8 relative z-10" 
+                        strokeWidth={isCompleted ? 3 : 2}
+                      />
+                    </div>
                   </motion.div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
