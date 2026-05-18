@@ -1,6 +1,7 @@
 "use client";
-import { motion, useScroll, useSpring, useInView, AnimatePresence, Variants } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import { Check } from "lucide-react";
 
 const steps = [
   { 
@@ -28,7 +29,7 @@ export function Process() {
   const containerRef = useRef<HTMLElement>(null);
   
   const isSectionInView = useInView(containerRef, { once: false, amount: 0.2 });
-  const duration = 2400; // Tempo levemente estendido para acompanhar a barra sutil
+  const duration = 3000;
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -43,26 +44,12 @@ export function Process() {
     return () => clearInterval(interval);
   }, [isSectionInView]);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "center center"]
-  });
-
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-
   return (
-    <section ref={containerRef} className="py-24 md:py-25 bg-card overflow-hidden relative">
-      <div className="absolute inset-0 bg-transparent pointer-events-none" />
-      
-      {/* Marca d'água tipográfica sutil integrada */}
-      <div className="absolute left-6 bottom-[10%] z-0 pointer-events-none select-none hidden xl:block opacity-[0.01]">
-        <h3 className="font-serif text-[15vw] text-white leading-none tracking-tighter">STEPS</h3>
-      </div>
-
+    <section ref={containerRef} className="py-24 md:py-32 bg-card overflow-hidden relative">
       <div className="mx-auto max-w-6xl px-6 relative z-10">
         
-        {/* Cabeçalho da Seção Refinado */}
-        <div className="flex flex-col items-center mb-28 text-center space-y-3">
+        {/* Header */}
+        <div className="flex flex-col items-center mb-20 md:mb-28 text-center space-y-3">
           <div className="flex items-center gap-3">
             <div className="h-[1px] w-6 bg-primary/40" />
             <motion.span 
@@ -81,15 +68,77 @@ export function Process() {
         </div>
 
         <div className="relative">
-          {/* Linha de progresso no fundo mais sutil */}
-          <div className="hidden md:block absolute top-[88px] left-[10%] right-[10%] h-[1px] bg-white/[0.03] z-0">
-            <motion.div style={{ scaleX, originX: 0 }} className="h-full bg-gradient-to-r from-primary/20 via-primary/70 to-primary/20" />
+          {/* Premium Progress Connector - Desktop */}
+          <div className="hidden md:block absolute top-[88px] left-[16.67%] right-[16.67%] z-10">
+            {/* Background track */}
+            <div className="absolute inset-0 top-1/2 -translate-y-1/2 h-[2px] bg-white/5 rounded-full" />
+            
+            {/* Animated progress line */}
+            <div className="absolute top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-r from-primary via-primary to-primary/50 rounded-full transition-all duration-700 ease-out"
+              style={{ 
+                width: `${(activeIndex / (steps.length - 1)) * 100}%`,
+                boxShadow: '0 0 12px rgba(200,166,106,0.4)'
+              }} 
+            />
+            
+            {/* Connector dots */}
+            {steps.map((_, index) => {
+              const isCompleted = activeIndex > index;
+              const isActive = activeIndex === index;
+              const position = (index / (steps.length - 1)) * 100;
+              
+              return (
+                <motion.div
+                  key={index}
+                  className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
+                  style={{ left: `${position}%` }}
+                  animate={{
+                    scale: isActive ? 1.2 : 1,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Outer glow ring for active */}
+                  {isActive && (
+                    <motion.div
+                      className="absolute inset-0 -m-2 rounded-full bg-primary/20"
+                      animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                  )}
+                  
+                  {/* Main connector dot */}
+                  <motion.div
+                    className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+                      isCompleted 
+                        ? 'bg-primary border-primary' 
+                        : isActive 
+                          ? 'bg-primary/20 border-primary' 
+                          : 'bg-card border-white/20'
+                    }`}
+                    animate={{
+                      boxShadow: isActive || isCompleted ? '0 0 16px rgba(200,166,106,0.5)' : 'none'
+                    }}
+                  >
+                    {isCompleted && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      >
+                        <Check className="w-2.5 h-2.5 text-primary-foreground" strokeWidth={3} />
+                      </motion.div>
+                    )}
+                  </motion.div>
+                </motion.div>
+              );
+            })}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-12 mb-24">
+          {/* Steps Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 mb-20">
             {steps.map((step, index) => {
-              const isCompletedOrActive = activeIndex >= index;
-              const isJustActive = activeIndex === index;
+              const isCompleted = activeIndex > index;
+              const isActive = activeIndex === index;
 
               return (
                 <div 
@@ -97,73 +146,123 @@ export function Process() {
                   className="relative flex flex-col items-center cursor-pointer group select-none"
                   onClick={() => setActiveIndex(index)}
                 >
-                  {/* Container do Círculo */}
-                  <div className="relative z-30 mb-8">
-                    
-                    {/* Loader Circular SVG Avançado */}
-                    <svg className="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] -rotate-90 pointer-events-none">
-                      <circle
-                        cx="50%" cy="50%" r="46%"
-                        stroke="currentColor" strokeWidth="1" fill="transparent"
-                        className="text-white/[0.02]"
+                  {/* Mobile Progress Line */}
+                  {index < steps.length - 1 && (
+                    <div className="md:hidden absolute top-[88px] left-1/2 w-[2px] h-12 -translate-x-1/2 translate-y-full">
+                      <div className="w-full h-full bg-white/10 rounded-full" />
+                      <motion.div 
+                        className="absolute top-0 left-0 w-full bg-primary rounded-full"
+                        animate={{ height: isCompleted || isActive ? '100%' : '0%' }}
+                        transition={{ duration: 0.5 }}
                       />
-                      {isJustActive && isSectionInView && (
+                    </div>
+                  )}
+
+                  {/* Image Circle Container */}
+                  <div className="relative z-20 mb-6">
+                    {/* Circular progress ring */}
+                    <svg className="absolute -inset-3 w-[calc(100%+24px)] h-[calc(100%+24px)] -rotate-90">
+                      {/* Background ring */}
+                      <circle
+                        cx="50%" cy="50%" r="48%"
+                        stroke="currentColor" 
+                        strokeWidth="1" 
+                        fill="transparent"
+                        className="text-white/10"
+                      />
+                      {/* Progress ring */}
+                      {isActive && isSectionInView && (
                         <motion.circle
-                          cx="50%" cy="50%" r="46%"
-                          stroke="#C8A66A" strokeWidth="1.5" fill="transparent"
-                          strokeDasharray="100 100"
-                          initial={{ strokeDashoffset: 100 }}
+                          cx="50%" cy="50%" r="48%"
+                          stroke="url(#progressGradient)"
+                          strokeWidth="2"
+                          fill="transparent"
+                          strokeLinecap="round"
+                          strokeDasharray="301.59"
+                          initial={{ strokeDashoffset: 301.59 }}
                           animate={{ strokeDashoffset: 0 }}
                           transition={{ duration: duration / 1000, ease: "linear" }}
                         />
                       )}
+                      {/* Completed ring */}
+                      {isCompleted && (
+                        <circle
+                          cx="50%" cy="50%" r="48%"
+                          stroke="#C8A66A"
+                          strokeWidth="2"
+                          fill="transparent"
+                          className="opacity-60"
+                        />
+                      )}
+                      <defs>
+                        <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stopColor="#C8A66A" stopOpacity="0.3" />
+                          <stop offset="50%" stopColor="#C8A66A" stopOpacity="1" />
+                          <stop offset="100%" stopColor="#C8A66A" stopOpacity="0.3" />
+                        </linearGradient>
+                      </defs>
                     </svg>
 
-                    {/* Moldura da Imagem Circular de Luxo */}
+                    {/* Image Frame */}
                     <motion.div 
                       animate={{ 
-                        scale: isJustActive ? 1.08 : 1,
-                        borderColor: isJustActive ? "#C8A66A" : isCompletedOrActive ? "rgba(200,166,106,0.45)" : "rgba(255,255,255,0.25)",
-                        boxShadow: isJustActive ? "0 0 26px rgba(200,166,106,0.16)" : "0 8px 18px rgba(0,0,0,0.08)"
+                        scale: isActive ? 1.05 : 1,
+                        borderColor: isActive ? "#C8A66A" : isCompleted ? "rgba(200,166,106,0.5)" : "rgba(255,255,255,0.15)",
                       }}
-                      transition={{ duration: 0.6, ease: "easeOut" }}
-                      className="w-36 h-36 md:w-44 md:h-44 rounded-full border overflow-hidden bg-secondary relative z-20"
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      className="w-36 h-36 md:w-44 md:h-44 rounded-full border-2 overflow-hidden bg-secondary relative"
                     >
                       <motion.img 
                         src={step.image}
                         alt={step.title}
                         animate={{ 
-                          opacity: 1,
-                          filter: isCompletedOrActive ? "grayscale(0%) blur(0px)" : "grayscale(12%) blur(0px)",
+                          filter: isCompleted || isActive ? "grayscale(0%)" : "grayscale(40%)",
+                          scale: isActive ? 1.1 : 1,
                         }}
-                        transition={{ duration: 0.7 }}
-                        className="absolute inset-0 w-full h-full object-cover scale-102 group-hover:scale-105 transition-transform duration-700"
+                        transition={{ duration: 0.5 }}
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
                       
-                      {/* Número do Passo integrado de forma elegante */}
-                      {!isCompletedOrActive && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-transparent">
-                          <span className="font-serif text-lg tracking-widest text-white/70">{step.number}</span>
-                        </div>
-                      )}
+                      {/* Overlay for inactive */}
+                      <motion.div 
+                        className="absolute inset-0 bg-black/40"
+                        animate={{ opacity: isCompleted || isActive ? 0 : 0.4 }}
+                        transition={{ duration: 0.5 }}
+                      />
+
+                      {/* Step number badge */}
+                      <motion.div
+                        className={`absolute -bottom-1 -right-1 w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold border-2 ${
+                          isCompleted 
+                            ? 'bg-primary border-primary text-primary-foreground' 
+                            : isActive 
+                              ? 'bg-primary border-primary text-primary-foreground'
+                              : 'bg-card border-white/20 text-white/60'
+                        }`}
+                        animate={{ 
+                          scale: isActive ? [1, 1.1, 1] : 1,
+                        }}
+                        transition={{ duration: 0.5, repeat: isActive ? Infinity : 0, repeatDelay: 1 }}
+                      >
+                        {isCompleted ? <Check className="w-4 h-4" strokeWidth={3} /> : step.number}
+                      </motion.div>
                     </motion.div>
                   </div>
 
-                  {/* Metadado Acima do Título */}
+                  {/* Phase Label */}
                   <motion.span 
-                    animate={{ opacity: isJustActive ? 0.75 : 0.55 }}
-                    className="text-[9px] font-sans font-bold tracking-[0.3em] text-white mb-2"
+                    animate={{ opacity: isActive ? 0.9 : 0.5 }}
+                    className="text-[10px] font-sans font-semibold tracking-[0.3em] text-primary mb-2"
                   >
                     PHASE {step.number}
                   </motion.span>
 
-                  {/* Título do Passo com Contraste */}
+                  {/* Step Title */}
                   <motion.h3 
                     animate={{ 
-                      color: isCompletedOrActive ? "#ffffff" : "rgba(255,255,255,0.76)",
-                      letterSpacing: isJustActive ? "0.25em" : "0.15em"
+                      color: isCompleted || isActive ? "#ffffff" : "rgba(255,255,255,0.6)",
                     }}
-                    className="font-serif text-base md:text-lg tracking-[0.15em] uppercase text-center relative z-30 transition-all duration-500"
+                    className="font-serif text-sm md:text-base tracking-[0.2em] uppercase text-center"
                   >
                     {step.title}
                   </motion.h3>
@@ -172,30 +271,47 @@ export function Process() {
             })}
           </div>
 
-          {/* ÁREA DE CONTEÚDO DINÂMICO PREMIUM */}
-          <div className="max-w-3xl mx-auto text-center min-h-[120px] flex flex-col items-center justify-center relative">
+          {/* Dynamic Description Area */}
+          <div className="max-w-3xl mx-auto text-center min-h-[100px] flex flex-col items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
                 className="space-y-6 flex flex-col items-center"
               >
-                <p className="text-[#ddd5c8] text-base md:text-xl font-light leading-relaxed max-w-2xl px-4 font-serif italic">
-                  "{steps[activeIndex].description}"
+                <p className="text-white/70 text-base md:text-lg font-light leading-relaxed max-w-2xl px-4 font-serif italic">
+                  &ldquo;{steps[activeIndex].description}&rdquo;
                 </p>
                 
-                {/* Indicador de progresso em linha abaixo do bloco descritivo */}
-                <div className="flex items-center gap-2 mt-2">
+                {/* Step Progress Indicator */}
+                <div className="flex items-center gap-3 mt-4">
                   {steps.map((_, dotIndex) => (
-                    <div 
-                      key={dotIndex} 
-                      className={`h-[2px] transition-all duration-500 ${
-                        activeIndex === dotIndex ? "w-8 bg-primary" : "w-2 bg-white/10"
-                      }`} 
-                    />
+                    <button 
+                      key={dotIndex}
+                      onClick={() => setActiveIndex(dotIndex)}
+                      className="relative group"
+                    >
+                      <motion.div
+                        className={`h-1 rounded-full transition-all duration-500 ${
+                          activeIndex === dotIndex 
+                            ? 'w-10 bg-primary' 
+                            : activeIndex > dotIndex 
+                              ? 'w-4 bg-primary/50' 
+                              : 'w-4 bg-white/20'
+                        }`}
+                        whileHover={{ scale: 1.2 }}
+                      />
+                      {activeIndex === dotIndex && (
+                        <motion.div
+                          className="absolute inset-0 bg-primary/30 rounded-full blur-sm"
+                          animate={{ opacity: [0.5, 1, 0.5] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        />
+                      )}
+                    </button>
                   ))}
                 </div>
               </motion.div>
