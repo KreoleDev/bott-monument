@@ -12,15 +12,26 @@ interface GalleryProps {
   categories: Category[]
 }
 
+const ITEMS_PER_PAGE = 8
+
 export function PremiumGallery({ artworks, categories }: GalleryProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState(0)
   const [showDetails, setShowDetails] = useState(false)
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE)
 
   const filteredArtworks = selectedCategory
     ? artworks.filter((a) => a.category_id === selectedCategory)
     : artworks
+
+  const visibleArtworks = filteredArtworks.slice(0, visibleCount)
+  const hasMore = visibleCount < filteredArtworks.length
+
+  // Reset visible count when category changes
+  useEffect(() => {
+    setVisibleCount(ITEMS_PER_PAGE)
+  }, [selectedCategory])
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: true,
@@ -194,26 +205,62 @@ export function PremiumGallery({ artworks, categories }: GalleryProps) {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+          className="mt-20"
         >
-          {filteredArtworks.slice(0, 8).map((artwork, index) => (
-            <div
-              key={artwork.id}
-              className="relative aspect-square overflow-hidden bg-zinc-900 border border-white/5 cursor-pointer group"
-              onClick={() => openLightbox(index)}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <AnimatePresence mode="popLayout">
+              {visibleArtworks.map((artwork, index) => (
+                <motion.div
+                  key={artwork.id}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.4, delay: index >= visibleCount - ITEMS_PER_PAGE ? (index % ITEMS_PER_PAGE) * 0.05 : 0 }}
+                  layout
+                  className="relative aspect-square overflow-hidden bg-zinc-900 border border-white/5 cursor-pointer group"
+                  onClick={() => openLightbox(index)}
+                >
+                  <Image
+                    src={artwork.image_url}
+                    alt={artwork.title}
+                    fill
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+                    <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+
+          {/* Show more / Show less buttons */}
+          {filteredArtworks.length > ITEMS_PER_PAGE && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex justify-center gap-4 mt-10"
             >
-              <Image
-                src={artwork.image_url}
-                alt={artwork.title}
-                fill
-                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
-                <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-            </div>
-          ))}
+              {hasMore && (
+                <button
+                  onClick={() => setVisibleCount(prev => Math.min(prev + ITEMS_PER_PAGE, filteredArtworks.length))}
+                  className="px-8 py-3 border border-primary/50 text-primary text-sm uppercase tracking-[0.2em] hover:bg-primary hover:text-background transition-all duration-300 flex items-center gap-3"
+                >
+                  <span>Mostrar mais</span>
+                  <span className="text-xs text-primary/60">({filteredArtworks.length - visibleCount} restantes)</span>
+                </button>
+              )}
+              {visibleCount > ITEMS_PER_PAGE && (
+                <button
+                  onClick={() => setVisibleCount(ITEMS_PER_PAGE)}
+                  className="px-8 py-3 border border-white/20 text-white/70 text-sm uppercase tracking-[0.2em] hover:border-white/40 hover:text-white transition-all duration-300"
+                >
+                  Mostrar menos
+                </button>
+              )}
+            </motion.div>
+          )}
         </motion.div>
       </div>
 
