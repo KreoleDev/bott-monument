@@ -8,7 +8,9 @@ import { Features } from "../components/features"
 import { Testimonials } from "../components/testimonials"
 import { Contact } from "../components/contact"
 import { Footer } from "../components/footer"
+import { Stats } from "../components/stats"
 import { ScrollAnimateSection, SectionTransition, ScrollRevealSection } from "../components/scroll-animate-section"
+import { SectionDivider } from "../components/ui/section-divider"
 import { getArtworks, getCategories } from "@/lib/actions"
 
 export default async function HomePage() {
@@ -31,32 +33,55 @@ export default async function HomePage() {
         <Philosophy />
       </SectionTransition>
 
-      {/* 3. Processo - Revelação lateral */}
+      {/* Divisor premium */}
+      <SectionDivider variant="elegant" />
+
+      {/* 3. Estatísticas Animadas */}
+      <ScrollRevealSection direction="up">
+        <Stats />
+      </ScrollRevealSection>
+
+      {/* Divisor premium */}
+      <SectionDivider variant="diamond" />
+
+      {/* 4. Processo - Revelação lateral */}
       <ScrollRevealSection direction="up">
         <Process />
       </ScrollRevealSection>
 
-      {/* 4. Galeria Premium - Transição suave */}
+      {/* Divisor premium */}
+      <SectionDivider variant="lines" />
+
+      {/* 5. Galeria Premium - Transição suave */}
       <SectionTransition>
         <PremiumGallery artworks={artworks} categories={categories} />
       </SectionTransition>
 
-      {/* 5. Sobre - Entrada da esquerda */}
+      {/* Divisor premium */}
+      <SectionDivider variant="dots" />
+
+      {/* 6. Sobre - Entrada da esquerda */}
       <ScrollRevealSection direction="left">
         <About />
       </ScrollRevealSection>
       
-      {/* 6. Features - Entrada da direita */}
+      {/* 7. Features - Entrada da direita */}
       <ScrollRevealSection direction="right">
         <Features />
       </ScrollRevealSection>
 
-      {/* 7. Depoimentos - Transição cinematográfica */}
+      {/* Divisor premium */}
+      <SectionDivider variant="elegant" />
+
+      {/* 8. Depoimentos - Transição cinematográfica */}
       <SectionTransition>
         <Testimonials />
       </SectionTransition>
+
+      {/* Divisor premium */}
+      <SectionDivider variant="lines" />
       
-      {/* 8. Contacto - Revelação final */}
+      {/* 9. Contacto - Revelação final */}
       <ScrollRevealSection direction="up">
         <Contact />
       </ScrollRevealSection>
