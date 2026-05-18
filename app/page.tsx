@@ -8,7 +8,7 @@ import { Features } from "../components/features"
 import { Testimonials } from "../components/testimonials"
 import { Contact } from "../components/contact"
 import { Footer } from "../components/footer"
-import { ScrollAnimateSection } from "../components/scroll-animate-section"
+import { ScrollAnimateSection, SectionTransition } from "../components/scroll-animate-section"
 import { getArtworks, getCategories } from "@/lib/actions"
 
 export default async function HomePage() {
@@ -22,32 +22,44 @@ export default async function HomePage() {
       <Header />
       
       {/* 1. Impacto Inicial */}
-      <ScrollAnimateSection>
+      <ScrollAnimateSection fadeOut={true}>
         <Hero />
       </ScrollAnimateSection>
 
       {/* 2. Manifesto Artistico */}
-      <ScrollAnimateSection>
+      <SectionTransition>
         <Philosophy />
-      </ScrollAnimateSection>
+      </SectionTransition>
 
       {/* 3. Demonstracao de Organizacao e Cuidado */}
-      <ScrollAnimateSection>
+      <SectionTransition>
         <Process />
-      </ScrollAnimateSection>
+      </SectionTransition>
 
       {/* 4. Galeria Premium Dinamica */}
-      <PremiumGallery artworks={artworks} categories={categories} />
+      <SectionTransition>
+        <PremiumGallery artworks={artworks} categories={categories} />
+      </SectionTransition>
 
       {/* 5. Historia da Familia e Detalhes de Engenharia */}
-      <About />
-      <Features />
+      <SectionTransition>
+        <About />
+      </SectionTransition>
+      
+      <SectionTransition>
+        <Features />
+      </SectionTransition>
 
       {/* 6. Conexao Emocional (Depoimentos de Familias) */}
-      <Testimonials />
+      <SectionTransition>
+        <Testimonials />
+      </SectionTransition>
       
       {/* 7. Fechamento e Acao */}
-      <Contact />
+      <SectionTransition>
+        <Contact />
+      </SectionTransition>
+      
       <Footer />
     </main>
   )
