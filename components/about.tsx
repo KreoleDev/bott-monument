@@ -60,19 +60,19 @@ export function About() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={isSectionInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.8 }}
-              className="absolute inset-0 overflow-hidden shadow-2xl border border-white/5 bg-black z-10 transition-transform duration-700 group-hover:scale-[1.01]"
+              className="absolute inset-0 overflow-hidden shadow-xl border border-white/10 bg-secondary z-10 transition-transform duration-700 group-hover:scale-[1.01]"
             >
               <video
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[1.5s] opacity-[0.85] hover:opacity-100"
+                className="w-full h-full object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-[1.5s] opacity-100"
               >
                 <source src="/videos/familia.mp4" type="video/mp4" />
                 <img src="/images/craftsman.jpg" alt="Drew Bott" className="object-cover w-full h-full" />
               </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-transparent" />
             </motion.div>
             
             {/* Elementos Decorativos Dourados */}
@@ -156,7 +156,7 @@ export function About() {
                     {/* O Counter agora escuta o estado global da seção para resetar e contar */}
                     <Counter value={stat.n} trigger={isSectionInView} />
                   </motion.span>
-                  <p className="text-[9px] uppercase tracking-[0.2em] text-white/30 mt-3 font-bold leading-tight group-hover/stat:text-white/60 transition-colors duration-500">
+                  <p className="text-[9px] uppercase tracking-[0.2em] text-white/62 mt-3 font-bold leading-tight group-hover/stat:text-white/80 transition-colors duration-500">
                     {stat.label}
                   </p>
                 </motion.div>

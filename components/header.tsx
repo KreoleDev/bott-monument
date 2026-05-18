@@ -29,7 +29,7 @@ export function Header() {
     <header 
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ${
         isScrolled 
-          ? "bg-background/90 backdrop-blur-xl border-b border-white/5 py-3" 
+          ? "bg-background/78 backdrop-blur-md border-b border-white/10 py-3" 
           : "bg-transparent py-6"
       }`}
     >
@@ -51,7 +51,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-[10px] uppercase tracking-[0.35em] text-white/60 hover:text-primary transition-all duration-300 font-semibold"
+                className="text-[10px] uppercase tracking-[0.35em] text-white/82 hover:text-primary transition-all duration-300 font-semibold"
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
                 {item.label}

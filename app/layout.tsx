@@ -30,8 +30,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" className={`${cormorant.variable} ${inter.variable} bg-[#0d0d0d] scroll-smooth`}>
-      <body className="font-sans antialiased text-zinc-300">
+    <html lang="pt-BR" className={`${cormorant.variable} ${inter.variable} bg-background scroll-smooth`}>
+      <body className="font-sans antialiased text-foreground">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

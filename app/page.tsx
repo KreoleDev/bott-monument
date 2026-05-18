@@ -10,14 +10,10 @@ import { Testimonials } from "../components/testimonials" // Validação emocion
 import { Contact } from "../components/contact"
 import { Footer } from "../components/footer"
 import { ScrollAnimateSection } from "../components/scroll-animate-section"
-import { CustomCursor } from "../components/custom-cursor" // Micro-interação global premium
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] relative select-none">
-      {/* O Cursor Customizado roda por trás de todo o site injetando luxo em cada clique */}
-      <CustomCursor />
-      
+    <main className="min-h-screen bg-background relative select-none">
       <Header />
       
       {/* 1. Impacto Inicial */}

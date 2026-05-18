@@ -52,6 +52,7 @@ export function Process() {
 
   return (
     <section ref={containerRef} className="py-24 md:py-25 bg-card overflow-hidden relative">
+      <div className="absolute inset-0 bg-transparent pointer-events-none" />
       
       {/* Marca d'água tipográfica sutil integrada */}
       <div className="absolute left-6 bottom-[10%] z-0 pointer-events-none select-none hidden xl:block opacity-[0.01]">
@@ -66,7 +67,7 @@ export function Process() {
             <div className="h-[1px] w-6 bg-primary/40" />
             <motion.span 
               initial={{ opacity: 0, letterSpacing: "0.3em" }}
-              animate={isSectionInView ? { opacity: 0.5, letterSpacing: "0.6em" } : { opacity: 0 }}
+              animate={isSectionInView ? { opacity: 0.75, letterSpacing: "0.6em" } : { opacity: 0 }}
               transition={{ duration: 0.8 }}
               className="text-primary text-[10px] font-bold uppercase tracking-[0.6em]"
             >
@@ -82,7 +83,7 @@ export function Process() {
         <div className="relative">
           {/* Linha de progresso no fundo mais sutil */}
           <div className="hidden md:block absolute top-[88px] left-[10%] right-[10%] h-[1px] bg-white/[0.03] z-0">
-            <motion.div style={{ scaleX, originX: 0 }} className="h-full bg-gradient-to-r from-primary/10 via-primary/40 to-primary/10" />
+            <motion.div style={{ scaleX, originX: 0 }} className="h-full bg-gradient-to-r from-primary/20 via-primary/70 to-primary/20" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-12 mb-24">
@@ -121,19 +122,19 @@ export function Process() {
                     {/* Moldura da Imagem Circular de Luxo */}
                     <motion.div 
                       animate={{ 
-                        scale: isJustActive ? 1.08 : isCompletedOrActive ? 1 : 0.9,
-                        borderColor: isJustActive ? "#C8A66A" : isCompletedOrActive ? "rgba(200,166,106,0.3)" : "rgba(255,255,255,0.05)",
-                        boxShadow: isJustActive ? "0 0 40px rgba(200,166,106,0.15)" : "0 0 0px rgba(0,0,0,0)"
+                        scale: isJustActive ? 1.08 : 1,
+                        borderColor: isJustActive ? "#C8A66A" : isCompletedOrActive ? "rgba(200,166,106,0.45)" : "rgba(255,255,255,0.25)",
+                        boxShadow: isJustActive ? "0 0 26px rgba(200,166,106,0.16)" : "0 8px 18px rgba(0,0,0,0.08)"
                       }}
                       transition={{ duration: 0.6, ease: "easeOut" }}
-                      className="w-36 h-36 md:w-44 md:h-44 rounded-full border overflow-hidden bg-[#111] relative z-20"
+                      className="w-36 h-36 md:w-44 md:h-44 rounded-full border overflow-hidden bg-secondary relative z-20"
                     >
                       <motion.img 
                         src={step.image}
                         alt={step.title}
                         animate={{ 
-                          opacity: isCompletedOrActive ? 1 : 0.12,
-                          filter: isCompletedOrActive ? "grayscale(0%) blur(0px)" : "grayscale(100%) blur(2px)",
+                          opacity: 1,
+                          filter: isCompletedOrActive ? "grayscale(0%) blur(0px)" : "grayscale(12%) blur(0px)",
                         }}
                         transition={{ duration: 0.7 }}
                         className="absolute inset-0 w-full h-full object-cover scale-102 group-hover:scale-105 transition-transform duration-700"
@@ -141,8 +142,8 @@ export function Process() {
                       
                       {/* Número do Passo integrado de forma elegante */}
                       {!isCompletedOrActive && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                          <span className="font-serif text-lg tracking-widest text-white/10">{step.number}</span>
+                        <div className="absolute inset-0 flex items-center justify-center bg-transparent">
+                          <span className="font-serif text-lg tracking-widest text-white/70">{step.number}</span>
                         </div>
                       )}
                     </motion.div>
@@ -150,7 +151,7 @@ export function Process() {
 
                   {/* Metadado Acima do Título */}
                   <motion.span 
-                    animate={{ opacity: isJustActive ? 0.4 : 0.1 }}
+                    animate={{ opacity: isJustActive ? 0.75 : 0.55 }}
                     className="text-[9px] font-sans font-bold tracking-[0.3em] text-white mb-2"
                   >
                     PHASE {step.number}
@@ -159,7 +160,7 @@ export function Process() {
                   {/* Título do Passo com Contraste */}
                   <motion.h3 
                     animate={{ 
-                      color: isCompletedOrActive ? "#ffffff" : "rgba(255,255,255,0.15)",
+                      color: isCompletedOrActive ? "#ffffff" : "rgba(255,255,255,0.76)",
                       letterSpacing: isJustActive ? "0.25em" : "0.15em"
                     }}
                     className="font-serif text-base md:text-lg tracking-[0.15em] uppercase text-center relative z-30 transition-all duration-500"
@@ -182,7 +183,7 @@ export function Process() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="space-y-6 flex flex-col items-center"
               >
-                <p className="text-zinc-400 text-base md:text-xl font-light leading-relaxed max-w-2xl px-4 font-serif italic">
+                <p className="text-[#ddd5c8] text-base md:text-xl font-light leading-relaxed max-w-2xl px-4 font-serif italic">
                   "{steps[activeIndex].description}"
                 </p>
                 

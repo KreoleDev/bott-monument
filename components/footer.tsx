@@ -15,7 +15,7 @@ export function Footer() {
                 className="h-8 w-auto brightness-0 invert" 
               />
             </Link>
-            <p className="text-[9px] tracking-[0.2em] text-white/20 uppercase font-light">
+            <p className="text-[9px] tracking-[0.2em] text-white/55 uppercase font-light">
               Crafting Legacies Since 1985
             </p>
           </div>
@@ -31,7 +31,7 @@ export function Footer() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-[10px] uppercase tracking-[0.2em] text-white/40 hover:text-primary transition-colors duration-300 font-medium"
+                className="text-[10px] uppercase tracking-[0.2em] text-white/65 hover:text-primary transition-colors duration-300 font-medium"
               >
                 {item.label}
               </Link>
@@ -40,10 +40,10 @@ export function Footer() {
 
           {/* Copyright e Info Alinhados */}
           <div className="flex flex-col items-center md:items-end gap-1">
-            <p className="text-[10px] text-white/30 tracking-wider font-light">
+            <p className="text-[10px] text-white/60 tracking-wider font-light">
               © {new Date().getFullYear()} Bott Monument. All Rights Reserved.
             </p>
-            <p className="text-[8px] text-white/10 uppercase tracking-[0.3em]">
+            <p className="text-[8px] text-white/35 uppercase tracking-[0.3em]">
               Design & Mastery in Every Detail
             </p>
           </div>

@@ -34,7 +34,7 @@ export function Showcase() {
             </h2>
           </div>
           <div className="lg:col-span-5 lg:text-right">
-            <p className="text-zinc-500 font-light text-sm md:text-base max-w-md lg:ml-auto font-serif italic">
+            <p className="text-[#cfc6b8] font-light text-sm md:text-base max-w-md lg:ml-auto font-serif italic">
               "Every piece is carved with a magazine cover in mind, preserving memories for generations."
             </p>
           </div>
@@ -54,7 +54,7 @@ export function Showcase() {
                 transition={{ duration: 0.8, delay: index * 0.15, ease: "easeOut" }}
                 className={`relative group cursor-pointer ${yOffset}`}
               >
-                <div className="relative aspect-[2/3] overflow-hidden bg-zinc-900 border border-white/5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)]">
+                <div className="relative aspect-[2/3] overflow-hidden bg-zinc-900 border border-white/10 shadow-[0_24px_45px_-18px_rgba(0,0,0,0.45)]">
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -62,10 +62,10 @@ export function Showcase() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-103"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-opacity duration-700" />
+                  <div className="absolute inset-0 bg-transparent transition-opacity duration-700" />
                   
                   {/* Conteúdo que aparece elegantemente */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-8">
+                  <div className="absolute inset-0 flex flex-col justify-end p-8 [text-shadow:0_2px_12px_rgba(0,0,0,0.45)]">
                     <span className="text-[9px] text-primary font-bold uppercase tracking-[0.25em] mb-2">
                       {project.category}
                     </span>

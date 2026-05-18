@@ -57,14 +57,14 @@ export function Features() {
                   src={pillar.image}
                   alt={pillar.title}
                   fill
-                  className="object-cover opacity-70 group-hover:opacity-90 group-hover:scale-110 transition-all duration-[2000ms] ease-out"
+                  className="object-cover opacity-100 group-hover:scale-110 transition-all duration-[2000ms] ease-out"
                 />
                 {/* Gradient Overlay for Text Readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/35 to-transparent" />
+                <div className="absolute inset-0 bg-transparent" />
               </div>
 
               {/* Content */}
-              <div className="relative z-10 w-full text-center">
+              <div className="relative z-10 w-full text-center [text-shadow:0_2px_12px_rgba(0,0,0,0.45)]">
                 {/* Icon Circle */}
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-primary/30 mb-6 group-hover:border-primary group-hover:bg-primary/10 transition-all duration-500">
                   <pillar.icon
@@ -73,7 +73,7 @@ export function Features() {
                   />
                 </div>
                 
-                <p className="text-[9px] tracking-[0.2em] text-primary uppercase font-bold mb-2 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0">
+                <p className="text-[9px] tracking-[0.2em] text-primary uppercase font-bold mb-2 opacity-100 transition-all duration-700">
                   {pillar.subtitle}
                 </p>
                 
@@ -81,8 +81,8 @@ export function Features() {
                   {pillar.title}
                 </h3>
                 
-                <div className="h-0 group-hover:h-24 transition-all duration-700 overflow-hidden opacity-0 group-hover:opacity-100">
-                  <p className="text-sm md:text-base text-white/60 leading-relaxed font-light">
+                <div className="h-auto transition-all duration-700 overflow-hidden opacity-100">
+                  <p className="text-sm md:text-base text-white/82 leading-relaxed font-light">
                     {pillar.description}
                   </p>
                 </div>

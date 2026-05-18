@@ -123,7 +123,7 @@ export function Philosophy() {
               </div>
               
               {/* Parágrafos Secundários */}
-              <div className="space-y-6 text-zinc-400 font-light leading-relaxed max-w-xl pl-6 text-sm md:text-base">
+              <div className="space-y-6 text-[#ddd5c8] font-light leading-relaxed max-w-xl pl-6 text-sm md:text-base">
                 <TypewriterBlock 
                   delay={1.2}
                   trigger={isSectionInView}
@@ -161,25 +161,25 @@ export function Philosophy() {
                 animate={isSectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
                 // CORREÇÃO AQUI: Adicionado 'as const' ao array de curvas cúbicas e na definição de ease para evitar inferência genérica do TS
                 transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
-                className="relative aspect-[3/4] overflow-hidden bg-zinc-900 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border border-white/5"
+                className="relative aspect-[3/4] overflow-hidden bg-zinc-900 shadow-[0_24px_45px_-18px_rgba(0,0,0,0.45)] border border-white/10"
               >
                 <Image
                   src="/images/monument-detail.jpg"
                   alt="Granite carving detail"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover transition-transform duration-1400 group-hover:scale-105 group-hover:filter grayscale-[20%]"
+                  className="object-cover transition-transform duration-1400 group-hover:scale-105"
                   priority
                 />
                 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+                <div className="absolute inset-0 bg-transparent" />
                 
                 {/* Detalhe da Legenda Interna */}
-                <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+                <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end [text-shadow:0_2px_12px_rgba(0,0,0,0.45)]">
                   <p className="text-[9px] uppercase tracking-[0.25em] text-zinc-300 font-light border-l border-primary/60 pl-3 leading-tight">
                     Hand-crafted<br/>Precision
                   </p>
-                  <span className="font-serif text-white/20 text-xs italic">Bott Coll.</span>
+                  <span className="font-serif text-white/45 text-xs italic">Bott Coll.</span>
                 </div>
               </motion.div>
             </div>

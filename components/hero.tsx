@@ -118,11 +118,11 @@ export function Hero() {
         >
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
-      <div className="absolute inset-0 bg-black/15" />
+      <div className="absolute inset-0 bg-transparent" />
       <div 
         className="absolute inset-0" 
         style={{ 
-          background: "radial-gradient(circle at center, transparent 12%, rgba(15,14,12,0.5) 100%)" 
+          background: "transparent" 
         }} 
       />
       </div>
@@ -131,7 +131,7 @@ export function Hero() {
         className="absolute top-0 left-0 right-0 z-[2] pointer-events-none"
         style={{
           height: "96px",
-          background: `linear-gradient(to bottom, rgba(15,14,12,0.88) 0%, rgba(15,14,12,0.52) 48%, transparent 100%)`,
+          background: "transparent",
         }}
       />
 
@@ -139,7 +139,7 @@ export function Hero() {
         className="absolute bottom-0 left-0 right-0 z-[2] pointer-events-none"
         style={{
           height: "clamp(70px, 12vh, 170px)",
-          background: `linear-gradient(to top, rgba(15,14,12,0.82) 0%, transparent 100%)`,
+          background: "transparent",
         }}
       />
 
@@ -148,7 +148,7 @@ export function Hero() {
         style={{
           fontFamily: "'Bebas Neue', sans-serif",
           fontSize: "clamp(40px, 13vw, 140px)",
-          color: "rgba(255,255,255,0.04)",
+          color: "rgba(255,255,255,0.08)",
           letterSpacing: "0.12em",
           lineHeight: 1,
           transition: "opacity 0.5s ease",
@@ -169,7 +169,7 @@ export function Hero() {
             fontWeight: 300,
             fontSize: "clamp(8px, 1.3vw, 12px)",
             letterSpacing: "0.3em",
-            color: "rgba(255,255,255,0.5)",
+            color: "rgba(255,255,255,0.78)",
           }}
         >
           — Stone arte since <span style={{ color: brass }}>1985</span> —
@@ -230,7 +230,7 @@ export function Hero() {
                   letterSpacing: "0.05em",
                   lineHeight: "1",
                   color: "#fff",
-                  textShadow: "0 10px 30px rgba(0,0,0,0.5)",
+                  textShadow: "0 8px 22px rgba(0,0,0,0.28)",
                   opacity: revealed ? 1 : 0,
                   transform: revealed ? "translateY(0) scale(1)" : "translateY(20px) scale(0.95)",
                   transition: "all 0.8s cubic-bezier(0.2, 0, 0.2, 1) 0.3s",
@@ -274,7 +274,7 @@ export function Hero() {
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: "clamp(9px, 1.4vw, 14px)",
                 letterSpacing: "0.25em",
-                color: "rgba(255,255,255,0.6)",
+                color: "rgba(255,255,255,0.82)",
                 opacity: revealed ? 1 : 0,
                 transition: "opacity 0.6s ease 0.5s",
               }}>
@@ -312,7 +312,7 @@ export function Hero() {
                 fontWeight: 300,
                 fontSize: "clamp(10px, 1.8vw, 18px)",
                 letterSpacing: "0.4em",
-                color: "rgba(255,255,255,0.45)",
+                color: "rgba(255,255,255,0.72)",
                 opacity: revealed ? 1 : 0,
                 transition: "opacity 0.8s ease 0.7s",
               }}>
@@ -337,7 +337,7 @@ export function Hero() {
               width: i === current ? 22 : 6,
               height: 6,
               borderRadius: i === current ? 3 : "50%",
-              background: i === current ? brass : "rgba(255,255,255,0.2)",
+              background: i === current ? brass : "rgba(255,255,255,0.45)",
               border: "none",
               cursor: "pointer",
               transition: "all 0.3s",
@@ -371,11 +371,11 @@ export function Hero() {
 
         <Link href="#sobre" className="flex items-center gap-3 group">
           <div className="relative flex items-center justify-center w-10 h-10 rounded-full border border-white/10 transition-all group-hover:border-primary/50 flex-shrink-0">
-            <span className="text-white/30 group-hover:text-primary text-sm">⬦</span>
+            <span className="text-white/65 group-hover:text-primary text-sm">⬦</span>
             <div className="absolute inset-0 border-t border-primary opacity-0 group-hover:opacity-100 rounded-full animate-spin" />
           </div>
           <div className="flex flex-col items-start">
-            <span className="text-[10px] tracking-[0.3em] text-white/30 uppercase font-bold group-hover:text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+            <span className="text-[10px] tracking-[0.3em] text-white/65 uppercase font-bold group-hover:text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>
               Explorar Galeria
             </span>
             <span className="text-[11px] text-primary/70 font-serif italic">

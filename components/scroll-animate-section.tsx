@@ -16,14 +16,12 @@ export function ScrollAnimateSection({ children }: ScrollAnimateSectionProps) {
     offset: ["start start", "end start"],
   });
 
-  // Transforma o scroll em opacidade, escala e movimento vertical
-  const opacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.75], [1, 0.93]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  // Keep sections readable while preserving a subtle parallax lift.
+  const y = useTransform(scrollYProgress, [0, 1], [0, -24]);
 
   return (
     <div ref={containerRef} className="relative w-full">
-      <motion.div style={{ opacity, scale, y }} className="w-full origin-bottom">
+      <motion.div style={{ y }} className="w-full origin-bottom">
         {children}
       </motion.div>
     </div>

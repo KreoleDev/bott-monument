@@ -67,7 +67,7 @@ export function Testimonials() {
         
         <motion.p
           initial={{ opacity: 0, letterSpacing: "0.2em" }}
-          animate={isInView ? { opacity: 0.4, letterSpacing: "0.5em" } : { opacity: 0 }}
+          animate={isInView ? { opacity: 0.75, letterSpacing: "0.5em" } : { opacity: 0 }}
           transition={{ duration: 0.8 }}
           className="text-[10px] tracking-[0.5em] text-primary font-bold uppercase mb-16"
         >
@@ -87,7 +87,7 @@ export function Testimonials() {
               {/* Citação partida por palavras com efeito blur-reveal de luxo */}
               <motion.q 
                 variants={containerVariants}
-                className="font-serif text-xl md:text-3xl text-zinc-200 leading-relaxed italic block max-w-3xl font-light px-2 md:px-6"
+                className="font-serif text-xl md:text-3xl text-[#f1eadf] leading-relaxed italic block max-w-3xl font-light px-2 md:px-6"
               >
                 {reviews[index].quote.split(" ").map((word, i) => (
                   <motion.span key={i} variants={wordVariants} className="inline-block mr-1.5 md:mr-2">
@@ -104,7 +104,7 @@ export function Testimonials() {
                 className="text-sm tracking-wide"
               >
                 <span className="text-primary font-medium">{reviews[index].author}</span>
-                <span className="text-zinc-600 font-light"> — {reviews[index].location}</span>
+                <span className="text-[#b8ad9e] font-light"> — {reviews[index].location}</span>
               </motion.div>
             </motion.div>
           </AnimatePresence>

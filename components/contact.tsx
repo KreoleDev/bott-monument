@@ -30,7 +30,7 @@ export function Contact() {
           </h2>
         </div>
 
-       <div className="border border-white/5 bg-white/[0.03] p-4 sm:p-5 md:p-6">
+       <div className="border border-white/12 bg-white/[0.06] p-4 sm:p-5 md:p-6">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-5 md:gap-8">
             <form onSubmit={handleSubmit} className="md:col-span-3 space-y-3">
               <div className="grid grid-cols-2 gap-3">
