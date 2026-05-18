@@ -8,7 +8,7 @@ import { Features } from "../components/features"
 import { Testimonials } from "../components/testimonials"
 import { Contact } from "../components/contact"
 import { Footer } from "../components/footer"
-import { ScrollAnimateSection, SectionTransition } from "../components/scroll-animate-section"
+import { ScrollAnimateSection, SectionTransition, ScrollRevealSection } from "../components/scroll-animate-section"
 import { getArtworks, getCategories } from "@/lib/actions"
 
 export default async function HomePage() {
@@ -18,47 +18,48 @@ export default async function HomePage() {
   ])
 
   return (
-    <main className="min-h-screen bg-background relative select-none">
+    <main className="min-h-screen bg-background relative select-none overflow-x-hidden">
       <Header />
       
-      {/* 1. Impacto Inicial */}
+      {/* 1. Impacto Inicial - Hero com fade dramático */}
       <ScrollAnimateSection fadeOut={true}>
         <Hero />
       </ScrollAnimateSection>
 
-      {/* 2. Manifesto Artistico */}
+      {/* 2. Manifesto Artistico - Entrada cinematográfica */}
       <SectionTransition>
         <Philosophy />
       </SectionTransition>
 
-      {/* 3. Demonstracao de Organizacao e Cuidado */}
-      <SectionTransition>
+      {/* 3. Processo - Revelação lateral */}
+      <ScrollRevealSection direction="up">
         <Process />
-      </SectionTransition>
+      </ScrollRevealSection>
 
-      {/* 4. Galeria Premium Dinamica */}
+      {/* 4. Galeria Premium - Transição suave */}
       <SectionTransition>
         <PremiumGallery artworks={artworks} categories={categories} />
       </SectionTransition>
 
-      {/* 5. Historia da Familia e Detalhes de Engenharia */}
-      <SectionTransition>
+      {/* 5. Sobre - Entrada da esquerda */}
+      <ScrollRevealSection direction="left">
         <About />
-      </SectionTransition>
+      </ScrollRevealSection>
       
-      <SectionTransition>
+      {/* 6. Features - Entrada da direita */}
+      <ScrollRevealSection direction="right">
         <Features />
-      </SectionTransition>
+      </ScrollRevealSection>
 
-      {/* 6. Conexao Emocional (Depoimentos de Familias) */}
+      {/* 7. Depoimentos - Transição cinematográfica */}
       <SectionTransition>
         <Testimonials />
       </SectionTransition>
       
-      {/* 7. Fechamento e Acao */}
-      <SectionTransition>
+      {/* 8. Contacto - Revelação final */}
+      <ScrollRevealSection direction="up">
         <Contact />
-      </SectionTransition>
+      </ScrollRevealSection>
       
       <Footer />
     </main>
