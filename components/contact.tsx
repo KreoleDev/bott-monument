@@ -32,7 +32,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contato" className="py-16 md:py-24 bg-background relative overflow-hidden">
+    <section id="contact" className="py-16 md:py-24 bg-background relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/[0.02] blur-[150px] pointer-events-none" />
       

@@ -68,7 +68,7 @@ export function PremiumGallery({ artworks, categories }: GalleryProps) {
   const brass = "#c8a66a"
 
   return (
-    <section id="galeria" className="py-24 md:py-36 bg-secondary relative overflow-hidden border-t border-white/[0.02]">
+    <section id="gallery" className="py-24 md:py-36 bg-secondary relative overflow-hidden border-t border-white/[0.02]">
       {/* Background glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/[0.03] blur-[180px] pointer-events-none" />
       

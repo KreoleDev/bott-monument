@@ -45,7 +45,7 @@ export function Process() {
   }, [isSectionInView]);
 
   return (
-    <section ref={containerRef} className="py-24 md:py-32 bg-card overflow-hidden relative">
+    <section id="process" ref={containerRef} className="py-24 md:py-32 bg-card overflow-hidden relative">
       <div className="mx-auto max-w-6xl px-6 relative z-10">
         
         {/* Header */}

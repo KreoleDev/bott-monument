@@ -100,6 +100,7 @@ export function Hero() {
 
   return (
     <section
+      id="hero"
       className="relative w-full overflow-hidden bg-background"
       style={{ minHeight: "calc(100vh - 80px)", height: "calc(100vh - 80px)", marginTop: "80px" }}
     >
