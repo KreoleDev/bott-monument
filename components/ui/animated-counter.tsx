@@ -21,8 +21,9 @@ export function AnimatedCounter({
   className = ""
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [hasAnimated, setHasAnimated] = useState(false)
+  // Changed once: false to replay animation every time section comes into view
+  const isInView = useInView(ref, { once: false, margin: "-100px" })
+  const [prevInView, setPrevInView] = useState(false)
 
   const spring = useSpring(0, { 
     duration: duration * 1000,
@@ -34,14 +35,22 @@ export function AnimatedCounter({
   )
 
   useEffect(() => {
-    if (isInView && !hasAnimated) {
+    // When entering view, animate from 0 to value
+    if (isInView && !prevInView) {
+      spring.set(0) // Reset to 0 first
       const timeout = setTimeout(() => {
         spring.set(value)
-        setHasAnimated(true)
       }, delay * 1000)
       return () => clearTimeout(timeout)
     }
-  }, [isInView, hasAnimated, spring, value, delay])
+    
+    // When leaving view, reset to 0 for next animation
+    if (!isInView && prevInView) {
+      spring.set(0)
+    }
+    
+    setPrevInView(isInView)
+  }, [isInView, prevInView, spring, value, delay])
 
   return (
     <span ref={ref} className={className}>
@@ -61,14 +70,15 @@ interface StatItemProps {
 
 export function StatItem({ value, suffix = "", label, delay = 0 }: StatItemProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-50px" })
+  // Changed once: false to replay animation every time
+  const isInView = useInView(ref, { once: false, margin: "-50px" })
 
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.6, delay }}
+      transition={{ duration: 0.6, delay: isInView ? delay : 0 }}
       className="text-center relative group"
     >
       {/* Glow effect */}
@@ -85,7 +95,7 @@ export function StatItem({ value, suffix = "", label, delay = 0 }: StatItemProps
       <motion.div 
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-        transition={{ duration: 0.8, delay: delay + 0.5 }}
+        transition={{ duration: 0.8, delay: isInView ? delay + 0.5 : 0 }}
         className="w-12 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent mx-auto mt-4"
       />
     </motion.div>
