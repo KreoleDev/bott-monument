@@ -7,7 +7,6 @@ import { Hammer } from "lucide-react"
 const scenes = [
   {
     id: 0,
-    watermark: "NOS CONHEÇA",
     badge: "— Stone arte since 1985 —",
     titleGold: "ETERNIZAMOS",
     titleWhite: "QUEM VOCÊ AMOU...",
@@ -19,7 +18,6 @@ const scenes = [
   },
   {
     id: 1,
-    watermark: "NOS CONHEÇA",
     badge: null,
     titleGold: null,
     titleWhite: "CADA VIDA MERECE\nSER LEMBRADA...",
@@ -32,7 +30,6 @@ const scenes = [
   },
   {
     id: 2,
-    watermark: "ST. CLAIR",
     badge: null,
     titleGold: "40 ANOS A ESCULPIR",
     titleWhite: "MEMÓRIAS ETERNAS",
@@ -44,7 +41,6 @@ const scenes = [
   },
   {
     id: 3,
-    watermark: "ARTE E DEVOÇÃO",
     badge: null,
     titleGold: "ARTE E DEVOÇÃO",
     titleWhite: null,
@@ -143,21 +139,6 @@ export function Hero() {
           background: "transparent",
         }}
       />
-
-      <div
-        className="absolute bottom-0 left-0 right-0 text-center pointer-events-none z-[1] select-none"
-        style={{
-          fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: "clamp(40px, 13vw, 140px)",
-          color: "rgba(255,255,255,0.08)",
-          letterSpacing: "0.12em",
-          lineHeight: 1,
-          transition: "opacity 0.5s ease",
-          opacity: visible ? 1 : 0,
-        }}
-      >
-        {scene.watermark}
-      </div>
 
       {scene.badge && (
         <div
