@@ -54,14 +54,6 @@ export function Testimonials() {
       id="testimonials" 
       className="py-24 md:py-20 bg-secondary relative overflow-hidden border-b border-white/[0.02]"
     >
-      {/* Aspas Gigantes de Fundo Artístico */}
-      <motion.div 
-        animate={isInView ? { opacity: 0.03, scale: 1 } : { opacity: 0, scale: 0.8 }}
-        transition={{ duration: 1 }}
-        className="absolute left-1/2 top-12 -translate-x-1/2 font-serif text-[30vw] leading-none text-primary pointer-events-none select-none z-0"
-      >
-        “
-      </motion.div>
 
       <div className="mx-auto max-w-4xl px-6 text-center relative z-10">
         

@@ -48,17 +48,6 @@ export function Philosophy() {
 
   return (
     <section id="philosophy" ref={sectionRef} className="py-24 md:py-20 bg-secondary relative overflow-hidden">
-      
-      {/* ELEMENTO DE LUXO: Marca d'água tipográfica gigante ao fundo */}
-      <div className="absolute right-[-5%] top-[10%] z-0 pointer-events-none select-none overflow-hidden hidden xl:block">
-        <motion.h3 
-          animate={isSectionInView ? { opacity: 0.02, x: 0 } : { opacity: 0, x: 100 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="font-serif text-[18vw] text-white leading-none tracking-tighter"
-        >
-          MASTERY
-        </motion.h3>
-      </div>
 
       <div className="mx-auto max-w-7xl px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
