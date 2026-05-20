@@ -49,24 +49,27 @@ export function Features() {
           {pillars.map((pillar, index) => (
             <div
               key={index}
-              className="group relative min-h-[450px] flex flex-col items-center justify-end p-8 md:p-10 overflow-hidden border border-white/5 transition-all duration-700"
+              className="group relative min-h-[450px] flex flex-col items-center justify-end overflow-hidden rounded-[2rem] p-8 md:p-10 shadow-[0_24px_80px_rgba(0,0,0,0.36)] ring-1 ring-white/10 transition-all duration-700 hover:-translate-y-2 hover:ring-primary/35"
             >
+              <div className="absolute inset-3 rounded-[1.45rem] border border-primary/20 z-20 pointer-events-none transition-colors duration-700 group-hover:border-primary/45" />
+
               {/* Background Image with Ken Burns Effect */}
               <div className="absolute inset-0 z-0">
                 <Image
                   src={pillar.image}
                   alt={pillar.title}
                   fill
-                  className="object-cover opacity-100 group-hover:scale-110 transition-all duration-[2000ms] ease-out"
+                  className="rounded-[inherit] object-cover opacity-100 group-hover:scale-110 transition-all duration-[2000ms] ease-out"
                 />
                 {/* Gradient Overlay for Text Readability */}
-                <div className="absolute inset-0 bg-transparent" />
+                <div className="absolute inset-0 rounded-[inherit] bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-[70%] rounded-b-[inherit] bg-gradient-to-t from-black/92 via-black/68 via-55% to-transparent" />
               </div>
 
               {/* Content */}
-              <div className="relative z-10 w-full text-center [text-shadow:0_2px_12px_rgba(0,0,0,0.45)]">
+              <div className="relative z-10 w-full text-center [text-shadow:0_2px_14px_rgba(0,0,0,0.75)]">
                 {/* Icon Circle */}
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-primary/30 mb-6 group-hover:border-primary group-hover:bg-primary/10 transition-all duration-500">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full border border-primary/45 bg-black/30 mb-5 group-hover:border-primary group-hover:bg-primary/10 transition-all duration-500">
                   <pillar.icon
                     className="h-6 w-6 text-primary"
                     strokeWidth={1}
@@ -82,7 +85,7 @@ export function Features() {
                 </h3>
                 
                 <div className="h-auto transition-all duration-700 overflow-hidden opacity-100">
-                  <p className="text-sm md:text-base text-white/82 leading-relaxed font-light">
+                  <p className="text-sm md:text-[15px] text-white/92 leading-relaxed font-light">
                     {pillar.description}
                   </p>
                 </div>

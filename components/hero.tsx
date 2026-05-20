@@ -7,7 +7,6 @@ import { Hammer } from "lucide-react"
 const scenes = [
   {
     id: 0,
-    watermark: "NOS CONHEÇA",
     badge: "— Stone arte since 1985 —",
     titleGold: "ETERNIZAMOS",
     titleWhite: "QUEM VOCÊ AMOU...",
@@ -19,7 +18,6 @@ const scenes = [
   },
   {
     id: 1,
-    watermark: "NOS CONHEÇA",
     badge: null,
     titleGold: null,
     titleWhite: "CADA VIDA MERECE\nSER LEMBRADA...",
@@ -32,7 +30,6 @@ const scenes = [
   },
   {
     id: 2,
-    watermark: "ST. CLAIR",
     badge: null,
     titleGold: "40 ANOS A ESCULPIR",
     titleWhite: "MEMÓRIAS ETERNAS",
@@ -44,7 +41,6 @@ const scenes = [
   },
   {
     id: 3,
-    watermark: "ARTE E DEVOÇÃO",
     badge: null,
     titleGold: "ARTE E DEVOÇÃO",
     titleWhite: null,
@@ -100,8 +96,9 @@ export function Hero() {
 
   return (
     <section
+      id="hero"
       className="relative w-full overflow-hidden bg-background"
-      style={{ minHeight: "calc(100vh - 80px)", height: "calc(100vh - 80px)", marginTop: "80px" }}
+      style={{ minHeight: "100vh", height: "100vh", paddingTop: "100px" }}
     >
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;700&display=swap');
@@ -143,26 +140,11 @@ export function Hero() {
         }}
       />
 
-      <div
-        className="absolute bottom-0 left-0 right-0 text-center pointer-events-none z-[1] select-none"
-        style={{
-          fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: "clamp(40px, 13vw, 140px)",
-          color: "rgba(255,255,255,0.08)",
-          letterSpacing: "0.12em",
-          lineHeight: 1,
-          transition: "opacity 0.5s ease",
-          opacity: visible ? 1 : 0,
-        }}
-      >
-        {scene.watermark}
-      </div>
-
       {scene.badge && (
         <div
           className="absolute z-10 whitespace-nowrap text-center"
           style={{
-            top: "clamp(16px, 5vh, 40px)",
+            top: "110px",
             left: "50%",
             transform: "translateX(-50%)",
             fontFamily: "'Montserrat', sans-serif",
@@ -177,7 +159,7 @@ export function Hero() {
       )}
 
       <div
-        className="absolute inset-0 z-[4] flex flex-col"
+        className="absolute inset-0 z-[4] flex flex-col pt-8"
         style={{ paddingBottom: "clamp(120px, 22vh, 180px)" }}
       >
         <div
@@ -351,7 +333,7 @@ export function Hero() {
       <div
         className="absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center gap-3 px-4 sm:px-6"
         style={{
-          paddingBottom: "clamp(12px, 2.5vh, 24px)",
+          paddingBottom: "clamp(24px, 4vh, 48px)",
           animation: "fadeUp 0.8s ease 0.5s both",
         }}
       >
@@ -360,7 +342,7 @@ export function Hero() {
           className="rounded-full px-6 md:px-10 py-5 md:py-6 text-xs md:text-sm font-bold text-primary-foreground bg-primary relative overflow-hidden transition-transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(200,166,106,0.32)] w-full max-w-xs md:max-w-sm"
           asChild
         >
-          <Link href="#contato">
+          <Link href="#contact">
             <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full animate-[shimmer_2.5s_infinite] skew-x-[-25deg]" />
             <div className="absolute inset-0 rounded-full animate-[pulseAura_2s_infinite] pointer-events-none" />
             <span className="relative z-10 flex items-center gap-3 tracking-wider" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}>
@@ -368,21 +350,6 @@ export function Hero() {
             </span>
           </Link>
         </Button>
-
-        <Link href="#sobre" className="flex items-center gap-3 group">
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-full border border-white/10 transition-all group-hover:border-primary/50 flex-shrink-0">
-            <span className="text-white/65 group-hover:text-primary text-sm">⬦</span>
-            <div className="absolute inset-0 border-t border-primary opacity-0 group-hover:opacity-100 rounded-full animate-spin" />
-          </div>
-          <div className="flex flex-col items-start">
-            <span className="text-[10px] tracking-[0.3em] text-white/65 uppercase font-bold group-hover:text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-              Explorar Galeria
-            </span>
-            <span className="text-[11px] text-primary/70 font-serif italic">
-              Obras que transcendem o tempo
-            </span>
-          </div>
-        </Link>
       </div>
 
       <style jsx>{`

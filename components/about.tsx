@@ -60,24 +60,25 @@ export function About() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={isSectionInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.8 }}
-              className="absolute inset-0 overflow-hidden shadow-xl border border-white/10 bg-secondary z-10 transition-transform duration-700 group-hover:scale-[1.01]"
+              className="absolute inset-0 overflow-hidden rounded-[2.25rem] bg-secondary z-10 shadow-[0_24px_80px_rgba(0,0,0,0.42)] ring-1 ring-white/10 transition-transform duration-700 group-hover:-translate-y-1 group-hover:scale-[1.01]"
             >
+              <div className="absolute inset-3 rounded-[1.65rem] border border-primary/25 z-20 pointer-events-none" />
               <video
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-[1.5s] opacity-100"
+                className="w-full h-full rounded-[inherit] object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-[1.5s] opacity-100"
               >
                 <source src="/videos/familia.mp4" type="video/mp4" />
-                <img src="/images/craftsman.jpg" alt="Drew Bott" className="object-cover w-full h-full" />
+                <img src="/images/craftsman.jpg" alt="Drew Bott" className="object-cover w-full h-full rounded-[inherit]" />
               </video>
               <div className="absolute inset-0 bg-transparent" />
             </motion.div>
             
             {/* Elementos Decorativos Dourados */}
-            <div className="absolute -left-3 -bottom-3 w-32 h-32 border-l border-b border-primary/40 -z-0 animate-pulse" />
-            <div className="absolute -right-3 -top-3 w-32 h-32 border-r border-t border-primary/20 -z-0 transition-all duration-1000 group-hover:-translate-y-2 group-hover:translate-x-2" />
+            <div className="absolute -left-3 -bottom-3 w-32 h-32 rounded-bl-[2.75rem] border-l border-b border-primary/40 -z-0 animate-pulse" />
+            <div className="absolute -right-3 -top-3 w-32 h-32 rounded-tr-[2.75rem] border-r border-t border-primary/20 -z-0 transition-all duration-1000 group-hover:-translate-y-2 group-hover:translate-x-2" />
           </div>
 
           {/* Lado do Conteúdo - Texto e Stats */}
@@ -135,33 +136,7 @@ export function About() {
               </motion.p>
             </div>
 
-            {/* Bloco de Números Animados */}
-            <div className="grid grid-cols-3 gap-4 md:gap-8 mt-12 pt-10 border-t border-white/10">
-              {[
-                { n: 6, label: "Harold Schaller Awards" },
-                { n: 27, label: "National First Places" },
-                { n: 18, label: "Magazine Features" }
-              ].map((stat, i) => (
-                <motion.div 
-                  key={i} 
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={isSectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                  transition={{ delay: 0.5 + i * 0.15 }}
-                  className="text-center lg:text-left group/stat cursor-default"
-                >
-                  <motion.span 
-                    whileHover={{ scale: 1.05 }}
-                    className="block font-serif text-3xl md:text-5xl text-primary transition-all duration-500 drop-shadow-[0_0_15px_rgba(200,166,106,0.18)]"
-                  >
-                    {/* O Counter agora escuta o estado global da seção para resetar e contar */}
-                    <Counter value={stat.n} trigger={isSectionInView} />
-                  </motion.span>
-                  <p className="text-[9px] uppercase tracking-[0.2em] text-white/62 mt-3 font-bold leading-tight group-hover/stat:text-white/80 transition-colors duration-500">
-                    {stat.label}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+           
           </div>
           
         </div>
