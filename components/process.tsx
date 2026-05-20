@@ -1,7 +1,7 @@
 "use client";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { Check, ChevronRight } from "lucide-react";
+import { Check } from "lucide-react";
 
 const steps = [
   { 
@@ -26,6 +26,7 @@ const steps = [
 
 export function Process() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [cycleIndex, setCycleIndex] = useState(0);
   const containerRef = useRef<HTMLElement>(null);
   
   const isSectionInView = useInView(containerRef, { once: false, amount: 0.2 });
@@ -36,8 +37,16 @@ export function Process() {
 
     if (isSectionInView) {
       setActiveIndex(0);
+      setCycleIndex((prev) => prev + 1);
       interval = setInterval(() => {
-        setActiveIndex((prev) => (prev === steps.length - 1 ? 0 : prev + 1));
+        setActiveIndex((prev) => {
+          if (prev === steps.length - 1) {
+            setCycleIndex((cycle) => cycle + 1);
+            return 0;
+          }
+
+          return prev + 1;
+        });
       }, duration);
     }
 
@@ -68,26 +77,36 @@ export function Process() {
         </div>
 
         <div className="relative">
-          {/* Premium Arrow Connectors - Desktop */}
-          <div className="hidden md:block absolute top-[88px] left-[16.67%] right-[16.67%] z-10">
-            {/* Arrow connectors between steps */}
+          {/* Premium Connectors - Desktop */}
+          <div className="hidden md:block absolute top-[88px] inset-x-0 z-10 pointer-events-none">
+            {/* Connectors between steps */}
             {[0, 1].map((index) => {
               const isCompleted = activeIndex > index;
               const isActive = activeIndex === index;
-              const leftPosition = index === 0 ? '8%' : '58%';
+              const connectorStyle =
+                index === 0
+                  ? {
+                      left: '16.666667%',
+                      right: '50%',
+                    }
+                  : {
+                      left: '50%',
+                      right: '16.666667%',
+                    };
               
               return (
                 <div 
                   key={index}
-                  className="absolute top-1/2 -translate-y-1/2 w-[34%]"
-                  style={{ left: leftPosition }}
+                  className="absolute top-1/2 -translate-y-1/2"
+                  style={connectorStyle}
                 >
                   {/* Background track */}
                   <div className="h-[3px] bg-white/10 rounded-full relative overflow-hidden">
                     {/* Animated progress fill */}
                     <motion.div 
+                      key={`${cycleIndex}-${index}-${isActive ? "active" : isCompleted ? "complete" : "idle"}`}
                       className="absolute inset-y-0 left-0 bg-gradient-to-r from-primary via-primary to-primary/80 rounded-full"
-                      initial={{ width: '0%' }}
+                      initial={{ width: isCompleted ? '100%' : '0%' }}
                       animate={{ 
                         width: isCompleted ? '100%' : isActive ? '100%' : '0%'
                       }}
@@ -114,36 +133,6 @@ export function Process() {
                       />
                     )}
                   </div>
-                  
-                  {/* Arrow head */}
-                  <motion.div
-                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2"
-                    animate={{
-                      opacity: isCompleted || isActive ? 1 : 0.3,
-                      scale: isCompleted ? 1.1 : 1,
-                      x: isActive ? [0, 4, 0] : 0
-                    }}
-                    transition={{ 
-                      duration: isActive ? 1 : 0.3,
-                      repeat: isActive ? Infinity : 0,
-                      repeatDelay: 0.5
-                    }}
-                  >
-                    <div className={`relative ${isCompleted || isActive ? 'text-primary' : 'text-white/30'}`}>
-                      {/* Glow behind arrow */}
-                      {(isCompleted || isActive) && (
-                        <motion.div 
-                          className="absolute inset-0 blur-md bg-primary/50 rounded-full"
-                          animate={{ opacity: [0.5, 1, 0.5] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                        />
-                      )}
-                      <ChevronRight 
-                        className="w-8 h-8 relative z-10" 
-                        strokeWidth={isCompleted ? 3 : 2}
-                      />
-                    </div>
-                  </motion.div>
                 </div>
               );
             })}
@@ -175,6 +164,8 @@ export function Process() {
 
                   {/* Image Circle Container */}
                   <div className="relative z-20 mb-6">
+                    <div className="absolute -inset-4 rounded-full bg-card" />
+
                     {/* Circular progress ring */}
                     <svg className="absolute -inset-3 w-[calc(100%+24px)] h-[calc(100%+24px)] -rotate-90">
                       {/* Background ring */}

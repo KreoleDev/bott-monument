@@ -33,32 +33,24 @@ export default async function HomePage() {
         <Philosophy />
       </SectionTransition>
 
-      {/* Divisor premium */}
-      <SectionDivider variant="elegant" />
 
       {/* 3. Estatísticas Animadas */}
       <ScrollRevealSection direction="up">
         <Stats />
       </ScrollRevealSection>
 
-      {/* Divisor premium */}
-      <SectionDivider variant="diamond" />
 
       {/* 4. Processo - Revelação lateral */}
       <ScrollRevealSection direction="up">
         <Process />
       </ScrollRevealSection>
 
-      {/* Divisor premium */}
-      <SectionDivider variant="lines" />
 
       {/* 5. Galeria Premium - Transição suave */}
       <SectionTransition>
         <PremiumGallery artworks={artworks} categories={categories} />
       </SectionTransition>
 
-      {/* Divisor premium */}
-      <SectionDivider variant="dots" />
 
       {/* 6. Sobre - Entrada da esquerda */}
       <ScrollRevealSection direction="left">
@@ -70,16 +62,10 @@ export default async function HomePage() {
         <Features />
       </ScrollRevealSection>
 
-      {/* Divisor premium */}
-      <SectionDivider variant="elegant" />
-
       {/* 8. Depoimentos - Transição cinematográfica */}
       <SectionTransition>
         <Testimonials />
       </SectionTransition>
-
-      {/* Divisor premium */}
-      <SectionDivider variant="lines" />
       
       {/* 9. Contacto - Revelação final */}
       <ScrollRevealSection direction="up">

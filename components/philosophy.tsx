@@ -148,13 +148,13 @@ export function Philosophy() {
                 initial={{ opacity: 0 }}
                 animate={isSectionInView ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
-                className="absolute -inset-4 border border-primary/30 transition-all duration-700 group-hover:border-primary/50"
+                className="absolute -inset-4 rounded-[2.75rem] border border-primary/30 transition-all duration-700 group-hover:border-primary/50"
               >
                 {/* Cantos decorativos */}
-                <div className="absolute -top-1 -left-1 w-6 h-6 border-t-2 border-l-2 border-primary" />
-                <div className="absolute -top-1 -right-1 w-6 h-6 border-t-2 border-r-2 border-primary" />
-                <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-2 border-l-2 border-primary" />
-                <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-2 border-r-2 border-primary" />
+                <div className="absolute -top-1 -left-1 w-6 h-6 rounded-tl-2xl border-t-2 border-l-2 border-primary" />
+                <div className="absolute -top-1 -right-1 w-6 h-6 rounded-tr-2xl border-t-2 border-r-2 border-primary" />
+                <div className="absolute -bottom-1 -left-1 w-6 h-6 rounded-bl-2xl border-b-2 border-l-2 border-primary" />
+                <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-br-2xl border-b-2 border-r-2 border-primary" />
               </motion.div>
               
               {/* Camada 2: Glow ambiente atras da imagem */}
@@ -184,26 +184,26 @@ export function Philosophy() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isSectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
                 transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
-                className="relative aspect-[3/4] overflow-hidden bg-zinc-900 shadow-[0_24px_45px_-18px_rgba(0,0,0,0.45)]"
+                className="relative aspect-[3/4] overflow-hidden rounded-[2.25rem] bg-zinc-900 shadow-[0_24px_80px_rgba(0,0,0,0.42)] ring-1 ring-white/10"
               >
                 {/* Borda interna dupla premium */}
-                <div className="absolute inset-0 border border-white/10 z-20 pointer-events-none" />
-                <div className="absolute inset-2 border border-primary/10 z-20 pointer-events-none" />
+                <div className="absolute inset-0 rounded-[inherit] border border-white/10 z-20 pointer-events-none" />
+                <div className="absolute inset-3 rounded-[1.65rem] border border-primary/20 z-20 pointer-events-none" />
                 
                 <Image
                   src="/images/monument-detail.jpg"
                   alt="Granite carving detail"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                  className="rounded-[inherit] object-cover transition-transform duration-1000 group-hover:scale-105"
                   priority
                 />
                 
                 {/* Vignette overlay premium */}
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)] z-10 pointer-events-none" />
+                <div className="absolute inset-0 rounded-[inherit] bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.4)_100%)] z-10 pointer-events-none" />
                 
                 {/* Reflexo de luz no topo */}
-                <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white/5 to-transparent z-10 pointer-events-none" />
+                <div className="absolute top-0 left-0 right-0 h-32 rounded-t-[inherit] bg-gradient-to-b from-white/5 to-transparent z-10 pointer-events-none" />
                 
                 {/* Detalhe da Legenda Interna */}
                 <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end [text-shadow:0_2px_12px_rgba(0,0,0,0.45)] z-20">

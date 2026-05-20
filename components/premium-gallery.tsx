@@ -1,11 +1,9 @@
 "use client"
 
-import { useState, useCallback, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect, useMemo } from "react"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import useEmblaCarousel from "embla-carousel-react"
-import { X, ChevronLeft, ChevronRight, ZoomIn, Info, ChevronDown, ChevronUp } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import type { Artwork, Category } from "@/lib/types"
 
 interface GalleryProps {
@@ -13,59 +11,70 @@ interface GalleryProps {
   categories: Category[]
 }
 
-const ITEMS_PER_PAGE = 4
-
 export function PremiumGallery({ artworks, categories }: GalleryProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-  const [lightboxOpen, setLightboxOpen] = useState(false)
-  const [lightboxIndex, setLightboxIndex] = useState(0)
-  const [showDetails, setShowDetails] = useState(false)
-  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE)
+  const [selectedSlide, setSelectedSlide] = useState(1)
 
-  const filteredArtworks = selectedCategory
-    ? artworks.filter((a) => a.category_id === selectedCategory)
-    : artworks
+  const filteredArtworks = useMemo(
+    () =>
+      selectedCategory
+        ? artworks.filter((a) => a.category_id === selectedCategory)
+        : artworks,
+    [artworks, selectedCategory],
+  )
+  const displayArtworks = useMemo(() => {
+    if (filteredArtworks.length <= 1) {
+      return filteredArtworks.map((artwork, originalIndex) => ({ artwork, originalIndex }))
+    }
 
-  const visibleArtworks = filteredArtworks.slice(0, visibleCount)
-  const hasMore = visibleCount < filteredArtworks.length
+    const featuredIndex = filteredArtworks.findIndex((artwork) => artwork.featured)
+    const frontIndex = featuredIndex >= 0 ? featuredIndex : 0
+    const previousIndex = (frontIndex - 1 + filteredArtworks.length) % filteredArtworks.length
+    const orderedIndices = [
+      previousIndex,
+      frontIndex,
+      ...filteredArtworks
+        .map((_, index) => index)
+        .filter((index) => index !== previousIndex && index !== frontIndex),
+    ]
 
-  // Reset visible count when category changes
-  useEffect(() => {
-    setVisibleCount(ITEMS_PER_PAGE)
-  }, [selectedCategory])
+    return orderedIndices.map((originalIndex) => ({
+      artwork: filteredArtworks[originalIndex],
+      originalIndex,
+    }))
+  }, [filteredArtworks])
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: true,
-    align: "start",
+    align: "center",
     skipSnaps: false,
     containScroll: "trimSnaps"
   })
 
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
-  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
+  useEffect(() => {
+    if (!emblaApi) return
 
-  const openLightbox = (index: number) => {
-    setLightboxIndex(index)
-    setLightboxOpen(true)
-  }
+    const updateSelectedSlide = () => {
+      setSelectedSlide(emblaApi.selectedScrollSnap())
+    }
 
-  const closeLightbox = () => {
-    setLightboxOpen(false)
-    setShowDetails(false)
-  }
+    emblaApi.on("select", updateSelectedSlide)
+    emblaApi.on("reInit", updateSelectedSlide)
+    updateSelectedSlide()
+
+    return () => {
+      emblaApi.off("select", updateSelectedSlide)
+      emblaApi.off("reInit", updateSelectedSlide)
+    }
+  }, [emblaApi])
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!lightboxOpen) return
-      if (e.key === "Escape") closeLightbox()
-      if (e.key === "ArrowLeft") setLightboxIndex((i) => (i - 1 + filteredArtworks.length) % filteredArtworks.length)
-      if (e.key === "ArrowRight") setLightboxIndex((i) => (i + 1) % filteredArtworks.length)
-    }
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [lightboxOpen, filteredArtworks.length])
+    if (!emblaApi || displayArtworks.length === 0) return
 
-  const brass = "#c8a66a"
+    const nextSlide = displayArtworks.length > 1 ? 1 : 0
+    emblaApi.scrollTo(nextSlide, true)
+    setSelectedSlide(nextSlide)
+  }, [emblaApi, displayArtworks])
 
   return (
     <section id="gallery" className="py-24 md:py-36 bg-secondary relative overflow-hidden border-t border-white/[0.02]">
@@ -127,39 +136,49 @@ export function PremiumGallery({ artworks, categories }: GalleryProps) {
 
         {/* Carousel */}
         <div className="relative -mx-6 lg:-mx-12">
-          <div className="overflow-hidden px-6 lg:px-12" ref={emblaRef}>
-            <div className="flex gap-4 md:gap-6">
-              {filteredArtworks.map((artwork, index) => (
-                <motion.div
-                  key={artwork.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex-[0_0_80%] sm:flex-[0_0_60%] md:flex-[0_0_45%] lg:flex-[0_0_32%] min-w-0"
-                >
-                  <div 
-                    className="relative aspect-[3/4] overflow-hidden bg-zinc-900 border border-white/10 shadow-2xl cursor-pointer group"
-                    onClick={() => openLightbox(index)}
+          <div className="overflow-hidden px-6 py-14 lg:px-12" ref={emblaRef}>
+            <div className="flex items-center">
+              {displayArtworks.map(({ artwork }, index) => {
+                const isFront = index === selectedSlide
+                const isBeforeFront = index < selectedSlide
+
+                return (
+                  <motion.div
+                    key={artwork.id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex-[0_0_82%] sm:flex-[0_0_58%] md:flex-[0_0_38%] lg:flex-[0_0_31%] min-w-0 px-2 md:px-0"
+                    style={{ zIndex: isFront ? 30 : 10 }}
                   >
+                    <motion.div
+                      animate={{
+                        rotate: isFront ? 0 : isBeforeFront ? -7 : 7,
+                        y: isFront ? -10 : 22,
+                        scale: isFront ? 1.08 : 0.92,
+                        opacity: isFront ? 1 : 0.78,
+                      }}
+                      whileHover={{
+                        y: isFront ? -16 : 12,
+                        scale: isFront ? 1.1 : 0.96,
+                      }}
+                      transition={{ duration: 0.45, ease: "easeOut" }}
+                      className="relative aspect-[4/5] overflow-hidden rounded-[2.25rem] bg-zinc-900 shadow-[0_24px_80px_rgba(0,0,0,0.42)] ring-1 ring-white/10 group"
+                    >
                     <Image
                       src={artwork.image_url}
                       alt={artwork.title}
                       fill
                       sizes="(max-width: 768px) 85vw, (max-width: 1024px) 40vw, 30vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="rounded-[inherit] object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 rounded-[inherit] bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
-                    {/* Zoom icon */}
-                    <div className="absolute top-4 right-4 w-10 h-10 bg-black/50 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <ZoomIn className="w-5 h-5 text-primary" />
-                    </div>
-
                     {/* Content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <div className="absolute bottom-0 left-0 right-0 z-20 p-6 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
                       <span className="text-[10px] text-primary font-bold uppercase tracking-[0.25em] mb-2 block">
                         {artwork.category?.name || "Portfolio"}
                       </span>
@@ -175,214 +194,19 @@ export function PremiumGallery({ artworks, categories }: GalleryProps) {
 
                     {/* Featured badge */}
                     {artwork.featured && (
-                      <div className="absolute top-4 left-4 px-3 py-1 bg-primary text-background text-[10px] font-bold uppercase tracking-wider">
+                      <div className="absolute top-5 left-5 z-20 px-4 py-2 rounded-full bg-primary text-background text-[10px] font-bold uppercase tracking-wider">
                         Destaque
                       </div>
                     )}
-                  </div>
-                </motion.div>
-              ))}
+                    </motion.div>
+                  </motion.div>
+                )
+              })}
             </div>
           </div>
-
-          {/* Navigation buttons */}
-          <button
-            onClick={scrollPrev}
-            className="absolute left-0 lg:left-2 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 bg-black/70 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary/50 transition-all z-10"
-          >
-            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
-          </button>
-          <button
-            onClick={scrollNext}
-            className="absolute right-0 lg:right-2 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 bg-black/70 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-primary/20 hover:border-primary/50 transition-all z-10"
-          >
-            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
-          </button>
         </div>
 
-        {/* Grid view below carousel */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="mt-20"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <AnimatePresence mode="popLayout">
-              {visibleArtworks.map((artwork, index) => (
-                <motion.div
-                  key={artwork.id}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.4, delay: index >= visibleCount - ITEMS_PER_PAGE ? (index % ITEMS_PER_PAGE) * 0.05 : 0 }}
-                  layout
-                  className="relative aspect-square overflow-hidden bg-zinc-900 border border-white/5 cursor-pointer group"
-                  onClick={() => openLightbox(index)}
-                >
-                  <Image
-                    src={artwork.image_url}
-                    alt={artwork.title}
-                    fill
-                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
-                    <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-
-          {/* Show more / Show less buttons */}
-          {filteredArtworks.length > ITEMS_PER_PAGE && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10"
-            >
-              {hasMore && (
-                <Button
-                  onClick={() => setVisibleCount(prev => Math.min(prev + ITEMS_PER_PAGE, filteredArtworks.length))}
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 h-12 text-sm uppercase tracking-widest font-medium shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  <ChevronDown className="mr-2 h-4 w-4" />
-                  Mostrar mais ({filteredArtworks.length - visibleCount})
-                </Button>
-              )}
-              {visibleCount > ITEMS_PER_PAGE && (
-                <Button
-                  onClick={() => setVisibleCount(ITEMS_PER_PAGE)}
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 h-12 text-sm uppercase tracking-widest font-medium shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  <ChevronUp className="mr-2 h-4 w-4" />
-                  Mostrar menos
-                </Button>
-              )}
-            </motion.div>
-          )}
-        </motion.div>
       </div>
-
-      {/* Lightbox */}
-      <AnimatePresence>
-        {lightboxOpen && filteredArtworks[lightboxIndex] && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center"
-            onClick={closeLightbox}
-          >
-            {/* Close button */}
-            <button
-              onClick={closeLightbox}
-              className="absolute top-6 right-6 w-12 h-12 bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-primary/20 transition-colors z-20"
-            >
-              <X className="w-6 h-6 text-white" />
-            </button>
-
-            {/* Info toggle */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                setShowDetails(!showDetails)
-              }}
-              className="absolute top-6 left-6 w-12 h-12 bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-primary/20 transition-colors z-20"
-            >
-              <Info className="w-6 h-6 text-white" />
-            </button>
-
-            {/* Navigation */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                setLightboxIndex((i) => (i - 1 + filteredArtworks.length) % filteredArtworks.length)
-              }}
-              className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-primary/20 transition-colors z-20"
-            >
-              <ChevronLeft className="w-8 h-8 text-white" />
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                setLightboxIndex((i) => (i + 1) % filteredArtworks.length)
-              }}
-              className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-primary/20 transition-colors z-20"
-            >
-              <ChevronRight className="w-8 h-8 text-white" />
-            </button>
-
-            {/* Image */}
-            <motion.div
-              key={lightboxIndex}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-full h-full max-w-5xl max-h-[85vh] mx-20"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={filteredArtworks[lightboxIndex].image_url}
-                alt={filteredArtworks[lightboxIndex].title}
-                fill
-                className="object-contain"
-                sizes="90vw"
-                priority
-              />
-            </motion.div>
-
-            {/* Details panel */}
-            <AnimatePresence>
-              {showDetails && (
-                <motion.div
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 100 }}
-                  className="absolute right-0 top-0 bottom-0 w-full max-w-md bg-background/95 backdrop-blur-xl border-l border-white/10 p-8 overflow-y-auto"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <div className="pt-16">
-                    <span 
-                      className="text-[10px] font-bold uppercase tracking-[0.3em] mb-4 block"
-                      style={{ color: brass }}
-                    >
-                      {filteredArtworks[lightboxIndex].category?.name || "Portfolio"}
-                    </span>
-                    <h3 className="font-serif text-3xl text-white mb-6">
-                      {filteredArtworks[lightboxIndex].title}
-                    </h3>
-                    {filteredArtworks[lightboxIndex].description && (
-                      <p className="text-muted-foreground leading-relaxed mb-8">
-                        {filteredArtworks[lightboxIndex].description}
-                      </p>
-                    )}
-                    <div className="border-t border-white/10 pt-6">
-                      <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
-                        Data de Criacao
-                      </p>
-                      <p className="text-white">
-                        {new Date(filteredArtworks[lightboxIndex].created_at).toLocaleDateString('pt-BR', {
-                          year: 'numeric',
-                          month: 'long'
-                        })}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Counter */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/60 text-sm tracking-wider">
-              {lightboxIndex + 1} / {filteredArtworks.length}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   )
 }

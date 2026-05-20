@@ -172,7 +172,7 @@ export function Header() {
             >
               <Button 
                 onClick={() => scrollToSection('#contact')}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 py-2 text-[10px] font-semibold uppercase tracking-[0.15em] transition-all duration-500 shadow-lg hover:shadow-primary/25 hover:scale-105"
+                className="bg-[#e2bc73] text-black hover:bg-[#f2d28a] rounded-full px-6 py-2 text-[10px] font-bold uppercase tracking-[0.15em] transition-all duration-500 shadow-[0_0_28px_rgba(226,188,115,0.35)] ring-1 ring-[#f6d994]/40 hover:shadow-[0_0_42px_rgba(242,210,138,0.6)] hover:ring-[#ffe2a3]/70 hover:scale-105"
               >
                 Solicitar Orcamento
               </Button>
@@ -295,7 +295,7 @@ export function Header() {
               >
                 <Button 
                   onClick={() => scrollToSection('#contact')}
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-10 py-6 text-sm font-semibold uppercase tracking-widest shadow-lg"
+                  className="bg-[#e2bc73] text-black hover:bg-[#f2d28a] rounded-full px-10 py-6 text-sm font-bold uppercase tracking-widest shadow-[0_0_28px_rgba(226,188,115,0.35)] ring-1 ring-[#f6d994]/40 hover:shadow-[0_0_42px_rgba(242,210,138,0.6)]"
                 >
                   Solicitar Orcamento
                 </Button>
