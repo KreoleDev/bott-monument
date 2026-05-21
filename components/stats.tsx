@@ -5,10 +5,10 @@ import { motion, useInView } from "framer-motion"
 import { StatItem } from "@/components/ui/animated-counter"
 
 const stats = [
-  { value: 15, suffix: "+", label: "Anos de Experiência" },
-  { value: 500, suffix: "+", label: "Monumentos Criados" },
-  { value: 100, suffix: "%", label: "Satisfação" },
-  { value: 50, suffix: "+", label: "Designs Únicos" }
+  { value: 15, suffix: "+", label: "Years of Experience" },
+  { value: 500, suffix: "+", label: "Monuments Crafted" },
+  { value: 100, suffix: "%", label: "Client Satisfaction" },
+  { value: 50, suffix: "+", label: "Unique Designs" }
 ]
 
 export function Stats() {
@@ -43,10 +43,10 @@ export function Stats() {
           className="text-center mb-16"
         >
           <span className="text-xs uppercase tracking-[0.3em] text-primary/80 mb-4 block">
-            Nossos Números
+            Our Numbers
           </span>
           <h2 className="font-serif text-3xl md:text-4xl text-foreground">
-            Uma <span className="italic text-primary">Trajetória</span> de Excelência
+            A <span className="italic text-primary">Journey</span> of Excellence
           </h2>
         </motion.div>
 

@@ -8,8 +8,8 @@ const scenes = [
   {
     id: 0,
     badge: "— Stone arte since 1985 —",
-    titleGold: "ETERNIZAMOS",
-    titleWhite: "QUEM VOCÊ AMOU...",
+    titleGold: "ETERNALIZING",
+    titleWhite: "THOSE YOU LOVED...",
     sub: null,
     imageSide: "/images/work-1.jpg",
     imageBg: null,
@@ -20,7 +20,7 @@ const scenes = [
     id: 1,
     badge: null,
     titleGold: null,
-    titleWhite: "CADA VIDA MERECE\nSER LEMBRADA...",
+    titleWhite: "EVERY LIFE DESERVES\nTO BE REMEMBERED...",
     sub: null,
     imageSide: "/images/workremove1.png",
     imageSide2: "/images/workremove2.png",
@@ -31,9 +31,9 @@ const scenes = [
   {
     id: 2,
     badge: null,
-    titleGold: "40 ANOS A ESCULPIR",
-    titleWhite: "MEMÓRIAS ETERNAS",
-    sub: "UMA HOMENAGEM PARA SEMPRE",
+    titleGold: "40 YEARS SCULPTING",
+    titleWhite: "ETERNAL MEMORIES",
+    sub: "HANDCRAFTED WITH PASSION AND PRECISION",
     imageSide: null,
     imageBg: "/images/work-3.jpg",
     glow: false,
@@ -42,9 +42,9 @@ const scenes = [
   {
     id: 3,
     badge: null,
-    titleGold: "ARTE E DEVOÇÃO",
+    titleGold: "CRAFTING LEGACIES",
     titleWhite: null,
-    sub: "EM CADA DETALHE",
+    sub: "FROM OUR HANDS TO ETERNITY",
     imageSide: null,
     imageBg: "/images/work-3.jpg",
     glow: false,
@@ -346,7 +346,7 @@ export function Hero() {
             <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full animate-[shimmer_2.5s_infinite] skew-x-[-25deg]" />
             <div className="absolute inset-0 rounded-full animate-[pulseAura_2s_infinite] pointer-events-none" />
             <span className="relative z-10 flex items-center gap-3 tracking-wider" style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700 }}>
-              <span className="text-lg">⚒</span> SOLICITE O SEU MONUMENTO
+              <span className="text-lg">⚒</span> REQUEST YOUR MONUMENT
             </span>
           </Link>
         </Button>

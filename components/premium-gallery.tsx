@@ -91,13 +91,13 @@ export function PremiumGallery({ artworks, categories }: GalleryProps) {
           className="text-center mb-16"
         >
           <span className="text-primary text-[10px] font-bold uppercase tracking-[0.6em] mb-4 block">
-            Portfolio Exclusivo
+            Exclusive Portfolio
           </span>
           <h2 className="font-serif text-4xl md:text-6xl text-white tracking-tight mb-6">
-            Monumentos de <span className="italic font-light text-primary/90">Distincao</span>
+            Monuments of <span className="italic font-light text-primary/90">Distinction</span>
           </h2>
           <p className="text-muted-foreground font-light text-sm md:text-base max-w-2xl mx-auto font-serif italic">
-            {'"'}Cada peca e esculpida com a atencao de uma capa de revista, preservando memorias por geracoes.{'"'}
+            {'"'}Each piece is sculpted with the attention of a magazine cover, preserving memories for generations.{'"'}
           </p>
         </motion.div>
 
@@ -117,7 +117,7 @@ export function PremiumGallery({ artworks, categories }: GalleryProps) {
                 : "bg-transparent text-white/70 border-white/20 hover:border-primary/50 hover:text-primary"
             }`}
           >
-            Todos
+            All
           </button>
           {categories.map((cat) => (
             <button
@@ -195,7 +195,7 @@ export function PremiumGallery({ artworks, categories }: GalleryProps) {
                     {/* Featured badge */}
                     {artwork.featured && (
                       <div className="absolute top-5 left-5 z-20 px-4 py-2 rounded-full bg-primary text-background text-[10px] font-bold uppercase tracking-wider">
-                        Destaque
+                        Featured
                       </div>
                     )}
                     </motion.div>
