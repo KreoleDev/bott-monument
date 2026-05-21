@@ -45,13 +45,13 @@ export function Contact() {
           className="text-center mb-12"
         >
           <span className="text-primary text-[10px] font-bold uppercase tracking-[0.5em] mb-4 block">
-            Contato
+            Contact
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground text-balance mb-4">
-            Inicie Seu <span className="italic text-primary">Projeto</span>
+            Start Your <span className="italic text-primary">Project</span>
           </h2>
           <p className="text-muted-foreground text-sm max-w-md mx-auto">
-            Entre em contato conosco para criar um monumento unico que honre a memoria de seus entes queridos.
+            Get in touch with us to create a unique monument that honors the memory of your loved ones.
           </p>
         </motion.div>
 
@@ -72,7 +72,7 @@ export function Contact() {
                   className="flex items-center gap-3 p-4 bg-green-500/10 border border-green-500/30 text-green-400"
                 >
                   <CheckCircle className="w-5 h-5" />
-                  <span className="text-sm">Mensagem enviada com sucesso! Entraremos em contato em breve.</span>
+                  <span className="text-sm">Message sent successfully! We will get in touch soon.</span>
                 </motion.div>
               )}
               
@@ -89,12 +89,12 @@ export function Contact() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-xs uppercase tracking-wider text-muted-foreground">
-                    Nome *
+                    Name *
                   </label>
                   <Input
                     id="name"
                     name="name"
-                    placeholder="Seu nome completo"
+                    placeholder="Your full name"
                     required
                     disabled={isPending}
                     className="rounded-none border-border/40 bg-background h-12 text-sm focus:border-primary transition-colors"
@@ -108,7 +108,7 @@ export function Contact() {
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="seu@email.com"
+                    placeholder="your@email.com"
                     required
                     disabled={isPending}
                     className="rounded-none border-border/40 bg-background h-12 text-sm focus:border-primary transition-colors"
@@ -118,7 +118,7 @@ export function Contact() {
               
               <div className="space-y-2">
                 <label htmlFor="phone" className="text-xs uppercase tracking-wider text-muted-foreground">
-                  Telefone
+                  Phone
                 </label>
                 <Input
                   id="phone"
@@ -132,12 +132,12 @@ export function Contact() {
               
               <div className="space-y-2">
                 <label htmlFor="message" className="text-xs uppercase tracking-wider text-muted-foreground">
-                  Mensagem *
+                  Message *
                 </label>
                 <Textarea
                   id="message"
                   name="message"
-                  placeholder="Conte-nos sobre o memorial que gostaria de criar..."
+                  placeholder="Tell us about the memorial you'd like to create..."
                   required
                   disabled={isPending}
                   className="rounded-none border-border/40 bg-background min-h-[140px] text-sm focus:border-primary resize-none transition-colors"
@@ -152,11 +152,11 @@ export function Contact() {
                 {isPending ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Enviando...
+                    Sending...
                   </>
                 ) : (
                   <>
-                    Enviar Mensagem
+                    Send Message
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
@@ -166,7 +166,7 @@ export function Contact() {
             {/* Contact Info */}
             <div className="lg:col-span-2 lg:border-l lg:border-border/30 lg:pl-12 space-y-6">
               <div>
-                <h3 className="font-serif text-xl text-foreground mb-4">Visite-nos</h3>
+                <h3 className="font-serif text-xl text-foreground mb-4">Visit Us</h3>
                 <a
                   href="https://maps.google.com/?q=3425+W+Main+St,+Riverton,+WY,+United+States,+82501"
                   target="_blank"
@@ -198,7 +198,7 @@ export function Contact() {
               </div>
 
               <div className="pt-6 border-t border-border/30">
-                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-4">Siga-nos</p>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-4">Follow Us</p>
                 <div className="flex gap-4">
                   <a
                     href="https://www.facebook.com/bottmonument"
@@ -221,7 +221,7 @@ export function Contact() {
 
               <div className="pt-6 border-t border-border/30">
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Atendemos todo o Wyoming e estados vizinhos. Entre em contato para consultas personalizadas.
+                  We serve all of Wyoming and surrounding states. Contact us for personalized consultations.
                 </p>
               </div>
             </div>

@@ -7,13 +7,13 @@ import { Menu, X, Phone, Mail, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { label: "Inicio", href: "#hero" },
-  { label: "Filosofia", href: "#philosophy" },
-  { label: "Processo", href: "#process" },
-  { label: "Galeria", href: "#gallery" },
-  { label: "Sobre", href: "#about" },
-  { label: "Testemunhos", href: "#testimonials" },
-  { label: "Contacto", href: "#contact" },
+  { label: "Home", href: "#hero" },
+  { label: "Philosophy", href: "#philosophy" },
+  { label: "Process", href: "#process" },
+  { label: "Gallery", href: "#gallery" },
+  { label: "About", href: "#about" },
+  { label: "Testimonials", href: "#testimonials" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function Header() {
@@ -174,7 +174,7 @@ export function Header() {
                 onClick={() => scrollToSection('#contact')}
                 className="bg-[#e2bc73] text-black hover:bg-[#f2d28a] rounded-full px-6 py-2 text-[10px] font-bold uppercase tracking-[0.15em] transition-all duration-500 shadow-[0_0_28px_rgba(226,188,115,0.35)] ring-1 ring-[#f6d994]/40 hover:shadow-[0_0_42px_rgba(242,210,138,0.6)] hover:ring-[#ffe2a3]/70 hover:scale-105"
               >
-                Solicitar Orcamento
+                Request a Quote
               </Button>
             </motion.div>
 
