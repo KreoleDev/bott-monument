@@ -3978,7 +3978,7 @@
     }
 
     #contact {
-      padding: clamp(5.5rem, 8vh, 7rem) clamp(1.25rem, 4vw, 4rem) clamp(2rem, 4vh, 3.25rem) !important;
+      padding: clamp(5.5rem, 8vh, 7rem) clamp(1.25rem, 4vw, 4rem) !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
@@ -6050,12 +6050,13 @@
 
     window.COLOR_COMBINATIONS = COLOR_COMBINATIONS;
 
+    const DEFAULT_COLOR_COMBINATION = 'second';
     const paletteSelect = document.getElementById('paletteSelect');
     const requestedPalette = new URLSearchParams(window.location.search).get('palette');
-    const savedPalette = requestedPalette || localStorage.getItem('bottColorCombination') || 'first';
+    const savedPalette = requestedPalette || localStorage.getItem('bottColorCombination') || DEFAULT_COLOR_COMBINATION;
 
     function applyColorCombination(name) {
-      const combination = COLOR_COMBINATIONS[name] || COLOR_COMBINATIONS.first;
+      const combination = COLOR_COMBINATIONS[name] || COLOR_COMBINATIONS[DEFAULT_COLOR_COMBINATION];
       Object.entries(combination.cssVars).forEach(([property, value]) => {
         document.documentElement.style.setProperty(property, value);
       });
@@ -6691,7 +6692,7 @@
       paletteSelect.appendChild(option);
     });
 
-    paletteSelect.value = COLOR_COMBINATIONS[savedPalette] ? savedPalette : 'first';
+    paletteSelect.value = COLOR_COMBINATIONS[savedPalette] ? savedPalette : DEFAULT_COLOR_COMBINATION;
     applyColorCombination(paletteSelect.value);
     paletteSelect.addEventListener('change', event => applyColorCombination(event.target.value));
 
