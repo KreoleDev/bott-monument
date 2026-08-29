@@ -6026,11 +6026,15 @@
       window.addEventListener('resize', layoutSizes);
 
       let rotation = 0;
+      let scrollRotation = 0;
+      let manualRotationOffset = 0;
+      let autoRotationOffset = 0;
       let isScrolling = false;
       let scrollTimeout = null;
       let isHoverPaused = false;
 
       function applyRotation() {
+        rotation = scrollRotation + manualRotationOffset + autoRotationOffset;
         ring.style.transform = `rotateY(${rotation}deg)`;
         items.forEach((item, i) => {
           const itemAngle = i * anglePerItem;
@@ -6048,7 +6052,7 @@
 
         const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
         const scrollProgress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
-        rotation = scrollProgress * 360 * 2;
+        scrollRotation = scrollProgress * 360 * 2;
         applyRotation();
 
         scrollTimeout = setTimeout(() => { isScrolling = false; }, 150);
@@ -6058,7 +6062,7 @@
 
       function autoRotate() {
         if (!isScrolling && !isDragging && !isHoverPaused) {
-          rotation += AUTO_ROTATE_SPEED;
+          autoRotationOffset += AUTO_ROTATE_SPEED;
           applyRotation();
         }
         requestAnimationFrame(autoRotate);
@@ -6101,7 +6105,7 @@
           if (Math.abs(deltaX) < 10) return;
           hasHorizontalDrag = true;
         }
-        rotation = dragStartRotation + deltaX * DRAG_SENSITIVITY;
+        manualRotationOffset = dragStartRotation + deltaX * DRAG_SENSITIVITY - scrollRotation - autoRotationOffset;
         applyRotation();
         if (e.cancelable) e.preventDefault();
       }
