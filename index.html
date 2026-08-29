@@ -830,6 +830,15 @@
 
     @media(max-width:1300px) {
       .press-founder {
+        --founder-size: clamp(180px, 21vw, 245px);
+        top: 4.8rem;
+        left: clamp(1.8rem, 5vw, 4.5rem);
+        display: block;
+      }
+    }
+
+    @media(max-width:900px) {
+      .press-founder {
         display: none;
       }
     }
