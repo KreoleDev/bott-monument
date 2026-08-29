@@ -4557,6 +4557,28 @@
         --test-columns-height: 560px;
       }
 
+      @media (pointer: coarse) {
+        .test-columns {
+          max-height: none;
+          overflow: visible;
+        }
+
+        .test-columns::before,
+        .test-columns::after {
+          display: none;
+        }
+
+        .test-col--a,
+        .test-col--b {
+          height: auto;
+          overflow: visible;
+        }
+
+        .test-col-track {
+          min-height: 0;
+        }
+      }
+
       #contact {
         padding: 5.5rem 2rem calc(6.5rem + env(safe-area-inset-bottom, 0px));
       }
@@ -6048,6 +6070,8 @@
       let isDragging = false;
       let dragPointerId = null;
       let dragStartX = 0;
+      let dragStartY = 0;
+      let hasHorizontalDrag = false;
       let dragStartRotation = 0;
 
       function onDragStart(e) {
@@ -6055,6 +6079,8 @@
         isDragging = true;
         dragPointerId = e.pointerId;
         dragStartX = e.clientX;
+        dragStartY = e.clientY;
+        hasHorizontalDrag = false;
         dragStartRotation = rotation;
         if (viewport) viewport.classList.add('is-dragging');
         ring.classList.add('is-dragging');
@@ -6066,15 +6092,25 @@
       function onDragMove(e) {
         if (!isDragging || e.pointerId !== dragPointerId) return;
         const deltaX = e.clientX - dragStartX;
+        const deltaY = e.clientY - dragStartY;
+        if (e.pointerType !== 'mouse' && !hasHorizontalDrag) {
+          if (Math.abs(deltaY) > 8 && Math.abs(deltaY) > Math.abs(deltaX)) {
+            onDragEnd(e);
+            return;
+          }
+          if (Math.abs(deltaX) < 10) return;
+          hasHorizontalDrag = true;
+        }
         rotation = dragStartRotation + deltaX * DRAG_SENSITIVITY;
         applyRotation();
-        e.preventDefault();
+        if (e.cancelable) e.preventDefault();
       }
 
       function onDragEnd(e) {
         if (!isDragging || (e && e.pointerId !== undefined && e.pointerId !== dragPointerId)) return;
         isDragging = false;
         dragPointerId = null;
+        hasHorizontalDrag = false;
         if (viewport) viewport.classList.remove('is-dragging');
         ring.classList.remove('is-dragging');
       }
@@ -6154,7 +6190,7 @@
       const columns = testimonials ? Array.from(testimonials.querySelectorAll('.test-col')) : [];
       if (!testimonials || !columns.length) return;
 
-      const desktopQuery = window.matchMedia('(min-width: 901px)');
+      const desktopQuery = window.matchMedia('(min-width: 901px) and (pointer: fine)');
       const scrollMultipliers = [1, 0.92, 1.08];
       const autoSpeeds = [18, 15, 12];
       let animationFrameId = null;
