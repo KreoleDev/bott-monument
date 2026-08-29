@@ -4587,8 +4587,11 @@
       }
 
       .cg-viewport {
+        width: calc(100% - 4rem);
         height: min(56svh, 560px);
         min-height: 420px;
+        margin-left: auto;
+        margin-right: auto;
         perspective: 1400px;
       }
 
@@ -6108,11 +6111,20 @@
 
       function layoutSizes() {
         const w = window.innerWidth;
+        const viewportWidth = viewport ? viewport.clientWidth : w;
         const isPortraitTablet = window.matchMedia('(min-width: 700px) and (max-width: 1180px) and (orientation: portrait)').matches;
-        const isLandscapeTablet = window.matchMedia('(min-width: 901px) and (max-width: 1180px) and (orientation: landscape)').matches;
+        const isLandscapeTablet = window.matchMedia('(min-width: 901px) and (max-width: 1366px) and (orientation: landscape)').matches;
         let radius, cardW, cardH;
-        if (isPortraitTablet) { radius = 380; cardW = 160; cardH = 210; }
-        else if (isLandscapeTablet) { radius = 540; cardW = 205; cardH = 270; }
+        if (isPortraitTablet) {
+          cardW = 160;
+          cardH = 210;
+          radius = Math.min(380, Math.max(330, (viewportWidth - cardW) * 0.44));
+        }
+        else if (isLandscapeTablet) {
+          cardW = 205;
+          cardH = 270;
+          radius = Math.min(505, Math.max(455, (viewportWidth - cardW) * 0.46));
+        }
         else if (w <= 600) { radius = 240; cardW = 160; cardH = 210; }
         else if (w <= 900) { radius = 340; cardW = 210; cardH = 270; }
         else if (w <= 1300) { radius = 460; cardW = 240; cardH = 310; }
