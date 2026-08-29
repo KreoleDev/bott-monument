@@ -4392,6 +4392,39 @@
         font-size: 1.05rem;
       }
 
+      .press-page-inner {
+        display: grid;
+        grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+        align-items: center;
+        gap: 1.8rem;
+        max-width: 920px;
+      }
+
+      .press-founder {
+        --founder-size: clamp(150px, 21vw, 190px);
+        position: relative;
+        top: auto;
+        left: auto;
+        display: block;
+        justify-self: center;
+        width: calc(var(--founder-size) * 1.1);
+      }
+
+      .press-founder-name {
+        margin-top: 1.45rem;
+      }
+
+      .press-page-head {
+        margin: 0;
+        text-align: left;
+      }
+
+      .press-page-divider,
+      .press-page-story {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
       .creations-section {
         padding: 5.5rem 2rem 5.8rem;
       }
@@ -4599,158 +4632,6 @@
       }
     }
 
-    @media (min-width: 700px) and (max-width: 820px) and (orientation: portrait) {
-      nav {
-        padding-left: 1.4rem;
-        padding-right: 1.4rem;
-      }
-
-      .nav-logo img {
-        height: 42px !important;
-      }
-
-      .nav-links {
-        gap: 1rem;
-      }
-
-      .nav-links a {
-        font-size: 0.62rem;
-        letter-spacing: 0.12em;
-      }
-
-      .hero-content {
-        width: min(680px, 92vw);
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-      }
-
-      .hero-title {
-        font-size: clamp(4.4rem, 11vw, 5.8rem);
-      }
-
-      .press-page,
-      .creations-section,
-      #press-clippings,
-      #testimonials,
-      #contact {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-      }
-
-      .luxury-creations-layout {
-        grid-template-columns: 1fr;
-        gap: 2.4rem;
-      }
-
-      .creations-left {
-        max-width: 620px;
-        margin: 0 auto;
-        text-align: center;
-      }
-
-      .gallery-label-row,
-      .gallery-ornament {
-        justify-content: center;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .gallery-lines {
-        width: fit-content;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: left;
-      }
-
-      .work-press-panel {
-        width: min(100%, 620px);
-        margin: 0 auto;
-      }
-
-      .ptw-wrap,
-      body[data-site-mode="secondary"] .ptw-wrap {
-        grid-template-columns: 1fr;
-        max-width: 620px;
-        gap: 1.2rem;
-      }
-
-      .ptw-center-frame,
-      body[data-site-mode="secondary"] .ptw-center-frame {
-        grid-column: 1;
-        grid-row: 1;
-        width: min(330px, 58vw);
-        justify-self: center;
-      }
-
-      .ptw-caption,
-      body[data-site-mode="secondary"] .ptw-caption {
-        grid-column: 1;
-        grid-row: 2;
-        max-width: 460px;
-        justify-self: center;
-        text-align: center;
-      }
-
-      .ptw-side,
-      body[data-site-mode="secondary"] .ptw-side {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        width: min(100%, 470px);
-        gap: 0.8rem;
-        justify-self: center;
-        transform: none;
-      }
-
-      .ptw-left,
-      body[data-site-mode="secondary"] .ptw-left {
-        grid-column: 1;
-        grid-row: 3;
-        padding: 0;
-        justify-self: center;
-      }
-
-      .ptw-right,
-      body[data-site-mode="secondary"] .ptw-right {
-        grid-column: 1;
-        grid-row: 4;
-        padding: 0;
-        justify-self: center;
-      }
-
-      .ptw-side .ptw-cover,
-      body[data-site-mode="secondary"] .ptw-side .ptw-cover,
-      body[data-site-mode="secondary"] .ptw-side .ptw-cover:nth-child(3) {
-        width: 100%;
-        max-width: 138px;
-        grid-area: auto;
-        transform: none;
-      }
-
-      .ptw-headline {
-        font-size: 1.7rem;
-      }
-
-      .cg-title {
-        font-size: clamp(2.7rem, 7vw, 4.1rem);
-      }
-
-      .cg-viewport {
-        height: min(48svh, 470px);
-        min-height: 380px;
-      }
-
-      .test-col--b {
-        display: none;
-      }
-
-      .test-col--a {
-        width: min(430px, 82vw);
-      }
-
-      .cm-footer-info {
-        gap: 1.8rem;
-      }
-    }
   </style>
 </head>
 
