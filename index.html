@@ -2882,7 +2882,7 @@
     }
 
     .test-col.is-scroll-armed {
-      overflow-y: auto;
+      overflow-y: hidden;
     }
 
     .test-col::-webkit-scrollbar {
@@ -6329,7 +6329,7 @@
 
       function handleWheel(state, multiplier, event) {
         if (!desktopQuery.matches) return;
-        if (!state.isManualActive) return;
+        if (!state.isDragging) return;
         const delta = event.deltaY;
         if (!delta || !state.loopHeight) return;
 
