@@ -140,6 +140,7 @@
       text-decoration: none;
       text-transform: uppercase;
     }
+
     /* .nav-logo img {
   display: block;
 } */
@@ -632,7 +633,8 @@
       background-size: 220% 220%;
       animation: bottFlow 16s ease infinite;
     }
-     /* .press-page-gold-bg {
+
+    /* .press-page-gold-bg {
   background:
     radial-gradient(
       circle at 19% 48%,
@@ -648,9 +650,9 @@
       #EFE5CF 100%
     ); */
 
-  background-size: 100% 100%;
-  animation: none;
-}
+    background-size: 100% 100%;
+    animation: none;
+    }
 
     @keyframes bottFlow {
       0% {
@@ -704,12 +706,10 @@
       width: calc(var(--founder-size) * 1.42);
       height: calc(var(--founder-size) * 1.42);
       transform: translate(-50%, -50%);
-      background: radial-gradient(
-    circle,
-    rgba(157, 118, 54, 0.15) 0%,
-    rgba(92, 70, 39, 0.08) 42%,
-    transparent 72%
-  );
+      background: radial-gradient(circle,
+          rgba(157, 118, 54, 0.15) 0%,
+          rgba(92, 70, 39, 0.08) 42%,
+          transparent 72%);
       /* background: radial-gradient(circle, rgba(28, 24, 18, .55) 0%, rgba(28, 24, 18, .28) 38%, transparent 72%); */
       filter: blur(6px);
       z-index: -1;
@@ -726,20 +726,20 @@
       padding: 7px;
       box-shadow: 0 30px 55px -10px rgba(0, 0, 0, .45);
     } */
-     .press-founder-frame {
-  position: relative;
-  width: var(--founder-size);
-  height: var(--founder-size);
-  margin: 0 auto;
-  border-radius: 50%;
+    .press-founder-frame {
+      position: relative;
+      width: var(--founder-size);
+      height: var(--founder-size);
+      margin: 0 auto;
+      border-radius: 50%;
 
-  background: #1C1812;
-  padding: 7px;
+      background: #1C1812;
+      padding: 7px;
 
-  box-shadow:
-    0 24px 55px rgba(62, 45, 25, 0.18),
-    0 8px 20px rgba(62, 45, 25, 0.10);
-}
+      box-shadow:
+        0 24px 55px rgba(62, 45, 25, 0.18),
+        0 8px 20px rgba(62, 45, 25, 0.10);
+    }
 
     .press-founder-frame::before {
       content: '';
@@ -765,14 +765,15 @@
       border-radius: 50%;
       overflow: hidden;
     }
+
     .press-founder-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  transform: translateX(-16px) scale(1.06);
-  display: block;
-}
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      transform: translateX(-16px) scale(1.06);
+      display: block;
+    }
 
     /* .press-founder-img img {
       width: 100%;
@@ -1334,8 +1335,15 @@
     }
 
     @keyframes pressFadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .press-card {
@@ -1368,7 +1376,7 @@
     .press-loadmore-btn {
       padding: 1.05rem 2.6rem;
       border-radius: 999px;
-      border: 1.5px solid rgba(28,24,18,.25);
+      border: 1.5px solid rgba(28, 24, 18, .25);
       background: #fff;
       cursor: pointer;
       font-family: var(--font-utility);
@@ -1378,7 +1386,7 @@
       text-transform: uppercase;
       color: #1C1812;
       transition: background .25s ease, border-color .25s ease, color .25s ease, transform .25s ease;
-      box-shadow: 0 4px 18px rgba(0,0,0,.08);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, .08);
     }
 
     .press-loadmore-btn:hover {
@@ -1807,16 +1815,18 @@
     /* ── WORK SECTION — PRESS PANEL (right side) ── */
     .work-press-panel {
       background: rgba(14, 12, 8, 0.78);
-      border: 1px solid rgba(201,160,80,.18);
+      border: 1px solid rgba(201, 160, 80, .18);
       border-radius: 20px;
       padding: max(2.6rem, 2.4vw) max(2.8rem, 2.6vw) max(2.2rem, 2vw);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 36px 90px -22px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.055);
+      box-shadow: 0 36px 90px -22px rgba(0, 0, 0, .7), inset 0 1px 0 rgba(255, 255, 255, .055);
       display: flex;
       flex-direction: column;
       align-self: center;
-      min-width: 0;    /* ← the width cap */  /* ← which edge stays put */
+      min-width: 0;
+      /* ← the width cap */
+      /* ← which edge stays put */
       max-width: max(600px, 44vw);
       margin-left: auto;
       margin-right: 0;
@@ -1869,7 +1879,7 @@
     .wpp-rule {
       width: 100%;
       height: 1px;
-      background: linear-gradient(to right, rgba(201,160,80,.35), rgba(201,160,80,.08), transparent);
+      background: linear-gradient(to right, rgba(201, 160, 80, .35), rgba(201, 160, 80, .08), transparent);
       margin: 1.1rem 0;
     }
 
@@ -1893,8 +1903,8 @@
       height: max(86px, 6vw);
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid rgba(201,160,80,.22);
-      box-shadow: 0 8px 24px rgba(0,0,0,.45);
+      border: 1px solid rgba(201, 160, 80, .22);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .45);
     }
 
     .wpp-thumb img {
@@ -1930,14 +1940,14 @@
     .wpp-meta {
       font-family: var(--font-utility);
       font-size: .36rem;
-      color: rgba(240,234,214,.38);
+      color: rgba(240, 234, 214, .38);
       letter-spacing: .07em;
     }
 
     .wpp-divider {
       width: 100%;
       height: 1px;
-      background: rgba(255,255,255,.07);
+      background: rgba(255, 255, 255, .07);
     }
 
     .wpp-all-link {
@@ -1945,7 +1955,7 @@
       font-size: .4rem;
       letter-spacing: .26em;
       text-transform: uppercase;
-      color: rgba(240,234,214,.55);
+      color: rgba(240, 234, 214, .55);
       text-decoration: none;
       margin-top: 1.3rem;
       display: inline-flex;
@@ -2080,15 +2090,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: clamp(2rem,4.2vw,4.5rem);
+      gap: clamp(2rem, 4.2vw, 4.5rem);
       padding: 0 0 1rem;
       max-width: 1400px;
       margin: 0 auto;
     }
-  
+
     .ptw-side {
       display: grid;
-      grid-template-columns: minmax(130px, 165px); 
+      grid-template-columns: minmax(130px, 165px);
       justify-items: center;
       gap: 1.5rem;
       flex-shrink: 0;
@@ -2134,7 +2144,7 @@
     .ptw-center-frame {
       flex-shrink: 0;
       /* width: clamp(170px, 13vw, 210px); */
-      width : clamp(230px,20vw,300px);
+      width: clamp(230px, 20vw, 300px);
       aspect-ratio: 3 / 4;
       border-radius: 10px;
       overflow: hidden;
@@ -2845,24 +2855,20 @@
 
     .test-columns::before {
       top: -.45rem;
-      background: linear-gradient(
-        to bottom,
-        rgba(229, 219, 203, .97) 0%,
-        rgba(229, 219, 203, .78) 34%,
-        rgba(229, 219, 203, .34) 72%,
-        rgba(229, 219, 203, 0) 100%
-      );
+      background: linear-gradient(to bottom,
+          rgba(229, 219, 203, .97) 0%,
+          rgba(229, 219, 203, .78) 34%,
+          rgba(229, 219, 203, .34) 72%,
+          rgba(229, 219, 203, 0) 100%);
     }
 
     .test-columns::after {
       bottom: -.25rem;
-      background: linear-gradient(
-        to top,
-        rgba(229, 219, 203, .92) 0%,
-        rgba(229, 219, 203, .68) 34%,
-        rgba(229, 219, 203, .26) 72%,
-        rgba(229, 219, 203, 0) 100%
-      );
+      background: linear-gradient(to top,
+          rgba(229, 219, 203, .92) 0%,
+          rgba(229, 219, 203, .68) 34%,
+          rgba(229, 219, 203, .26) 72%,
+          rgba(229, 219, 203, 0) 100%);
     }
 
     .test-col {
@@ -2873,8 +2879,10 @@
       box-sizing: border-box;
       flex-shrink: 0;
       overflow: hidden;
-      touch-action: none;
-      overscroll-behavior: contain;
+
+      touch-action: pan-y;
+      overscroll-behavior: auto;
+
       user-select: none;
       -webkit-user-select: none;
       scrollbar-width: none;
@@ -2905,7 +2913,7 @@
       border: 1px solid #D8CDBB;
       box-shadow: 0 20px 45px -22px rgba(43, 38, 32, .18);
       transform-origin: center center;
-      transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s ease, border-color .4s ease;
+      transition: transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease, border-color .4s ease;
       will-change: transform;
     }
 
@@ -2961,6 +2969,7 @@
     }
 
     @media (max-width: 900px) {
+
       .test-col--b,
       .test-col--c {
         display: none;
@@ -3123,14 +3132,14 @@
     }
 
     .cm-input:focus {
-  border-color: rgba(198, 169, 104, .85);
-  background: #435667;
+      border-color: rgba(198, 169, 104, .85);
+      background: #435667;
 
-  box-shadow:
-    0 0 0 3px rgba(198, 169, 104, .12);
+      box-shadow:
+        0 0 0 3px rgba(198, 169, 104, .12);
 
-  outline: none;
-}
+      outline: none;
+    }
 
     textarea.cm-input {
       resize: vertical;
@@ -3152,99 +3161,99 @@
       transition: background .25s ease;
     } */
 
-    
+
 
     /* .cm-submit:hover {
       background: rgba(27, 28, 24, .06);
     } */
 
     .cm-submit {
-  position: relative;
-  width: 100%;
-  padding: 1.15rem 2rem;
+      position: relative;
+      width: 100%;
+      padding: 1.15rem 2rem;
 
-  border-radius: 10px;
-  border: 1px solid #C6A968;
+      border-radius: 10px;
+      border: 1px solid #C6A968;
 
-  background: #C6A968;
+      background: #C6A968;
 
-  color: #2C3A46;
+      color: #2C3A46;
 
-  font-family: var(--font-utility);
-  font-weight: 500;
-  font-size: max(.85rem, .8vw);
-  letter-spacing: .04em;
+      font-family: var(--font-utility);
+      font-weight: 500;
+      font-size: max(.85rem, .8vw);
+      letter-spacing: .04em;
 
-  cursor: pointer;
-  overflow: hidden;
+      cursor: pointer;
+      overflow: hidden;
 
-  box-shadow:
-    0 8px 24px rgba(23, 25, 26, .13),
-    inset 0 0 0 1px rgba(193, 161, 90, .05);
+      box-shadow:
+        0 8px 24px rgba(23, 25, 26, .13),
+        inset 0 0 0 1px rgba(193, 161, 90, .05);
 
-  transition:
-    transform .35s ease,
-    background .35s ease,
-    color .35s ease,
-    border-color .35s ease,
-    box-shadow .35s ease;
-}
-
-
-/* slow gold shine */
-.cm-submit::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -120%;
-
-  width: 55%;
-  height: 100%;
-
-  background: linear-gradient(
-    110deg,
-    transparent,
-    rgba(255, 255, 255, .06),
-    rgba(255, 255, 255, .3),
-    rgba(255, 255, 255, .06),
-    transparent
-  );
-
-  transform: skewX(-20deg);
-  pointer-events: none;
-
-  animation: cmButtonShine 4.5s ease-in-out infinite;
-}
+      transition:
+        transform .35s ease,
+        background .35s ease,
+        color .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+    }
 
 
-@keyframes cmButtonShine {
-  0%, 55% {
-    left: -120%;
-  }
+    /* slow gold shine */
+    .cm-submit::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -120%;
 
-  100% {
-    left: 150%;
-  }
-}
+      width: 55%;
+      height: 100%;
+
+      background: linear-gradient(110deg,
+          transparent,
+          rgba(255, 255, 255, .06),
+          rgba(255, 255, 255, .3),
+          rgba(255, 255, 255, .06),
+          transparent);
+
+      transform: skewX(-20deg);
+      pointer-events: none;
+
+      animation: cmButtonShine 4.5s ease-in-out infinite;
+    }
 
 
-/* hover = button inverts to black with white text */
-.cm-submit:hover {
-  transform: translateY(-2px);
+    @keyframes cmButtonShine {
 
-  background: #000000;
+      0%,
+      55% {
+        left: -120%;
+      }
 
-  color: #FFFFFF;
-  border-color: #000000;
-
-  box-shadow:
-    0 14px 32px rgba(0, 0, 0, .35);
-}
+      100% {
+        left: 150%;
+      }
+    }
 
 
-.cm-submit:active {
-  transform: translateY(0);
-}
+    /* hover = button inverts to black with white text */
+    .cm-submit:hover {
+      transform: translateY(-2px);
+
+      background: #000000;
+
+      color: #FFFFFF;
+      border-color: #000000;
+
+      box-shadow:
+        0 14px 32px rgba(0, 0, 0, .35);
+    }
+
+
+    .cm-submit:active {
+      transform: translateY(0);
+    }
 
     .cm-note {
       text-align: center;
@@ -3626,6 +3635,7 @@
     }
 
     @media (min-width: 1512px) {
+
       .mag-frame,
       .mag-header-shell {
         width: max(1320px, 82vw);
@@ -3719,7 +3729,7 @@
       font-weight: 600;
     }
 
-   
+
     .cg-access-trigger {
       top: 25%;
     }
@@ -3936,6 +3946,7 @@
     }
 
     @media (max-width: 900px) {
+
       .mag-header-shell,
       .cg-header-shell {
         display: flex;
@@ -3991,8 +4002,8 @@
       width: 68px;
       height: 68px;
       border-radius: 50%;
-      background: rgba(201,160,80,.92);
-      border: 2px solid rgba(255,255,255,.3);
+      background: rgba(201, 160, 80, .92);
+      border: 2px solid rgba(255, 255, 255, .3);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -4001,9 +4012,14 @@
       z-index: 6;
     }
 
-    .mag-play-btn:hover { transform: translate(-50%, -50%) scale(1.1); }
+    .mag-play-btn:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
 
-    .mag-play-btn.hidden { opacity: 0; pointer-events: none; }
+    .mag-play-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
 
     .mag-play-icon {
       font-size: 1.4rem;
@@ -4015,9 +4031,11 @@
     /* Bottom controls bar */
     .mag-vid-controls {
       position: absolute;
-      bottom: 0; left: 0; right: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       z-index: 7;
-      background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 100%);
+      background: linear-gradient(to top, rgba(0, 0, 0, .85) 0%, transparent 100%);
       padding: 2.5rem 1.6rem 1rem;
       display: flex;
       flex-direction: column;
@@ -4027,13 +4045,15 @@
     }
 
     .mag-overlay:hover .mag-vid-controls,
-    .mag-overlay.visible .mag-vid-controls { opacity: 1; }
+    .mag-overlay.visible .mag-vid-controls {
+      opacity: 1;
+    }
 
     /* Seek bar */
     .mag-seek-wrap {
       position: relative;
       height: 6px;
-      background: rgba(255,255,255,.28);
+      background: rgba(255, 255, 255, .28);
       border-radius: 6px;
       cursor: pointer;
     }
@@ -4050,10 +4070,11 @@
       position: absolute;
       top: 50%;
       left: 0%;
-      width: 16px; height: 16px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       background: var(--gold);
-      box-shadow: 0 0 6px rgba(201,160,80,.6);
+      box-shadow: 0 0 6px rgba(201, 160, 80, .6);
       transform: translate(-50%, -50%);
       pointer-events: none;
     }
@@ -4078,12 +4099,14 @@
       transition: color .2s ease;
     }
 
-    .mag-vid-play-sm:hover { color: var(--gold); }
+    .mag-vid-play-sm:hover {
+      color: var(--gold);
+    }
 
     .mag-vid-time {
       font-family: var(--font-utility);
       font-size: .55rem;
-      color: rgba(255,255,255,.8);
+      color: rgba(255, 255, 255, .8);
       letter-spacing: .08em;
       flex: 1;
     }
@@ -4092,7 +4115,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      color: rgba(255,255,255,.85);
+      color: rgba(255, 255, 255, .85);
       font-size: 1.3rem;
       display: flex;
       align-items: center;
@@ -4101,7 +4124,9 @@
       transition: color .2s ease;
     }
 
-    .mag-vid-fullscreen:hover { color: var(--gold); }
+    .mag-vid-fullscreen:hover {
+      color: var(--gold);
+    }
 
     /* ── CIRCULAR GALLERY (rotating memorial ring) ── */
     .cg-header-shell {
@@ -4214,7 +4239,7 @@
       user-select: none;
       transform: translateZ(0) scale(1);
       transform-origin: center center;
-      transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
+      transition: transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease, border-color .35s ease;
     }
 
     .cg-card img {
@@ -4322,7 +4347,7 @@
         inset: 0;
         z-index: 1;
         pointer-events: none;
-        background: linear-gradient(to bottom, rgba(10,10,10,0.18) 0%, rgba(10,10,10,0.15) 45%, rgba(10,10,10,0.78) 100%);
+        background: linear-gradient(to bottom, rgba(10, 10, 10, 0.18) 0%, rgba(10, 10, 10, 0.15) 45%, rgba(10, 10, 10, 0.78) 100%);
       }
 
       .hero-content {
@@ -4576,13 +4601,13 @@
   </style>
 </head>
 
-  <body>
+<body>
 
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
   <div class="site-mode-switcher" id="siteModeSwitcher">
-    <button class="site-mode-trigger" id="siteModeTrigger" type="button" aria-haspopup="listbox"
-      aria-expanded="false" aria-controls="siteModeMenu">
+    <button class="site-mode-trigger" id="siteModeTrigger" type="button" aria-haspopup="listbox" aria-expanded="false"
+      aria-controls="siteModeMenu">
       <span class="site-mode-label">Options</span>
       <span class="site-mode-value" id="siteModeValue">Primary</span>
       <span class="site-mode-chevron">⌄</span>
@@ -4605,7 +4630,7 @@
       <li><a href="#work">Masterpieces</a></li>
       <li><a href="#magazine">Gallery</a></li>
       <li><a href="#contact">Inquire</a></li>
-       <li><a href="#founder">About</a></li>
+      <li><a href="#founder">About</a></li>
     </ul>
   </nav>
 
@@ -4657,7 +4682,7 @@
   </div>
 
   <!-- PAGE 2 / ABOUT OUR FOUNDER (two selectable designs) -->
-  <section  class="page2-wrap">
+  <section class="page2-wrap">
     <div class="page2-variant" id="page2Classic">
       <div class="press-page">
         <div class="press-page-inner">
@@ -4818,7 +4843,7 @@
   <!-- ═══════════ PRESS CLIPPINGS ═══════════ -->
   <section id="press-clippings">
     <!-- <div class="press-switcher" id="pressSwitcher"> -->
-      <!-- <span class="prs-icon">✦</span>
+    <!-- <span class="prs-icon">✦</span>
       <span class="prs-label">Design</span>
       <span class="prs-divider"></span>
       <span class="prs-select-wrap">
@@ -4840,13 +4865,17 @@
       <div class="press-variant" id="pressTriptych">
         <div class="ptw-wrap">
           <div class="ptw-side ptw-left">
-            <button type="button" class="ptw-cover" style="--rot:-4deg" data-img="images/IMG_2732.jpg" data-title="From the Cover: Brinda" data-pub="By Drew Bott, AICA, CM" data-meta="4 min read">
+            <button type="button" class="ptw-cover" style="--rot:-4deg" data-img="images/IMG_2732.jpg"
+              data-title="From the Cover: Brinda" data-pub="By Drew Bott, AICA, CM" data-meta="4 min read">
               <img src="images/IMG_2732.jpg" alt="From the Cover: Brinda">
             </button>
-            <button type="button" class="ptw-cover" style="--rot:-3deg" data-img="images/IMG_2738.jpg" data-title="Local Craftsman Honored For Excellence In Granite" data-pub="Trade Press" data-meta="3 min read">
+            <button type="button" class="ptw-cover" style="--rot:-3deg" data-img="images/IMG_2738.jpg"
+              data-title="Local Craftsman Honored For Excellence In Granite" data-pub="Trade Press"
+              data-meta="3 min read">
               <img src="images/IMG_2738.jpg" alt="Local Craftsman Honored For Excellence In Granite">
             </button>
-            <button type="button" class="ptw-cover" style="--rot:-2deg" data-img="images/IMG_2745.jpg" data-title="Serving Families Across Generations" data-pub="Community Spotlight" data-meta="2 min read">
+            <button type="button" class="ptw-cover" style="--rot:-2deg" data-img="images/IMG_2745.jpg"
+              data-title="Serving Families Across Generations" data-pub="Community Spotlight" data-meta="2 min read">
               <img src="images/IMG_2745.jpg" alt="Serving Families Across Generations">
             </button>
           </div>
@@ -4863,13 +4892,19 @@
           </div>
 
           <div class="ptw-side ptw-right">
-            <button type="button" class="ptw-cover" style="--rot:-3deg" data-img="images/IMG_2755.jpg" data-title="Behind the Stone: A Family's Legacy in Memorial Art" data-pub="Wyoming Business Journal" data-meta="5 min read">
+            <button type="button" class="ptw-cover" style="--rot:-3deg" data-img="images/IMG_2755.jpg"
+              data-title="Behind the Stone: A Family's Legacy in Memorial Art" data-pub="Wyoming Business Journal"
+              data-meta="5 min read">
               <img src="images/IMG_2755.jpg" alt="Behind the Stone: A Family's Legacy in Memorial Art">
             </button>
-            <button type="button" class="ptw-cover" style="--rot:-4deg" data-img="images/IMG_2758.jpg" data-title="Crafting Memories in Granite: One Family's Mission" data-pub="Denver Post Feature" data-meta="4 min read">
+            <button type="button" class="ptw-cover" style="--rot:-4deg" data-img="images/IMG_2758.jpg"
+              data-title="Crafting Memories in Granite: One Family's Mission" data-pub="Denver Post Feature"
+              data-meta="4 min read">
               <img src="images/IMG_2758.jpg" alt="Crafting Memories in Granite: One Family's Mission">
             </button>
-            <button type="button" class="ptw-cover" style="--rot:-5deg" data-img="images/IMG_2765.jpg" data-title="The Art of Remembrance: Bott Monument's Story" data-pub="Mountain States Journal" data-meta="3 min read">
+            <button type="button" class="ptw-cover" style="--rot:-5deg" data-img="images/IMG_2765.jpg"
+              data-title="The Art of Remembrance: Bott Monument's Story" data-pub="Mountain States Journal"
+              data-meta="3 min read">
               <img src="images/IMG_2765.jpg" alt="The Art of Remembrance: Bott Monument's Story">
             </button>
           </div>
@@ -4883,70 +4918,80 @@
           <!-- Page 1 of 2 -->
           <div class="press-cards reveal" id="pressPage1">
             <article class="press-card">
-              <div class="press-card-frame"><img src="images/newspaper.jpg" alt="MB News magazine cover featuring Bott Monument"></div>
+              <div class="press-card-frame"><img src="images/newspaper.jpg"
+                  alt="MB News magazine cover featuring Bott Monument"></div>
               <div class="press-card-caption">
                 <h3 class="press-card-title">MB News — Cover Feature</h3>
                 <p class="press-card-meta">Monument Builders of North America<span>September 2024</span></p>
               </div>
             </article>
             <article class="press-card">
-              <div class="press-card-frame"><img src="images/newspaper.jpg" alt="From the Cover article written by Drew Bott"></div>
+              <div class="press-card-frame"><img src="images/newspaper.jpg"
+                  alt="From the Cover article written by Drew Bott"></div>
               <div class="press-card-caption">
                 <h3 class="press-card-title">From the Cover: Brinda</h3>
                 <p class="press-card-meta">By Drew Bott, AICA, CM<span>4 min read</span></p>
               </div>
             </article>
             <article class="press-card">
-              <div class="press-card-frame"><img src="images/newspaper.jpg" alt="Local Craftsman Honored For Excellence In Granite article"></div>
+              <div class="press-card-frame"><img src="images/newspaper.jpg"
+                  alt="Local Craftsman Honored For Excellence In Granite article"></div>
               <div class="press-card-caption">
                 <h3 class="press-card-title">Local Craftsman Honored For Excellence In Granite</h3>
                 <p class="press-card-meta">Trade Press<span>3 min read</span></p>
               </div>
             </article>
             <article class="press-card">
-              <div class="press-card-frame"><img src="images/newspaper.jpg" alt="Bott Monument Co. Serves Families Across Generations article"></div>
+              <div class="press-card-frame"><img src="images/newspaper.jpg"
+                  alt="Bott Monument Co. Serves Families Across Generations article"></div>
               <div class="press-card-caption">
                 <h3 class="press-card-title">Serving Families Across Generations</h3>
                 <p class="press-card-meta">Community Spotlight<span>2 min read</span></p>
               </div>
             </article>
             <article class="press-card">
-              <div class="press-card-frame"><img src="images/newspaper.jpg" alt="The Daily Craftsman feature on a studio earning honors"></div>
+              <div class="press-card-frame"><img src="images/newspaper.jpg"
+                  alt="The Daily Craftsman feature on a studio earning honors"></div>
               <div class="press-card-caption">
                 <h3 class="press-card-title">Renowned Studio Earns Top Honors In Memorial Design</h3>
                 <p class="press-card-meta">The Daily Craftsman<span>5 min read</span></p>
               </div>
             </article>
             <article class="press-card">
-              <div class="press-card-frame"><img src="images/newspaper.jpg" alt="North Star Press feature on granite artistry"></div>
+              <div class="press-card-frame"><img src="images/newspaper.jpg"
+                  alt="North Star Press feature on granite artistry"></div>
               <div class="press-card-caption">
                 <h3 class="press-card-title">Why This Workshop Is Setting The Standard In Granite Artistry</h3>
                 <p class="press-card-meta">North Star Press<span>5 min read</span></p>
               </div>
             </article>
             <article class="press-card">
-              <div class="press-card-frame"><img src="images/newspaper.jpg" alt="Rocky Mountain Life feature on Drew Bott"></div>
+              <div class="press-card-frame"><img src="images/newspaper.jpg"
+                  alt="Rocky Mountain Life feature on Drew Bott"></div>
               <div class="press-card-caption">
                 <h3 class="press-card-title">Award-Winning Sculptor Brings Tradition to Modern Grief</h3>
                 <p class="press-card-meta">Rocky Mountain Life<span>6 min read</span></p>
               </div>
             </article>
             <article class="press-card">
-              <div class="press-card-frame"><img src="images/newspaper.jpg" alt="Wyoming Business Journal feature on Bott Monument family legacy"></div>
+              <div class="press-card-frame"><img src="images/newspaper.jpg"
+                  alt="Wyoming Business Journal feature on Bott Monument family legacy"></div>
               <div class="press-card-caption">
                 <h3 class="press-card-title">Behind the Stone: A Family's Legacy in Memorial Art</h3>
                 <p class="press-card-meta">Wyoming Business Journal<span>5 min read</span></p>
               </div>
             </article>
             <article class="press-card">
-              <div class="press-card-frame"><img src="images/newspaper.jpg" alt="Denver Post feature on granite craftsmanship"></div>
+              <div class="press-card-frame"><img src="images/newspaper.jpg"
+                  alt="Denver Post feature on granite craftsmanship"></div>
               <div class="press-card-caption">
                 <h3 class="press-card-title">Crafting Memories in Granite: One Family's Mission</h3>
                 <p class="press-card-meta">Denver Post Feature<span>4 min read</span></p>
               </div>
             </article>
             <article class="press-card">
-              <div class="press-card-frame"><img src="images/newspaper.jpg" alt="Mountain States Journal on Bott Monument story"></div>
+              <div class="press-card-frame"><img src="images/newspaper.jpg"
+                  alt="Mountain States Journal on Bott Monument story"></div>
               <div class="press-card-caption">
                 <h3 class="press-card-title">The Art of Remembrance: Bott Monument's Story</h3>
                 <p class="press-card-meta">Mountain States Journal<span>3 min read</span></p>
@@ -4990,7 +5035,8 @@
           <h2 class="mag-display-title">Our <em>Gallery</em></h2>
           <div class="mag-rule"></div>
         </div>
-        <button class="mag-access-trigger" id="magAccessTrigger" type="button" aria-haspopup="dialog" aria-controls="magAccessModal">
+        <button class="mag-access-trigger" id="magAccessTrigger" type="button" aria-haspopup="dialog"
+          aria-controls="magAccessModal">
           <span class="mag-access-trigger-text">Our Private Gallery</span>
         </button>
       </div>
@@ -5000,25 +5046,33 @@
         <div class="mag-stack" id="magStack">
           <div class="mag-spread" style="z-index:3;">
             <div class="mag-left" data-img="images/headstone.jpg" data-cap="Carved granite headstone">
-              <img src="images/headstone.jpg" alt="Carved granite headstone"></div>
-            <div class="mag-right" data-img="images/MercyPhotography-BottM-87.JPG" data-cap="Heart-shaped polished memorial">
-              <img src="images/MercyPhotography-BottM-87.JPG" alt="Heart-shaped memorial" style="object-position: center 92%;"></div>
+              <img src="images/headstone.jpg" alt="Carved granite headstone">
+            </div>
+            <div class="mag-right" data-img="images/MercyPhotography-BottM-87.JPG"
+              data-cap="Heart-shaped polished memorial">
+              <img src="images/MercyPhotography-BottM-87.JPG" alt="Heart-shaped memorial"
+                style="object-position: center 92%;">
+            </div>
           </div>
           <div class="mag-spread" style="z-index:2;">
             <div class="mag-left" data-img="images/page3.jpg" data-cap="Granite cherub sculpture">
-              <img src="images/page3.jpg" alt="Granite cherub sculpture"></div>
-            <div class="mag-right" data-img="images/page4_image5.jpg"" data-cap="Hand-crafted granite statuary">
-              <img src="images/page4_image5.jpg" alt="Granite statuary"></div>
+              <img src="images/page3.jpg" alt="Granite cherub sculpture">
+            </div>
+            <div class="mag-right" data-img="images/page4_image5.jpg"" data-cap=" Hand-crafted granite statuary">
+              <img src="images/page4_image5.jpg" alt="Granite statuary">
+            </div>
           </div>
           <div class="mag-spread" style="z-index:1;">
             <div class="mag-left" data-img="images/page4_image2.jpg" data-cap="Hand-finished granite detail">
-              <img src="images/page4_image2.jpg" alt="Hand-finished granite"></div>
+              <img src="images/page4_image2.jpg" alt="Hand-finished granite">
+            </div>
             <div class="mag-right" data-img="images/page4_image1.jpg" data-cap="Personalized stone monument">
-              <img src="images/page4_image1.jpg" alt="Personalized monument"></div>
+              <img src="images/page4_image1.jpg" alt="Personalized monument">
+            </div>
           </div>
-          
+
         </div>
-        
+
         <!-- Video panel: inside the frame, fades in after all spreads open -->
         <div class="mag-overlay" id="magOverlay">
           <video id="magVideo" src="videos/Bott Monument the .mp4" playsinline preload="metadata"></video>
@@ -5055,38 +5109,40 @@
 
     <!-- ═══════════ OPTION 1: CIRCULAR GALLERY (formerly page 6) ═══════════ -->
     <div class="gallery-variant" id="magCircularVariant">
-    <div class="cg-header-shell">
-      <div class="cg-header reveal">
-        <!-- <p class="cg-eyebrow">In The Round</p> -->
-        <h2 class="cg-title">A Gallery of Lasting<em>Tributes</em></h2>
-        <!-- A Gallery of Lasting Tributes -->
-        <!-- <div class="cg-rule"></div> -->
+      <div class="cg-header-shell">
+        <div class="cg-header reveal">
+          <!-- <p class="cg-eyebrow">In The Round</p> -->
+          <h2 class="cg-title">A Gallery of Lasting<em>Tributes</em></h2>
+          <!-- A Gallery of Lasting Tributes -->
+          <!-- <div class="cg-rule"></div> -->
+        </div>
+        <button class="mag-access-trigger cg-access-trigger" id="cgAccessTrigger" type="button" aria-haspopup="dialog"
+          aria-controls="magAccessModal">
+          <span class="mag-access-trigger-text">Our Private Gallery</span>
+        </button>
       </div>
-      <button class="mag-access-trigger cg-access-trigger" id="cgAccessTrigger" type="button" aria-haspopup="dialog" aria-controls="magAccessModal">
-        <span class="mag-access-trigger-text">Our Private Gallery</span>
-      </button>
-    </div>
-    <div class="cg-viewport" aria-label="Rotating memorial gallery">
-      <div class="cg-ring" id="cgRing">
-        <div class="cg-item">
-          <div class="cg-card">
-            <img src="images/headstone.jpg" alt="Carved granite headstone">
-            <div class="cg-caption">
-              <h3>Carved Granite Headstone</h3>
-              <em>Hand-finished detail</em>
+      <div class="cg-viewport" aria-label="Rotating memorial gallery">
+        <div class="cg-ring" id="cgRing">
+          <div class="cg-item">
+            <div class="cg-card">
+              <img src="images/headstone.jpg" alt="Carved granite headstone">
+              <div class="cg-caption">
+                <h3>Carved Granite Headstone</h3>
+                <em>Hand-finished detail</em>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="cg-item">
-          <div class="cg-card">
-            <img src="images/MercyPhotography-BottM-87.JPG" alt="Heart-shaped polished memorial" style="object-position:center 85%;">
-            <div class="cg-caption">
-              <h3>Heart-Shaped Memorial</h3>
-              <em>Polished rose granite</em>
+          <div class="cg-item">
+            <div class="cg-card">
+              <img src="images/MercyPhotography-BottM-87.JPG" alt="Heart-shaped polished memorial"
+                style="object-position:center 85%;">
+              <div class="cg-caption">
+                <h3>Heart-Shaped Memorial</h3>
+                <em>Polished rose granite</em>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- <div class="cg-item">
+          <!-- <div class="cg-item">
           <div class="cg-card">
             <img src="images/page3.jpg" alt="Granite cherub sculpture">
             <div class="cg-caption">
@@ -5095,108 +5151,108 @@
             </div>
           </div>
         </div> -->
-       
-        <div class="cg-item">
-          <div class="cg-card">
-            <img src="images/page6_image7.jpg" alt="Finished memorial installation">
-            <div class="cg-caption">
-              <h3>Set in place with care</h3>
-              <!-- <em></em> -->
+
+          <div class="cg-item">
+            <div class="cg-card">
+              <img src="images/page6_image7.jpg" alt="Finished memorial installation">
+              <div class="cg-caption">
+                <h3>Set in place with care</h3>
+                <!-- <em></em> -->
+              </div>
             </div>
           </div>
-        </div>
-        <div class="cg-item">
-          <div class="cg-card">
-            <img src="images/page6_image1.jpg" alt="Personalized stone monument">
-            <div class="cg-caption">
-              <h3>Personalized Monument</h3>
-              <em>Set in place with care</em>
+          <div class="cg-item">
+            <div class="cg-card">
+              <img src="images/page6_image1.jpg" alt="Personalized stone monument">
+              <div class="cg-caption">
+                <h3>Personalized Monument</h3>
+                <em>Set in place with care</em>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="cg-item">
-          <div class="cg-card">
-            <img src="images/page6_image2.jpg" alt="Personalized stone monument">
-            <div class="cg-caption">
-              <h3>Personalized Monument</h3>
-              <em>Set in place with care</em>
+          <div class="cg-item">
+            <div class="cg-card">
+              <img src="images/page6_image2.jpg" alt="Personalized stone monument">
+              <div class="cg-caption">
+                <h3>Personalized Monument</h3>
+                <em>Set in place with care</em>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="cg-item">
-          <div class="cg-card">
-            <img src="images/page6_image3.jpg" alt="Personalized stone monument">
-            <div class="cg-caption">
-              <h3>Personalized Monument</h3>
-              <em>Set in place with care</em>
+          <div class="cg-item">
+            <div class="cg-card">
+              <img src="images/page6_image3.jpg" alt="Personalized stone monument">
+              <div class="cg-caption">
+                <h3>Personalized Monument</h3>
+                <em>Set in place with care</em>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="cg-item">
-          <div class="cg-card">
-            <img src="images/page6_image4.jpg" alt="Finished memorial installation">
-            <div class="cg-caption">
-              <h3>Personalized Monument</h3>
-              <em>Set in place with care</em>
+          <div class="cg-item">
+            <div class="cg-card">
+              <img src="images/page6_image4.jpg" alt="Finished memorial installation">
+              <div class="cg-caption">
+                <h3>Personalized Monument</h3>
+                <em>Set in place with care</em>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="cg-item">
-          <div class="cg-card">
-            <img src="images/page6_image5.jpg" alt="Finished memorial installation">
-            <div class="cg-caption">
-              <h3>Personalized Monument</h3>
-              <em>Set in place with care</em>
+          <div class="cg-item">
+            <div class="cg-card">
+              <img src="images/page6_image5.jpg" alt="Finished memorial installation">
+              <div class="cg-caption">
+                <h3>Personalized Monument</h3>
+                <em>Set in place with care</em>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="cg-item">
-          <div class="cg-card">
-            <img src="images/page6_image6.jpg" alt="Finished memorial installation">
-            <div class="cg-caption">
-              <h3>Personalized Monument</h3>
-              <em>Set in place with care</em>
+          <div class="cg-item">
+            <div class="cg-card">
+              <img src="images/page6_image6.jpg" alt="Finished memorial installation">
+              <div class="cg-caption">
+                <h3>Personalized Monument</h3>
+                <em>Set in place with care</em>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="cg-item">
-          <div class="cg-card">
-            <img src="images/page4_image5.jpg" alt="Hand-crafted granite statuary">
-            <div class="cg-caption">
-              <h3>Hand-Crafted Statuary</h3>
-              <em>Sculpted in stone</em>
+          <div class="cg-item">
+            <div class="cg-card">
+              <img src="images/page4_image5.jpg" alt="Hand-crafted granite statuary">
+              <div class="cg-caption">
+                <h3>Hand-Crafted Statuary</h3>
+                <em>Sculpted in stone</em>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="cg-item">
-          <div class="cg-card">
-            <img src="images/page4_image1.jpg" alt="Personalized stone monument">
-            <div class="cg-caption">
-              <h3>Personalized Monument</h3>
-              <em>A life, in granite</em>
+          <div class="cg-item">
+            <div class="cg-card">
+              <img src="images/page4_image1.jpg" alt="Personalized stone monument">
+              <div class="cg-caption">
+                <h3>Personalized Monument</h3>
+                <em>A life, in granite</em>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="cg-item">
-          <div class="cg-card">
-            <img src="images/page4_image2.jpg" alt="Hand-finished granite detail">
-            <div class="cg-caption">
-              <h3>Hand-Finished Detail</h3>
-              <em>Precision engraving</em>
+          <div class="cg-item">
+            <div class="cg-card">
+              <img src="images/page4_image2.jpg" alt="Hand-finished granite detail">
+              <div class="cg-caption">
+                <h3>Hand-Finished Detail</h3>
+                <em>Precision engraving</em>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="cg-item">
-          <div class="cg-card">
-            <img src="images/craft_02.jpg" alt="Granite monument craftsmanship">
-            <div class="cg-caption">
-              <h3>Studio Craftsmanship</h3>
-              <em>Built by hand</em>
+          <div class="cg-item">
+            <div class="cg-card">
+              <img src="images/craft_02.jpg" alt="Granite monument craftsmanship">
+              <div class="cg-caption">
+                <h3>Studio Craftsmanship</h3>
+                <em>Built by hand</em>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </div><!-- /magCircularVariant -->
     <!-- ═══════════ END OPTION 1: CIRCULAR GALLERY ═══════════ -->
   </section>
@@ -5216,7 +5272,8 @@
       <button class="mag-access-close" id="magAccessClose" type="button" aria-label="Close">&#10005;</button>
       <p class="mag-access-kicker">Access Required</p>
       <h3 class="mag-access-title" id="magAccessTitle">Want to see the <em>full gallery?</em></h3>
-      <p class="mag-access-copy">Our extended memorial collection is available by request so we can share it thoughtfully. Reach out and we will guide you to more gallery images.</p>
+      <p class="mag-access-copy">Our extended memorial collection is available by request so we can share it
+        thoughtfully. Reach out and we will guide you to more gallery images.</p>
       <div class="mag-access-actions">
         <a class="mag-access-primary" href="#contact" id="magAccessRequest">Request Access</a>
         <button class="mag-access-secondary" id="magAccessLater" type="button">Maybe Later</button>
@@ -5227,7 +5284,8 @@
   <!-- FOUNDER DOCUMENTARY -->
   <section id="founder">
     <div class="founder-img-side reveal">
-      <img class="founder-img founder-img--secondary" src="images/IMG_0180.jpg?v=secondary-20260819" alt="Bott Monument showroom interior">
+      <img class="founder-img founder-img--secondary" src="images/IMG_0180.jpg?v=secondary-20260819"
+        alt="Bott Monument showroom interior">
     </div>
     <div class="founder-content reveal reveal-delay-1">
       <div class="founder-panel founder-panel--secondary">
@@ -5258,7 +5316,7 @@
     </div>
     <img class="founder-secondary-image" src="images/image4.PNG" alt="Trusted for generations — Bott Monument showroom">
   </section>
-   <!-- page 6 -->
+  <!-- page 6 -->
   <section id="testimonials">
     <div class="test-header reveal">
       <!-- <p class="test-eyebrow">In Their Words</p> -->
@@ -5268,7 +5326,8 @@
     <div class="test-columns">
       <div class="test-col test-col--a">
         <div class="test-card">
-          <p class="test-quote">"Placeholder testimonial #1 — replace with a real family's words about their experience."</p>
+          <p class="test-quote">"Placeholder testimonial #1 — replace with a real family's words about their
+            experience."</p>
           <div class="test-person">
             <span class="test-avatar">✦</span>
             <div>
@@ -5299,7 +5358,8 @@
         </div>
         <!-- duplicate of the 3 cards above, for a seamless loop -->
         <div class="test-card">
-          <p class="test-quote">"Placeholder testimonial #1 — replace with a real family's words about their experience."</p>
+          <p class="test-quote">"Placeholder testimonial #1 — replace with a real family's words about their
+            experience."</p>
           <div class="test-person">
             <span class="test-avatar">✦</span>
             <div>
@@ -5332,7 +5392,8 @@
 
       <div class="test-col test-col--b">
         <div class="test-card">
-          <p class="test-quote">"Placeholder testimonial #4 — replace with a real family's words about their experience."</p>
+          <p class="test-quote">"Placeholder testimonial #4 — replace with a real family's words about their
+            experience."</p>
           <div class="test-person">
             <span class="test-avatar">✦</span>
             <div>
@@ -5363,7 +5424,8 @@
         </div>
         <!-- duplicate of the 3 cards above, for a seamless loop -->
         <div class="test-card">
-          <p class="test-quote">"Placeholder testimonial #4 — replace with a real family's words about their experience."</p>
+          <p class="test-quote">"Placeholder testimonial #4 — replace with a real family's words about their
+            experience."</p>
           <div class="test-person">
             <span class="test-avatar">✦</span>
             <div>
@@ -5396,7 +5458,8 @@
 
       <div class="test-col test-col--c">
         <div class="test-card">
-          <p class="test-quote">"Placeholder testimonial #7 — replace with a real family's words about their experience."</p>
+          <p class="test-quote">"Placeholder testimonial #7 — replace with a real family's words about their
+            experience."</p>
           <div class="test-person">
             <span class="test-avatar">✦</span>
             <div>
@@ -5427,7 +5490,8 @@
         </div>
         <!-- duplicate of the 3 cards above, for a seamless loop -->
         <div class="test-card">
-          <p class="test-quote">"Placeholder testimonial #7 — replace with a real family's words about their experience."</p>
+          <p class="test-quote">"Placeholder testimonial #7 — replace with a real family's words about their
+            experience."</p>
           <div class="test-person">
             <span class="test-avatar">✦</span>
             <div>
@@ -5750,8 +5814,8 @@
   <!-- ═══════════ MAGAZINE SPREAD SCRIPT ═══════════ -->
   <script>
     (function () {
-      const section   = document.getElementById('magazine');
-      const spreads   = Array.from(document.querySelectorAll('.mag-spread'));
+      const section = document.getElementById('magazine');
+      const spreads = Array.from(document.querySelectorAll('.mag-spread'));
       const captionEl = document.getElementById('mag-caption');
       const counterEl = document.getElementById('mag-counter');
       const overlayEl = document.getElementById('magOverlay');
@@ -5785,7 +5849,7 @@
           const isLast = i === N - 1;
           const localT = Math.max(0, Math.min(1, stage - i));
           const e = ease(localT);
-          const left  = spread.querySelector('.mag-left');
+          const left = spread.querySelector('.mag-left');
           const right = spread.querySelector('.mag-right');
           if (!isLast && localT >= 1) {
             spread.style.opacity = '0';
@@ -5793,8 +5857,8 @@
           } else {
             spread.style.opacity = '1';
             spread.style.pointerEvents = 'auto';
-            left.style.transform  = 'translateX(' + (-e * 100) + '%)';
-            right.style.transform = 'translateX(' + ( e * 100) + '%)';
+            left.style.transform = 'translateX(' + (-e * 100) + '%)';
+            right.style.transform = 'translateX(' + (e * 100) + '%)';
           }
         });
 
@@ -5844,13 +5908,13 @@
 
       /* ── Lightbox ── */
       const lightbox = document.getElementById('magLightbox');
-      const lbImg    = document.getElementById('magLbImg');
-      const lbCap    = document.getElementById('magLbCap');
-      const lbClose  = document.getElementById('magLbClose');
-      const accessModal    = document.getElementById('magAccessModal');
+      const lbImg = document.getElementById('magLbImg');
+      const lbCap = document.getElementById('magLbCap');
+      const lbClose = document.getElementById('magLbClose');
+      const accessModal = document.getElementById('magAccessModal');
       const accessTriggers = document.querySelectorAll('.mag-access-trigger');
-      const accessClose   = document.getElementById('magAccessClose');
-      const accessLater   = document.getElementById('magAccessLater');
+      const accessClose = document.getElementById('magAccessClose');
+      const accessLater = document.getElementById('magAccessLater');
       const accessRequest = document.getElementById('magAccessRequest');
 
       function openLightbox(src, cap) {
@@ -5904,19 +5968,19 @@
       });
 
       // ── Video player ──
-      const magVideo    = document.getElementById('magVideo');
-      const magPlayBtn  = document.getElementById('magPlayBtn');
-      const magVidPlaySm= document.getElementById('magVidPlaySm');
+      const magVideo = document.getElementById('magVideo');
+      const magPlayBtn = document.getElementById('magPlayBtn');
+      const magVidPlaySm = document.getElementById('magVidPlaySm');
       const magSeekWrap = document.getElementById('magSeekWrap');
       const magSeekFill = document.getElementById('magSeekFill');
-      const magSeekThumb= document.getElementById('magSeekThumb');
-      const magVidTime  = document.getElementById('magVidTime');
-      const magVidFs    = document.getElementById('magVidFs');
+      const magSeekThumb = document.getElementById('magSeekThumb');
+      const magVidTime = document.getElementById('magVidTime');
+      const magVidFs = document.getElementById('magVidFs');
 
       if (magVideo) {
         function fmt(s) {
-          const m = Math.floor(s/60), sec = Math.floor(s%60);
-          return m + ':' + (sec<10?'0':'')+sec;
+          const m = Math.floor(s / 60), sec = Math.floor(s % 60);
+          return m + ':' + (sec < 10 ? '0' : '') + sec;
         }
         function setPlaying(playing) {
           magPlayBtn.classList.toggle('hidden', playing);
@@ -5924,7 +5988,7 @@
         }
         magPlayBtn.addEventListener('click', () => { magVideo.play(); });
         magVidPlaySm.addEventListener('click', () => { magVideo.paused ? magVideo.play() : magVideo.pause(); });
-        magVideo.addEventListener('play',  () => setPlaying(true));
+        magVideo.addEventListener('play', () => setPlaying(true));
         magVideo.addEventListener('pause', () => setPlaying(false));
         magVideo.addEventListener('click', () => { magVideo.paused ? magVideo.play() : magVideo.pause(); });
 
@@ -6108,11 +6172,11 @@
   <!-- ═══════════ GALLERY DESIGN SWITCHER (Circular / Magazine Spread) ═══════════ -->
   <script>
     (function () {
-      const section    = document.getElementById('magazine');
-      const spreadEl   = document.getElementById('magSpreadVariant');
+      const section = document.getElementById('magazine');
+      const spreadEl = document.getElementById('magSpreadVariant');
       const circularEl = document.getElementById('magCircularVariant');
-      const select     = document.getElementById('gallerySelect');
-      const cycleBtn   = document.getElementById('galleryCycle');
+      const select = document.getElementById('gallerySelect');
+      const cycleBtn = document.getElementById('galleryCycle');
       if (!section || !spreadEl || !circularEl || !select || !cycleBtn) return;
 
       function applyVariant(key) {
@@ -6330,13 +6394,19 @@
       function handleWheel(state, multiplier, event) {
         if (!desktopQuery.matches) return;
         if (!state.isDragging) return;
+
         const delta = event.deltaY;
         if (!delta || !state.loopHeight) return;
 
         event.preventDefault();
+
         state.hoverPaused = true;
         state.manualPauseUntil = performance.now() + 1100;
-        state.target = mod(state.target + (delta * 0.62 * multiplier), state.loopHeight);
+
+        state.target = mod(
+          state.target + (delta * 0.62 * multiplier),
+          state.loopHeight
+        );
       }
 
       function beginColumnDrag(state, event) {
