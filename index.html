@@ -4263,6 +4263,12 @@
       box-shadow: 0 52px 96px -20px rgba(0, 0, 0, .82);
     }
 
+    @media (hover: none) and (pointer: coarse) {
+      .cg-item:hover .cg-card {
+        transform: translateZ(0) scale(1);
+      }
+    }
+
     .cg-caption {
       position: absolute;
       bottom: 0;
@@ -4584,6 +4590,10 @@
         height: min(56svh, 560px);
         min-height: 420px;
         perspective: 1400px;
+      }
+
+      .cg-caption {
+        padding: 1rem 1rem 1.15rem;
       }
 
       .cg-card {
@@ -6098,9 +6108,11 @@
 
       function layoutSizes() {
         const w = window.innerWidth;
-        const isPortraitTablet = window.matchMedia('(min-width: 700px) and (max-width: 820px) and (orientation: portrait)').matches;
+        const isPortraitTablet = window.matchMedia('(min-width: 700px) and (max-width: 1180px) and (orientation: portrait)').matches;
+        const isLandscapeTablet = window.matchMedia('(min-width: 901px) and (max-width: 1180px) and (orientation: landscape)').matches;
         let radius, cardW, cardH;
-        if (isPortraitTablet) { radius = 285; cardW = 185; cardH = 240; }
+        if (isPortraitTablet) { radius = 380; cardW = 160; cardH = 210; }
+        else if (isLandscapeTablet) { radius = 540; cardW = 205; cardH = 270; }
         else if (w <= 600) { radius = 240; cardW = 160; cardH = 210; }
         else if (w <= 900) { radius = 340; cardW = 210; cardH = 270; }
         else if (w <= 1300) { radius = 460; cardW = 240; cardH = 310; }
