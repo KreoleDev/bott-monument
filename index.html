@@ -4557,26 +4557,10 @@
         --test-columns-height: 560px;
       }
 
-      @media (pointer: coarse) {
-        .test-columns {
-          max-height: none;
-          overflow: visible;
-        }
-
-        .test-columns::before,
-        .test-columns::after {
-          display: none;
-        }
-
-        .test-col--a,
-        .test-col--b {
-          height: auto;
-          overflow: visible;
-        }
-
-        .test-col-track {
-          min-height: 0;
-        }
+      .test-col {
+        touch-action: none;
+        user-select: none;
+        -webkit-user-select: none;
       }
 
       #contact {
@@ -6194,7 +6178,7 @@
       const columns = testimonials ? Array.from(testimonials.querySelectorAll('.test-col')) : [];
       if (!testimonials || !columns.length) return;
 
-      const desktopQuery = window.matchMedia('(min-width: 901px) and (pointer: fine)');
+      const desktopQuery = window.matchMedia('(min-width: 901px)');
       const scrollMultipliers = [1, 0.92, 1.08];
       const autoSpeeds = [18, 15, 12];
       let animationFrameId = null;
@@ -6394,7 +6378,11 @@
         state.hoverPaused = true;
         state.manualPauseUntil = performance.now() + 1100;
         state.target = mod(state.dragStartTarget - (deltaY * DRAG_SCROLL_SENSITIVITY), state.loopHeight);
-        event.preventDefault();
+        if (event.pointerType !== 'mouse') {
+          state.current = state.target;
+          applyStateScroll(state);
+        }
+        if (event.cancelable) event.preventDefault();
       }
 
       function endColumnDrag(event) {
