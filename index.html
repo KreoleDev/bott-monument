@@ -2873,6 +2873,10 @@
       box-sizing: border-box;
       flex-shrink: 0;
       overflow: hidden;
+      touch-action: none;
+      overscroll-behavior: contain;
+      user-select: none;
+      -webkit-user-select: none;
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
@@ -4555,12 +4559,6 @@
 
       .test-columns {
         --test-columns-height: 560px;
-      }
-
-      .test-col {
-        touch-action: none;
-        user-select: none;
-        -webkit-user-select: none;
       }
 
       #contact {
@@ -6372,6 +6370,18 @@
         }
       }
 
+      function beginColumnTouch(state, event) {
+        const touch = event.touches && event.touches[0];
+        if (!touch || !event.target.closest('.test-card')) return;
+        activateManualScroll(state);
+        state.isDragging = true;
+        state.dragPointerId = 'touch';
+        state.dragStartY = touch.clientY;
+        state.dragStartTarget = state.target;
+        state.hoverPaused = true;
+        state.manualPauseUntil = performance.now() + 1100;
+      }
+
       function updateColumnDrag(state, event) {
         if (!state.isDragging || event.pointerId !== state.dragPointerId) return;
         const deltaY = event.clientY - state.dragStartY;
@@ -6382,6 +6392,19 @@
           state.current = state.target;
           applyStateScroll(state);
         }
+        if (event.cancelable) event.preventDefault();
+      }
+
+      function updateColumnTouch(state, event) {
+        if (!state.isDragging || state.dragPointerId !== 'touch') return;
+        const touch = event.touches && event.touches[0];
+        if (!touch || !state.loopHeight) return;
+        const deltaY = touch.clientY - state.dragStartY;
+        state.hoverPaused = true;
+        state.manualPauseUntil = performance.now() + 1100;
+        state.target = mod(state.dragStartTarget - (deltaY * DRAG_SCROLL_SENSITIVITY), state.loopHeight);
+        state.current = state.target;
+        applyStateScroll(state);
         if (event.cancelable) event.preventDefault();
       }
 
@@ -6397,6 +6420,7 @@
 
       states.forEach((state, index) => {
         state.column.addEventListener('pointerdown', (event) => {
+          if (event.pointerType === 'touch') return;
           if (event.pointerType === 'mouse' && event.button !== 0) return;
           if (!event.target.closest('.test-card')) return;
           beginColumnDrag(state, event);
@@ -6404,6 +6428,22 @@
 
         state.column.addEventListener('pointermove', (event) => {
           updateColumnDrag(state, event);
+        });
+
+        state.column.addEventListener('touchstart', (event) => {
+          beginColumnTouch(state, event);
+        }, { passive: false });
+
+        state.column.addEventListener('touchmove', (event) => {
+          updateColumnTouch(state, event);
+        }, { passive: false });
+
+        state.column.addEventListener('touchend', () => {
+          endColumnDrag();
+        });
+
+        state.column.addEventListener('touchcancel', () => {
+          endColumnDrag();
         });
 
         state.column.addEventListener('wheel', (event) => {
