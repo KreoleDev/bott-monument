@@ -4392,6 +4392,39 @@
         font-size: 1.05rem;
       }
 
+      .press-page-inner {
+        display: grid;
+        grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+        align-items: center;
+        gap: 1.8rem;
+        max-width: 920px;
+      }
+
+      .press-founder {
+        --founder-size: clamp(150px, 21vw, 190px);
+        position: relative;
+        top: auto;
+        left: auto;
+        display: block;
+        justify-self: center;
+        width: calc(var(--founder-size) * 1.1);
+      }
+
+      .press-founder-name {
+        margin-top: 1.45rem;
+      }
+
+      .press-page-head {
+        margin: 0;
+        text-align: left;
+      }
+
+      .press-page-divider,
+      .press-page-story {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
       .creations-section {
         padding: 5.5rem 2rem 5.8rem;
       }
