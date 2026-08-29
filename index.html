@@ -2575,14 +2575,51 @@
       border-color: #D5AB4A;
     }
 
-    /* ── PRIMARY: single pre-composed showroom image, shown as-is ── */
+    /* ── PRIMARY: clean showroom photo + separate live content overlay ── */
     body[data-site-mode="primary"] #founder {
+      position: relative;
       display: block;
-      min-height: 0;
+      min-height: 100svh;
       background: #17110A;
+      overflow: hidden;
     }
 
-    body[data-site-mode="primary"] .founder-img-side,
+    /* PRIMARY uses the new clean showroom image supplied by the user. */
+    body[data-site-mode="primary"] .founder-img-side {
+      display: none !important;
+    }
+
+    .founder-primary-bg {
+      display: none;
+    }
+
+    body[data-site-mode="primary"] .founder-primary-bg {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      z-index: 0;
+    }
+
+    /* Gentle right-side contrast only; no card/container behind the copy. */
+    body[data-site-mode="primary"] #founder::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg,
+          rgba(36, 22, 13, 0.00) 0%,
+          rgba(36, 22, 13, 0.00) 48%,
+          rgba(36, 22, 13, 0.14) 58%,
+          rgba(36, 22, 13, 0.48) 100%);
+    }
+
+    /* Keep the original Secondary panel untouched. */
     body[data-site-mode="primary"] .founder-content {
       display: none !important;
     }
@@ -2594,7 +2631,265 @@
     }
 
     body[data-site-mode="primary"] .founder-secondary-image {
+      display: none !important;
+    }
+
+    .founder-primary-content {
+      display: none;
+    }
+
+    body[data-site-mode="primary"] .founder-primary-content {
+      position: relative;
+      z-index: 3;
+      min-height: 100svh;
+      width: min(35vw, 650px);
+      margin-left: auto;
+      padding: clamp(7.5rem, 8.5vh, 10rem) clamp(3.2rem, 5.8vw, 7rem) clamp(4rem, 6vh, 6rem) 0;
+      display: flex;
+      align-items: center;
+    }
+
+    body[data-site-mode="primary"] .founder-primary-panel {
+      width: 100%;
+      color: #F7F1E7;
+    }
+
+    .founder-primary-kicker {
+      display: grid;
+      grid-template-columns: minmax(34px, 1fr) auto minmax(34px, 1fr);
+      align-items: center;
+      gap: 1.15rem;
+      margin-bottom: 1.7rem;
+    }
+
+    .founder-primary-kicker::before,
+    .founder-primary-kicker::after {
+      content: '';
+      height: 1px;
+      background: #D5A43C;
+    }
+
+    .founder-primary-kicker p {
+      margin: 0;
+      font-family: var(--font-utility);
+      font-size: clamp(.64rem, .72vw, .82rem);
+      font-weight: 500;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: #D5A43C;
+      white-space: nowrap;
+    }
+
+    .founder-primary-title {
+      margin: 0 0 1.65rem;
+      font-family: var(--font-display);
+      font-size: clamp(3.9rem, 5.4vw, 6.35rem);
+      font-weight: 500;
+      line-height: .86;
+      letter-spacing: -.025em;
+      color: #FAF6F0;
+      text-shadow: 0 8px 26px rgba(0, 0, 0, .16);
+    }
+
+    .founder-primary-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(215, 164, 60, .95);
+      margin: 0 0 1.45rem;
+    }
+
+    .founder-primary-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      width: 100%;
+      margin-bottom: 1.45rem;
+    }
+
+    .founder-primary-stat {
+      position: relative;
+      min-width: 0;
+      padding: .18rem .75rem .05rem;
+      text-align: center;
+    }
+
+    .founder-primary-stat:first-child {
+      padding-left: 0;
+    }
+
+    .founder-primary-stat:last-child {
+      padding-right: 0;
+    }
+
+    .founder-primary-stat:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: .1rem;
+      right: 0;
+      width: 1px;
+      height: calc(100% - .2rem);
+      background: rgba(215, 164, 60, .82);
+    }
+
+    .founder-primary-stat-value {
+      margin: 0 0 .35rem;
+      font-family: var(--font-display);
+      font-size: clamp(2.35rem, 2.75vw, 3.35rem);
+      font-weight: 500;
+      line-height: .95;
+      color: #D8A63F;
+    }
+
+    .founder-primary-stat-label {
+      margin: 0;
+      font-family: var(--font-utility);
+      font-size: clamp(.56rem, .6vw, .68rem);
+      font-weight: 500;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: rgba(255, 250, 243, .9);
+      white-space: nowrap;
+    }
+
+    .founder-primary-visit-title {
+      margin: 1.55rem 0 1.35rem;
+      font-family: var(--font-display);
+      font-size: clamp(2.75rem, 3.35vw, 4rem);
+      font-weight: 600;
+      line-height: 1;
+      color: #FAF6F0;
+      white-space: nowrap;
+    }
+
+    .founder-primary-details {
+      display: grid;
+      gap: .72rem;
+      margin-bottom: 1.7rem;
+    }
+
+    .founder-primary-detail {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      align-items: start;
+      gap: .85rem;
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(.98rem, 1.02vw, 1.16rem);
+      line-height: 1.35;
+      color: rgba(255, 249, 240, .94);
+    }
+
+    .founder-primary-icon {
+      width: 24px;
+      height: 24px;
+      color: #D9A538;
+      margin-top: .02rem;
+    }
+
+    .founder-primary-icon svg {
+      width: 100%;
+      height: 100%;
       display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .founder-primary-cta {
+      min-height: 58px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0 1.85rem 0 2rem;
+      background: linear-gradient(100deg, #D59B1B 0%, #E5B23A 100%);
+      border: 1px solid rgba(249, 202, 90, .58);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, .16);
+      color: #17110A;
+      text-decoration: none;
+      font-family: var(--font-utility);
+      font-size: clamp(.68rem, .72vw, .8rem);
+      font-weight: 600;
+      letter-spacing: .23em;
+      text-transform: uppercase;
+      transition: transform .28s ease, box-shadow .28s ease, filter .28s ease;
+    }
+
+    .founder-primary-cta-arrow {
+      flex: 0 0 auto;
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      line-height: 1;
+      letter-spacing: 0;
+      transition: transform .28s ease;
+    }
+
+    .founder-primary-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 44px rgba(0, 0, 0, .22);
+      filter: brightness(1.04);
+    }
+
+    .founder-primary-cta:hover .founder-primary-cta-arrow {
+      transform: translateX(5px);
+    }
+
+    @media (max-width: 1180px) {
+      body[data-site-mode="primary"] #founder {
+        min-height: 100svh;
+      }
+
+      body[data-site-mode="primary"] .founder-img--secondary {
+        object-position: 44% center;
+      }
+
+      body[data-site-mode="primary"] .founder-primary-content {
+        width: min(40vw, 470px);
+        padding-right: clamp(2rem, 4vw, 3.6rem);
+      }
+
+      .founder-primary-title {
+        font-size: clamp(3.25rem, 5.7vw, 4.7rem);
+      }
+
+      .founder-primary-visit-title {
+        font-size: clamp(2.25rem, 3.5vw, 3.15rem);
+      }
+    }
+
+    @media (max-width: 760px) {
+      body[data-site-mode="primary"] #founder {
+        min-height: 920px;
+      }
+
+      body[data-site-mode="primary"] .founder-img--secondary {
+        object-position: 36% center;
+      }
+
+      body[data-site-mode="primary"] .founder-img-side::after {
+        background: linear-gradient(180deg,
+          rgba(34, 21, 13, .02) 0%,
+          rgba(34, 21, 13, .13) 32%,
+          rgba(34, 21, 13, .76) 67%,
+          rgba(34, 21, 13, .95) 100%);
+      }
+
+      body[data-site-mode="primary"] .founder-primary-content {
+        min-height: 920px;
+        width: 100%;
+        padding: 26rem 1.5rem 3rem;
+        align-items: flex-end;
+      }
+
+      .founder-primary-title {
+        font-size: clamp(3.1rem, 14vw, 4.35rem);
+      }
+
+      .founder-primary-visit-title {
+        white-space: normal;
+      }
     }
 
     .founder-secondary-kicker {
@@ -4619,11 +4914,6 @@
         padding: 4rem 2rem 4.5rem;
       }
 
-      body[data-site-mode="primary"] .founder-secondary-image {
-        min-height: 58svh;
-        object-fit: cover;
-      }
-
       #testimonials {
         padding: 5.5rem 2rem;
       }
@@ -4655,7 +4945,516 @@
       }
     }
 
-  </style>
+  
+
+/* PRIMARY SHOWROOM: exact supplied photo + separate live HTML overlay */
+body[data-site-mode="primary"] #founder {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  aspect-ratio: 4 / 3;
+  overflow: hidden !important;
+  background: #2d211a !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  z-index: 0 !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-shade {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  background: linear-gradient(
+    90deg,
+    rgba(20,12,8,0) 48%,
+    rgba(20,12,8,.08) 59%,
+    rgba(20,12,8,.38) 100%
+  ) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-content {
+  position: absolute !important;
+  top: 50% !important;
+  right: clamp(3.5rem, 5.5vw, 7rem) !important;
+  transform: translateY(-50%) !important;
+  width: min(31vw, 31rem) !important;
+  z-index: 2 !important;
+}
+
+body[data-site-mode="primary"] .founder-secondary-image {
+  display: none !important;
+}
+
+@media (max-width: 1180px) {
+  body[data-site-mode="primary"] .founder-primary-content {
+    right: clamp(1.5rem, 3vw, 3rem) !important;
+    width: min(36vw, 25rem) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  body[data-site-mode="primary"] #founder {
+    aspect-ratio: auto;
+    min-height: 52rem !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-shade {
+    background: linear-gradient(
+      to bottom,
+      rgba(20,12,8,0) 20%,
+      rgba(20,12,8,.18) 42%,
+      rgba(20,12,8,.82) 70%,
+      rgba(20,12,8,.94) 100%
+    ) !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-content {
+    top: auto !important;
+    right: 1.25rem !important;
+    bottom: 2rem !important;
+    left: 1.25rem !important;
+    width: auto !important;
+    transform: none !important;
+  }
+}
+
+
+
+/* ==========================================================
+   FINAL PRIMARY SHOWROOM FIX
+   - original image proportions (3:2)
+   - no object-fit: cover / no zoom / no crop
+   - image determines section height
+   - live HTML text overlays the image
+   - subtle gradient ONLY on the right
+   ========================================================== */
+
+body[data-site-mode="primary"] #founder {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+
+/* This is the sizing reference for the whole section.
+   width:100% + height:auto preserves the source image's original 3:2 ratio. */
+body[data-site-mode="primary"] .founder-primary-bg {
+  position: relative !important;
+  inset: auto !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: none !important;
+  object-fit: unset !important;
+  object-position: unset !important;
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  z-index: 0 !important;
+}
+
+/* Only a light readability gradient on the RIGHT.
+   The left side and floor keep the original image brightness. */
+body[data-site-mode="primary"] #founder::after {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  background: linear-gradient(
+    90deg,
+    rgba(37, 22, 14, 0) 0%,
+    rgba(37, 22, 14, 0) 58%,
+    rgba(37, 22, 14, 0.05) 66%,
+    rgba(37, 22, 14, 0.14) 78%,
+    rgba(37, 22, 14, 0.25) 100%
+  ) !important;
+}
+
+/* Disable any older full-section shade rules. */
+body[data-site-mode="primary"] .founder-primary-shade {
+  display: none !important;
+  background: none !important;
+}
+
+/* Live overlay is positioned relative to the image dimensions. */
+body[data-site-mode="primary"] .founder-primary-content {
+  display: flex !important;
+  position: absolute !important;
+  z-index: 3 !important;
+  top: 50% !important;
+  right: 5.4% !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 30.5% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: translateY(-50%) !important;
+  align-items: center !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-panel {
+  width: 100% !important;
+}
+
+/* Keep old composed image hidden in Primary. */
+body[data-site-mode="primary"] .founder-secondary-image,
+body[data-site-mode="primary"] .founder-img-side,
+body[data-site-mode="primary"] .founder-content {
+  display: none !important;
+}
+
+/* Scale the typography to the image instead of to viewport height. */
+body[data-site-mode="primary"] .founder-primary-kicker {
+  margin-bottom: clamp(.75rem, 1.15vw, 1.35rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-kicker p {
+  font-size: clamp(.55rem, .67vw, .76rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-title {
+  font-size: clamp(3rem, 4.65vw, 5.25rem) !important;
+  line-height: .90 !important;
+  margin-bottom: clamp(.9rem, 1.35vw, 1.5rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-divider {
+  margin-bottom: clamp(.8rem, 1.12vw, 1.25rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-stats {
+  margin-bottom: clamp(.8rem, 1.12vw, 1.25rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-stat-value {
+  font-size: clamp(1.8rem, 2.45vw, 2.8rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-stat-label {
+  font-size: clamp(.46rem, .54vw, .62rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-visit-title {
+  font-size: clamp(2rem, 2.85vw, 3.15rem) !important;
+  margin: clamp(.8rem, 1.1vw, 1.25rem) 0 clamp(.7rem, 1vw, 1.1rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-details {
+  gap: clamp(.4rem, .55vw, .65rem) !important;
+  margin-bottom: clamp(.9rem, 1.2vw, 1.35rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-detail {
+  font-size: clamp(.78rem, .88vw, 1rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-icon {
+  width: clamp(18px, 1.4vw, 24px) !important;
+  height: clamp(18px, 1.4vw, 24px) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-cta {
+  min-height: clamp(44px, 3.8vw, 58px) !important;
+  font-size: clamp(.58rem, .67vw, .76rem) !important;
+}
+
+/* iPad/tablet landscape: same image ratio, same overlay relationship.
+   No 100vh and no cover cropping. */
+@media (min-width: 701px) and (max-width: 1180px) {
+  body[data-site-mode="primary"] #founder {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-bg {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-content {
+    top: 50% !important;
+    right: 3.8% !important;
+    width: 34% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-title {
+    font-size: clamp(2.55rem, 5vw, 4.25rem) !important;
+  }
+}
+
+/* Phone: keep the photo ratio and place a compact overlay lower in the image. */
+@media (max-width: 700px) {
+  body[data-site-mode="primary"] #founder {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-bg {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  body[data-site-mode="primary"] #founder::after {
+    background: linear-gradient(
+      to bottom,
+      rgba(37,22,14,0) 20%,
+      rgba(37,22,14,.05) 45%,
+      rgba(37,22,14,.42) 100%
+    ) !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-content {
+    top: auto !important;
+    right: 1rem !important;
+    bottom: 1rem !important;
+    left: 1rem !important;
+    width: auto !important;
+    transform: none !important;
+  }
+}
+
+
+
+/* ==========================================================
+   PRIMARY SHOWROOM — VIEWPORT FIT + TEXT-ONLY DARK BACKDROP
+   Added 2026-08-29
+   - keeps the office photo itself bright / untinted
+   - reduces section height so it fits below the fixed header
+   - vertically centers the live HTML content
+   - puts the darker brown treatment behind the text only
+   ========================================================== */
+
+:root {
+  --primary-showroom-header-space: 86px;
+}
+
+body[data-site-mode="primary"] #founder {
+  position: relative !important;
+  width: 100% !important;
+  height: calc(100svh - var(--primary-showroom-header-space)) !important;
+  min-height: 620px !important;
+  max-height: 980px !important;
+  aspect-ratio: auto !important;
+  overflow: hidden !important;
+  background: #2d211a !important;
+}
+
+/* The photo stays clean. No opacity, filter, or brown overlay on the image. */
+body[data-site-mode="primary"] .founder-primary-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  z-index: 0 !important;
+}
+
+/* IMPORTANT: no shade across the photo. */
+body[data-site-mode="primary"] #founder::after,
+body[data-site-mode="primary"] .founder-primary-shade {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+}
+
+/* Keep the whole text group centered vertically on the right. */
+body[data-site-mode="primary"] .founder-primary-content {
+  position: absolute !important;
+  z-index: 3 !important;
+  top: 50% !important;
+  right: clamp(2rem, 4.2vw, 5.4rem) !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: min(33vw, 35rem) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: translateY(-50%) !important;
+  display: block !important;
+}
+
+/* Dark brown belongs to the text area only, not the image.
+   There is NO visible rectangle: the backdrop fades vertically and softly left/right. */
+body[data-site-mode="primary"] .founder-primary-panel {
+  position: relative !important;
+  isolation: isolate !important;
+  width: 100% !important;
+  padding: clamp(1.35rem, 2vw, 2.25rem) clamp(1.35rem, 2.15vw, 2.4rem) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-panel::before {
+  content: '' !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+
+  /* Extend beyond the live content so the fade never reads as a box. */
+  top: -16% !important;
+  bottom: -16% !important;
+  left: -10% !important;
+  right: -10% !important;
+
+  /* Strongest behind the copy; long vertical fade + smaller horizontal fade. */
+  background: radial-gradient(
+    ellipse 74% 84% at 52% 50%,
+    rgba(47, 26, 17, 0.88) 0%,
+    rgba(47, 26, 17, 0.82) 34%,
+    rgba(47, 26, 17, 0.64) 52%,
+    rgba(47, 26, 17, 0.36) 69%,
+    rgba(47, 26, 17, 0.14) 83%,
+    rgba(47, 26, 17, 0.04) 92%,
+    transparent 100%
+  ) !important;
+  filter: blur(5px) !important;
+}
+
+/* Slightly tighten vertical spacing so the full overlay stays inside the viewport. */
+body[data-site-mode="primary"] .founder-primary-kicker {
+  margin-bottom: clamp(.6rem, .8vw, .9rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-title {
+  font-size: clamp(2.8rem, 4vw, 4.8rem) !important;
+  line-height: .92 !important;
+  margin-bottom: clamp(.7rem, .9vw, 1rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-divider {
+  margin-bottom: clamp(.65rem, .8vw, .9rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-stats {
+  margin-bottom: clamp(.65rem, .85vw, .95rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-visit-title {
+  margin: clamp(.65rem, .85vw, .95rem) 0 clamp(.55rem, .75vw, .85rem) !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-details {
+  gap: clamp(.3rem, .45vw, .5rem) !important;
+  margin-bottom: clamp(.7rem, .9vw, 1rem) !important;
+}
+
+/* Tablet landscape: reserve a little more room for the header and keep centered. */
+@media (min-width: 701px) and (max-width: 1180px) {
+  :root {
+    --primary-showroom-header-space: 78px;
+  }
+
+  body[data-site-mode="primary"] #founder {
+    min-height: 540px !important;
+    max-height: none !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-content {
+    top: 50% !important;
+    right: 2.5% !important;
+    width: 38% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-panel {
+    padding: 1.2rem 1.35rem !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-title {
+    font-size: clamp(2.35rem, 4.6vw, 3.8rem) !important;
+  }
+}
+
+/* Phone keeps the content readable without darkening the photo globally. */
+@media (max-width: 700px) {
+  :root {
+    --primary-showroom-header-space: 70px;
+  }
+
+  body[data-site-mode="primary"] #founder {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background: #2d211a !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-bg {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: unset !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-content {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    transform: none !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-panel {
+    padding: 1.4rem 1.2rem 1.7rem !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  body[data-site-mode="primary"] .founder-primary-panel::before {
+    top: -8% !important;
+    bottom: -8% !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(47, 26, 17, 0.72) 12%,
+      rgba(47, 26, 17, 0.92) 28%,
+      rgba(47, 26, 17, 0.94) 72%,
+      rgba(47, 26, 17, 0.72) 88%,
+      transparent 100%
+    ) !important;
+    filter: none !important;
+  }
+}
+
+</style>
 </head>
 
 <body>
@@ -5340,10 +6139,15 @@
 
   <!-- FOUNDER DOCUMENTARY -->
   <section id="founder">
+    <!-- PRIMARY MODE ONLY: clean showroom background supplied by the user -->
+    <img class="founder-primary-bg" src="images/office1.jpeg" alt="Bott Monument showroom interior">
+
     <div class="founder-img-side reveal">
       <img class="founder-img founder-img--secondary" src="images/IMG_0180.jpg?v=secondary-20260819"
         alt="Bott Monument showroom interior">
     </div>
+
+    <!-- SECONDARY MODE: unchanged -->
     <div class="founder-content reveal reveal-delay-1">
       <div class="founder-panel founder-panel--secondary">
         <p class="founder-secondary-kicker">A Legacy of Craft</p>
@@ -5371,6 +6175,61 @@
         <a class="founder-secondary-cta" href="#contact">Schedule a Visit</a>
       </div>
     </div>
+
+    <!-- PRIMARY MODE: live HTML overlay, visually matching the former image4.PNG composition -->
+    <div class="founder-primary-content reveal reveal-delay-1">
+      <div class="founder-primary-panel">
+        <div class="founder-primary-kicker"><p>A Legacy of Craft</p></div>
+        <h2 class="founder-primary-title">Trusted for<br>generations</h2>
+        <div class="founder-primary-divider" aria-hidden="true"></div>
+
+        <div class="founder-primary-stats">
+          <div class="founder-primary-stat">
+            <p class="founder-primary-stat-value">35+</p>
+            <p class="founder-primary-stat-label">Years</p>
+          </div>
+          <div class="founder-primary-stat">
+            <p class="founder-primary-stat-value">6</p>
+            <p class="founder-primary-stat-label">States</p>
+          </div>
+          <div class="founder-primary-stat">
+            <p class="founder-primary-stat-value">1k+</p>
+            <p class="founder-primary-stat-label">Memorials</p>
+          </div>
+        </div>
+
+        <div class="founder-primary-divider" aria-hidden="true"></div>
+        <h3 class="founder-primary-visit-title">Visit our showroom</h3>
+
+        <div class="founder-primary-details">
+          <p class="founder-primary-detail">
+            <span class="founder-primary-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+            </span>
+            <span>Wyoming Studio</span>
+          </p>
+          <p class="founder-primary-detail">
+            <span class="founder-primary-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1.5"></rect><path d="M7 3v4M17 3v4M3 9h18M7 13h2M11 13h2M15 13h2M7 17h2M11 17h2M15 17h2"></path></svg>
+            </span>
+            <span>By appointment only</span>
+          </p>
+          <p class="founder-primary-detail">
+            <span class="founder-primary-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.5 2"></path></svg>
+            </span>
+            <span>Mon-Fri · 9am-5pm<br>Sat · by appointment</span>
+          </p>
+        </div>
+
+        <a class="founder-primary-cta" href="#contact">
+          <span>Schedule a Visit</span>
+          <span class="founder-primary-cta-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Legacy composed artwork retained in markup but not displayed in Primary mode. -->
     <img class="founder-secondary-image" src="images/image4.PNG" alt="Trusted for generations — Bott Monument showroom">
   </section>
   <!-- page 6 -->
@@ -6813,3 +7672,110 @@
 </body>
 
 </html>
+
+<!-- Natural showroom gradient override: 2026-08-29 -->
+<style>
+/*
+  Natural right-side treatment:
+  - no panel/box behind the copy
+  - no overlay over the left/logo side
+  - one broad, soft brown field that grows toward the right edge
+  - very gentle vertical feathering so the transition never reads as a rectangle
+*/
+body[data-site-mode="primary"] .founder-primary-panel,
+body[data-site-mode="primary"] .founder-primary-panel::before {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-panel::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Use the content wrapper only as an anchor for a very large atmospheric gradient. */
+body[data-site-mode="primary"] .founder-primary-content {
+  isolation: isolate !important;
+}
+
+body[data-site-mode="primary"] .founder-primary-content::before {
+  content: '' !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+
+  /* Much larger than the copy so no edge can be perceived. */
+  top: -34vh !important;
+  bottom: -34vh !important;
+  left: -18vw !important;
+  right: -8vw !important;
+
+  background:
+    radial-gradient(
+      ellipse 92% 70% at 72% 50%,
+      rgba(55, 31, 21, 0.58) 0%,
+      rgba(55, 31, 21, 0.46) 34%,
+      rgba(55, 31, 21, 0.28) 57%,
+      rgba(55, 31, 21, 0.11) 76%,
+      rgba(55, 31, 21, 0.03) 88%,
+      transparent 100%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(54, 30, 20, 0.04) 20%,
+      rgba(54, 30, 20, 0.12) 42%,
+      rgba(54, 30, 20, 0.22) 62%,
+      rgba(54, 30, 20, 0.30) 82%,
+      rgba(54, 30, 20, 0.34) 100%
+    ) !important;
+
+  /* Feather the top and bottom instead of ending on a straight line. */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,0,0,.20) 10%,
+    #000 27%,
+    #000 73%,
+    rgba(0,0,0,.20) 90%,
+    transparent 100%
+  ) !important;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,0,0,.20) 10%,
+    #000 27%,
+    #000 73%,
+    rgba(0,0,0,.20) 90%,
+    transparent 100%
+  ) !important;
+}
+
+/* Keep the actual copy transparent and crisp. */
+body[data-site-mode="primary"] .founder-primary-panel {
+  position: relative !important;
+  z-index: 1 !important;
+  padding-left: clamp(.5rem, 1vw, 1rem) !important;
+  padding-right: clamp(.5rem, 1vw, 1rem) !important;
+}
+
+/* iPad / narrower landscape: slightly broaden the fade toward center. */
+@media (hover: none) and (pointer: coarse) and (orientation: landscape),
+       (max-width: 1180px) and (orientation: landscape) {
+  body[data-site-mode="primary"] .founder-primary-content::before {
+    left: -22vw !important;
+    right: -10vw !important;
+    top: -38vh !important;
+    bottom: -38vh !important;
+  }
+}
+
+/* On portrait/mobile, don't force the desktop atmospheric field. */
+@media (max-width: 700px), (orientation: portrait) and (max-width: 900px) {
+  body[data-site-mode="primary"] .founder-primary-content::before {
+    display: none !important;
+  }
+}
+</style>
